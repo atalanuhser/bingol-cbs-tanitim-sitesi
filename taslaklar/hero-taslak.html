@@ -4,9 +4,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hero Taslağı — Görsel Yön Denemesi</title>
-<link rel="stylesheet" href="../src/styles/tokens.css">
 <style>
-  /* Taslak: yalnızca hero bölümü. Renkler tokens.css'ten gelir. */
+  /* Taslak: yalnızca hero bölümü.
+     Token değerleri src/styles/tokens.css'ten KOPYA — dosya çift tıklamayla
+     tek başına açılabilsin diye gömüldü. Gerçek sitede tek kaynak tokens.css'tir. */
+  :root {
+    --renk-zemin: #f6f8f6;
+    --renk-yuzey: #ffffff;
+    --renk-metin: #182722;
+    --renk-metin-soluk: #4e615a;
+    --renk-cizgi: #d9e2dc;
+    --renk-vurgu: #17604c;
+    --renk-vurgu-koyu: #0f4636;
+    --renk-vurgu-acik: #e3efe9;
+    --renk-cta: #f0a93f;
+    --renk-cta-koyu: #d99427;
+    --renk-harita-zemin: #10201b;
+    --renk-harita-yuzey: #1a2f28;
+    --renk-harita-metin: #dbe7e1;
+    --renk-katman-1: #35c4b5;
+    --renk-katman-2: #f0a93f;
+    --renk-katman-3: #9d8cf0;
+    --renk-katman-4: #ef8368;
+    --yazi-govde: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --boyut-kucuk: 0.875rem;
+    --boyut-buyuk: 1.125rem;
+    --boyut-h1: clamp(1.9rem, 1.2rem + 3.2vw, 3.1rem);
+    --satir-metin: 1.65;
+    --satir-baslik: 1.2;
+    --kalinlik-baslik: 700;
+    --bosluk-1: 0.25rem;
+    --bosluk-2: 0.5rem;
+    --bosluk-3: 0.75rem;
+    --bosluk-4: 1rem;
+    --bosluk-5: 1.5rem;
+    --bosluk-6: 2rem;
+    --bosluk-7: 3rem;
+    --bosluk-8: 4rem;
+    --kose: 10px;
+    --kose-kucuk: 6px;
+    --golge-kart: 0 1px 2px rgb(24 39 34 / 0.06), 0 8px 24px rgb(24 39 34 / 0.07);
+    --icerik-genislik: 72rem;
+    --odak-halka: 2px solid var(--renk-vurgu);
+    --odak-bosluk: 2px;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: var(--yazi-govde);
