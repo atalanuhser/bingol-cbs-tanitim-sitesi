@@ -1,12 +1,12 @@
-# Bingöl Belediyesi CBS Programı Tanıtım Sitesi
+# CBS Tanıtım Sitesi
 
-Bu proje, Bingöl Belediyesi CBS Programı için staj kapsamında geliştirilen bir tanıtım web sitesidir.
+Bu proje, staj kapsamında geliştirilen genel bir CBS (Coğrafi Bilgi Sistemi) ürün tanıtım web sitesidir.
 
 ## Projenin Amacı
 
 CBS (Coğrafi Bilgi Sistemi) programının ne olduğunu, ne işe yaradığını ve sunduğu özellikleri kullanıcıya anlaşılır bir şekilde tanıtmak.
 
-Projenin mobil uyumlu, hızlı, erişilebilir ve Bingöl Belediyesi'nin kurumsal kimliğine uygun olması hedeflenmektedir.
+Projenin mobil uyumlu, hızlı, erişilebilir ve tutarlı, özgün bir görsel kimliğe sahip olması hedeflenmektedir.
 
 ## Proje Durumu
 
@@ -17,7 +17,7 @@ Projenin mobil uyumlu, hızlı, erişilebilir ve Bingöl Belediyesi'nin kurumsal
 * Ana sayfa
 * CBS özelliklerinin tanıtımı
 * Harita ve katman özellikleri
-* Gerçek sistem ekran görüntüleri
+* Kodla (HTML/SVG) üretilen stilize CBS arayüz mockup'ları
 * CBS ile ilgili sayısal bilgiler
 * Hakkında ve iletişim bölümü
 * Mobil uyum
