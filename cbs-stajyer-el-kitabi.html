@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CBS Tanıtım Sitesi — Stajyer El Kitabı</title>
+<style>
+  :root {
+    --bg: #f7f8f5;
+    --surface: #ffffff;
+    --surface-2: #eef1ea;
+    --ink: #1f2a24;
+    --muted: #5b6a61;
+    --line: #dbe2da;
+    --accent: #1e5c45;
+    --accent-soft: #e3efe8;
+    --amber: #a06f14;
+    --amber-soft: #f6ecd8;
+    --danger: #9a3b2e;
+    --danger-soft: #f6e5e1;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141a16;
+      --surface: #1b231d;
+      --surface-2: #222c25;
+      --ink: #e6ebe6;
+      --muted: #9cab9f;
+      --line: #2d3830;
+      --accent: #6cc39a;
+      --accent-soft: #1f3229;
+      --amber: #d9a54a;
+      --amber-soft: #33290f;
+      --danger: #d98675;
+      --danger-soft: #38201b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141a16;
+    --surface: #1b231d;
+    --surface-2: #222c25;
+    --ink: #e6ebe6;
+    --muted: #9cab9f;
+    --line: #2d3830;
+    --accent: #6cc39a;
+    --accent-soft: #1f3229;
+    --amber: #d9a54a;
+    --amber-soft: #33290f;
+    --danger: #d98675;
+    --danger-soft: #38201b;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Seravek", "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+  h1, h2, h3 {
+    font-family: "Charter", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    line-height: 1.2;
+    text-wrap: balance;
+    margin: 0;
+  }
+  h1 { font-size: 2.3rem; font-weight: 700; }
+  h2 { font-size: 1.5rem; margin: 0 0 4px; }
+  h3 { font-size: 1.12rem; margin: 0 0 8px; }
+  p { margin: 0 0 1em; max-width: 70ch; }
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .meta-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .meta-line strong { color: var(--ink); font-weight: 600; }
+  .mono { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.85em; font-variant-numeric: tabular-nums; }
+
+  header.doc { margin-bottom: 40px; }
+  header.doc .lede { margin-top: 14px; color: var(--muted); font-size: 1.05rem; }
+
+  section { margin: 48px 0 0; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+  }
+  .section-head .sub { color: var(--muted); font-size: 0.9rem; }
+
+  .glance {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 720px) { .glance { grid-template-columns: repeat(2, 1fr); } }
+  .glance .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 14px 14px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .glance .wk { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .glance .theme { font-weight: 700; font-size: 0.98rem; line-height: 1.3; }
+  .glance .dates { color: var(--muted); font-size: 0.82rem; }
+  .glance .deliver { font-size: 0.85rem; margin-top: 6px; padding-top: 8px; border-top: 1px dashed var(--line); color: var(--ink); }
+  .glance .deliver::before { content: "cuma çıktısı: "; color: var(--accent); font-weight: 600; }
+
+  .week {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px;
+    margin-top: 20px;
+  }
+  .week-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 4px; }
+  .week-num {
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    padding: 2px 9px;
+    white-space: nowrap;
+  }
+  .week-head .dates { color: var(--muted); font-size: 0.9rem; }
+  .week .goal { margin: 10px 0 16px; font-size: 1.02rem; }
+  .week .goal strong { color: var(--accent); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+  .table-scroll { overflow-x: auto; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  td.day { white-space: nowrap; font-weight: 600; width: 1%; color: var(--accent); }
+  tr:last-child td { border-bottom: none; }
+
+  .dod {
+    margin-top: 16px;
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    font-size: 0.93rem;
+  }
+  .dod .label { font-weight: 700; color: var(--accent); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 6px; }
+  .dod ul { margin: 0; padding-left: 20px; }
+  .dod li { margin-bottom: 3px; }
+
+  ul.tight { margin: 0 0 1em; padding-left: 22px; }
+  ul.tight li { margin-bottom: 6px; max-width: 68ch; }
+
+  .callout {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--amber);
+    background: var(--amber-soft);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 18px;
+    margin: 18px 0;
+    font-size: 0.93rem;
+  }
+  .callout .label { font-weight: 700; color: var(--amber); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 6px; }
+  .callout ul { margin: 0; padding-left: 20px; }
+  .callout li { margin-bottom: 4px; }
+  .callout.red { border-left-color: var(--danger); background: var(--danger-soft); }
+  .callout.red .label { color: var(--danger); }
+
+  .rubric td:first-child { font-weight: 600; }
+  .rubric .w { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .anchors td { font-size: 0.86rem; }
+  .anchors td:first-child { font-weight: 600; white-space: nowrap; }
+  .scorecard td, .scorecard th { text-align: center; }
+  .scorecard td:first-child, .scorecard th:first-child { text-align: left; }
+  .scorecard .blank { color: var(--line); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px 22px;
+  }
+  .panel h3 { color: var(--accent); }
+  .panel ul { margin: 0; padding-left: 20px; font-size: 0.93rem; }
+  .panel li { margin-bottom: 6px; }
+  .panel .sub-label { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 12px 0 4px; }
+
+  .facts li { margin-bottom: 8px; }
+  .facts .num { font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+  .fill { color: var(--amber); font-weight: 600; }
+
+  footer.doc {
+    margin-top: 56px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  @media print {
+    body { background: #fff; color: #111; }
+    .week, .panel, .glance .card { break-inside: avoid; border-color: #bbb; }
+    .wrap { padding: 0; max-width: none; }
+  }
+  /* — stajyer el kitabı ek stilleri — */
+  ul.check { list-style: none; padding-left: 0; margin: 0 0 1em; }
+  ul.check li { position: relative; padding-left: 27px; margin-bottom: 8px; max-width: 68ch; }
+  ul.check li::before {
+    content: ""; position: absolute; left: 0; top: 0.42em;
+    width: 13px; height: 13px; border: 1.5px solid var(--accent);
+    border-radius: 3px; background: var(--surface);
+  }
+  .copy {
+    background: var(--surface-2); border: 1px dashed var(--line); border-radius: 6px;
+    padding: 13px 15px; margin: 12px 0;
+    font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+    font-size: 0.84rem; line-height: 1.6; white-space: pre-wrap; color: var(--ink);
+  }
+  .copy .lbl { display: block; font-family: inherit; font-size: 0.72rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 8px; }
+  .callout.green { border-left-color: var(--accent); background: var(--accent-soft); }
+  .callout.green .label { color: var(--accent); }
+  nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px 22px 20px; margin-top: 28px; }
+  nav.toc .label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; display: block; margin-bottom: 10px; }
+  nav.toc ol { columns: 2; column-gap: 32px; margin: 0; padding-left: 20px; font-size: 0.92rem; }
+  @media (max-width: 720px) { nav.toc ol { columns: 1; } }
+  nav.toc li { margin-bottom: 5px; break-inside: avoid; }
+  nav.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+  nav.toc a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+  .kv { font-size: 0.93rem; }
+  .kv td:first-child { font-weight: 600; white-space: nowrap; width: 1%; }
+  .lead-q { font-weight: 600; color: var(--accent); }
+  .note-sm { font-size: 0.87rem; color: var(--muted); max-width: 70ch; }
+  h2 .n { color: var(--muted); font-weight: 400; font-size: 0.8em; margin-right: 6px; font-variant-numeric: tabular-nums; }
+  .week h4 { font-size: 0.95rem; margin: 18px 0 6px; color: var(--accent); font-family: inherit; letter-spacing: 0.02em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="doc">
+  <div class="eyebrow">Bingöl Belediyesi · CBS Programı · Staj Sprinti</div>
+  <h1>Stajyer El Kitabı</h1>
+  <p class="lede">Bu doküman senin için yazıldı. Dört hafta boyunca ne yapacağını, hangi gün
+  neyin beklendiğini, tıkandığında kime nasıl soracağını ve nasıl değerlendirileceğini
+  baştan sona buradan takip edeceksin. Sürpriz yok: puanlama ölçütleri de, bizim sana karşı
+  taahhütlerimiz de bu dosyanın içinde yazılı.</p>
+  <div class="meta-line">
+    <span><strong>Sprint:</strong> 24 Ağustos – 18 Eylül 2026 <span class="mono">(20 iş günü)</span></span>
+    <span><strong>Standup:</strong> her iş günü 09.30–09.45</span>
+    <span><strong>Sunum:</strong> her cuma 15.00 (45 dk)</span>
+  </div>
+  <div class="meta-line">
+    <span><strong>Mentorun:</strong> ⟨mentor⟩</span>
+    <span><strong>Yedek:</strong> ⟨yedek⟩</span>
+    <span><strong>Kanal:</strong> ⟨kanal⟩</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <span class="label">İçindekiler</span>
+  <ol>
+    <li><a href="#is">Bu sprintte ne yapacaksın</a></li>
+    <li><a href="#kapsam">Ne inşa ediyorsun, ne inşa etmiyorsun</a></li>
+    <li><a href="#ilkgun">İlk gün: kurulum ve erişim</a></li>
+    <li><a href="#sozluk">Bilmen gereken terimler</a></li>
+    <li><a href="#ritim">Günlük ritmin</a></li>
+    <li><a href="#tikanma">Tıkandığında ne yapacaksın</a></li>
+    <li><a href="#haftalar">Hafta hafta planın</a></li>
+    <li><a href="#kalibrasyon">Kalibrasyon görevi (1. hafta çarşamba)</a></li>
+    <li><a href="#sunum">Cuma sunumu</a></li>
+    <li><a href="#degerlendirme">Nasıl değerlendirileceksin</a></li>
+    <li><a href="#icerik">İçerik cephanesi — siteye yazacakların</a></li>
+    <li><a href="#kirmizi">Kırmızı çizgiler — asla yazmayacakların</a></li>
+    <li><a href="#kalite">Kalite kontrol listesi</a></li>
+    <li><a href="#teslim">Teslim dokümanı</a></li>
+    <li><a href="#bizden">Bizden ne bekleyebilirsin</a></li>
+  </ol>
+</nav>
+
+<section id="is">
+  <div class="section-head"><h2><span class="n">01</span>Bu sprintte ne yapacaksın</h2><span class="sub">tek cümlelik hedef + 4 hafta</span></div>
+
+  <p><strong>Hedefin:</strong> Dört hafta sonunda, Bingöl Belediyesi'nin coğrafi bilgi sistemi (CBS)
+  programının ne olduğunu, ne işe yaradığını ve nereye gittiğini anlatan; mobil uyumlu, hızlı,
+  tutarlı bir görsel kimliğe sahip ve <strong>yayına hazır</strong> bir tanıtım web sitesi teslim edeceksin.</p>
+
+  <p>Bu site, CBS'nin kendi kod tabanından bağımsız <strong>ayrı bir projedir</strong>. Sistemin
+  içine dokunmuyorsun; sistemi <em>anlatan</em> siteyi inşa ediyorsun. Sitenin içeriğini kendi araştırmanla kuracaksın — açık internet kaynakları (CBS kavramları, TUCBS, belediye CBS örnekleri) ana kaynağındır; başlangıç malzemesi <a href="#icerik">İçerik cephanesi</a> bölümünde duruyor.</p>
+
+  <div class="glance">
+    <div class="card">
+      <div class="wk">Hafta 1</div><div class="theme">Keşif &amp; Tasarım</div>
+      <div class="dates">24–28 Ağustos</div>
+      <div class="deliver">Site haritası, wireframe, görsel yön → tasarım onayı</div>
+    </div>
+    <div class="card">
+      <div class="wk">Hafta 2</div><div class="theme">İskelet</div>
+      <div class="dates">31 Ağustos – 4 Eylül</div>
+      <div class="deliver">Localhost'ta gezilebilir site iskeleti</div>
+    </div>
+    <div class="card">
+      <div class="wk">Hafta 3</div><div class="theme">İçerik &amp; Görseller</div>
+      <div class="dates">7–11 Eylül</div>
+      <div class="deliver">İçeriği tamamlanmış site</div>
+    </div>
+    <div class="card">
+      <div class="wk">Hafta 4</div><div class="theme">Cila &amp; Teslim</div>
+      <div class="dates">14–18 Eylül</div>
+      <div class="deliver">Yayına hazır site + teslim dokümanı + final sunum</div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <span class="label">En önemli üç alışkanlık</span>
+    <ul>
+      <li><strong>Küçük ve sık commit'le.</strong> 2. haftadan itibaren her gün en az bir anlamlı commit + push. Hafta sonunda toplu teslim yok.</li>
+      <li><strong>Tıkanmayı sakla<em>ma</em>.</strong> 2 saatten uzun tıkalı kalmak kural ihlalidir — bilmemek değil, sessiz kalmak puan kaybettirir.</li>
+      <li><strong>Cuma sürpriz günü değildir.</strong> Cuma sunacağın her şey çarşamba masa başı kontrolünde bir kez görülmüş olacak.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="kapsam">
+  <div class="section-head"><h2><span class="n">02</span>Ne inşa ediyorsun, ne inşa etmiyorsun</h2><span class="sub">kapsam sınırların</span></div>
+
+  <div class="two-col">
+    <div class="panel">
+      <h3>Yapacakların — zorunlu</h3>
+      <ul>
+        <li>Ana sayfa: tanıtım, değer önerileri, "rakamlarla CBS" bandı</li>
+        <li>Özellikler sayfası: harita, katmanlar, veri kalitesi, standartlar</li>
+        <li>Kodla (HTML/SVG) üretilen stilize CBS arayüz mockup'ları</li>
+        <li>Hakkında / iletişim bölümü</li>
+        <li>Mobil uyum, temel SEO, performans</li>
+        <li>Teslim dokümanı: siteyi kim, nasıl günceller</li>
+      </ul>
+      <div class="sub-label">Olması güzel — bu sırayla kesilir</div>
+      <ul>
+        <li>Ek mockup varyantları — ilk kesilecek</li>
+        <li>Sık sorulan sorular bölümü</li>
+        <li>Yol haritası bölümü</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Yapmayacakların</h3>
+      <ul>
+        <li>CBS kod tabanına (Go servisi, veritabanı) müdahale — <strong>hiçbir şekilde</strong></li>
+        <li>Canlı harita gömme (Leaflet/Mapbox/OpenLayers yok). Bunun yerine kodla üretilen stilize mockup'lar kullanacaksın</li>
+        <li>İçerik yönetim sistemi (CMS) kurulumu</li>
+        <li>Çoklu dil desteği — site Türkçe</li>
+        <li>Vatandaşa açık CBS erişimi vaadi — bu ayrı bir kurumsal karar, sen söz veremezsin</li>
+      </ul>
+      <div class="sub-label">Yeni fikir çıkarsa</div>
+      <ul>
+        <li>Sprint hedefi değişmez. Fikri iş listesine (backlog) yaz, cuma değerlendirmesinde konuşuruz. Fikir üretmek iyidir; plan dışına tek başına çıkmak değil.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="label">Kapsam kırpma kuralı — bunu bilmen senin lehine</span>
+    <ul>
+      <li>Hafta hedefi kaçıyorsa <strong>çarşamba günü</strong> "olması güzel" listesinden yukarıdaki sırayla iş kesilir ve günlerin yeniden dizilir.</li>
+      <li>Bu bir ceza değil, planın mekanizmasıdır. Kırpılan iş backlog'a yazılır, senin karnene eksi olarak yazılmaz.</li>
+      <li>Kırpma kararını sen tek başına vermezsin; çarşamba kontrolünde birlikte veririz. Ama "yetişmeyecek" sinyalini <strong>çarşambadan önce</strong> vermek senin işin.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="ilkgun">
+  <div class="section-head"><h2><span class="n">03</span>İlk gün: kurulum ve erişim</h2><span class="sub">24 Ağustos pazartesi</span></div>
+
+  <p>Pazartesi sabahı oryantasyon var; ardından CBS alan araştırmasına başlayacaksın (kurum içinden CBS bilgisi verilmez — kaynağın açık internet, arşivdeki demo ekran görüntüleri yalnızca yardımcı bağlamdır). Günün geri kalanında
+  aşağıdakileri kurup çalıştığını doğrulayacaksın. Takıldığın kalemi <strong>aynı gün</strong> bildir —
+  ilk günün yarısı kurulumda geçebilir, bu normaldir; sessiz geçmesi normal değildir.</p>
+
+  <div class="two-col">
+    <div class="panel">
+      <h3>Bilgisayarında kuracakların</h3>
+      <ul class="check">
+        <li>Kod editörü (VS Code önerilir) + Türkçe yazım için tarayıcı eklentisi</li>
+        <li>Git — <span class="mono">git --version</span> çalışmalı</li>
+        <li>Node.js LTS + npm (Astro için gerekli)</li>
+        <li>Chrome, Safari ve Firefox — test için üçü de lazım</li>
+        <li>Görsel işleme: WebP dönüştürme + sıkıştırma aracı (<span class="mono">squoosh.app</span> yeterli)</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Erişim ve hesaplar</h3>
+      <ul class="check">
+        <li>GitHub hesabı — kullanıcı adını ⟨mentor⟩'a ilet, depoya (repo) davet edileceksin</li>
+        <li>İletişim kanalına (⟨kanal⟩) eklendiğini doğrula</li>
+        <li>Takvim davetleri: günlük standup + cuma sunumları takviminde mi?</li>
+      </ul>
+      <p class="note-sm" style="margin-top:12px">Kurum içi ağa ve CBS sunucularına erişimin <strong>olmayacak</strong> — ihtiyacın da yok. Site tamamen yerelde (localhost) geliştirilecek; yayın yalnızca sprint sonunda manuel yapılacak.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="label">İlk gün sonunda elinde olması gerekenler</span>
+    <ul>
+      <li>Çalışan bir geliştirme ortamı ve depoya erişim.</li>
+      <li>CBS'yi canlı görmüş olmak: harita, katmanlar, CAD verisinden haritaya giden yol.</li>
+      <li>İlk gün sonu mesajını 17.30'da yazmış olmak — formatı <a href="#ritim">Günlük ritmin</a> bölümünde.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="sozluk">
+  <div class="section-head"><h2><span class="n">04</span>Bilmen gereken terimler</h2><span class="sub">ilk hafta bunları duyacaksın</span></div>
+
+  <p>Bu terimleri ezberlemen gerekmiyor ama <strong>siteye yazarken doğru kullanman</strong> gerekiyor.
+  Anlamadığın bir terimi toplantıda sormak zayıflık değil, doğru davranıştır.</p>
+
+  <div class="table-scroll">
+  <table class="kv">
+    <tr><th>Terim</th><th>Ne demek</th></tr>
+    <tr><td>CBS</td><td>Coğrafi Bilgi Sistemi. Konuma bağlı verinin (şebeke hatları, imar, sınırlar) haritada toplanıp sorgulanabildiği sistem.</td></tr>
+    <tr><td>Katman (layer)</td><td>Haritada açılıp kapatılabilen tek bir veri kümesi — ör. "atıksu şebekesi", "planlı arazi kullanımı".</td></tr>
+    <tr><td>Öznitelik (attribute)</td><td>Haritadaki bir nesnenin taşıdığı bilgi — bir borunun çapı, bir alanın kullanım sınıfı.</td></tr>
+    <tr><td>CAD verisi</td><td>Mühendislik çizim dosyası (AutoCAD vb.). Ham hâli haritaya doğrudan girmez; işlenip "derlenir".</td></tr>
+    <tr><td>Kürasyon / derleme</td><td>Ham veriyi temizleyip birleştirip haritaya uygun hâle getirme işlemi. Her derleme bir kayıt üretir.</td></tr>
+    <tr><td>TUCBS</td><td>Türkiye Ulusal Coğrafi Bilgi Sistemi. Öznitelik adlarının uyması gereken ulusal sözlük/standart.</td></tr>
+    <tr><td>MVT / vektör karo</td><td>Mapbox Vector Tile. Haritayı küçük parçalar hâlinde hızlıca gönderen modern format — sitede "hızlı" iddiasının teknik dayanağı.</td></tr>
+    <tr><td>Altlık harita (basemap)</td><td>Verinin üstüne oturduğu arka plan haritası. Şu an geliştirme amaçlı OpenStreetMap (OSM) kullanılıyor.</td></tr>
+    <tr><td>Wireframe</td><td>Renk ve görsel olmadan, yalnızca yerleşimi gösteren sayfa taslağı. 1. hafta perşembe bunları çizeceksin.</td></tr>
+    <tr><td>Duyarlı (responsive)</td><td>Sayfanın telefon, tablet ve masaüstünde kırılmadan çalışması.</td></tr>
+    <tr><td>Alt metin (alt text)</td><td>Görselin ne anlattığını yazan metin. Ekran okuyucular ve görsel yüklenmediğinde kullanılır — <strong>baştan itibaren zorunlu</strong>.</td></tr>
+    <tr><td>Deploy (yayın)</td><td>Sitenin güncel hâlini canlı adrese çıkarmak. Bu projede yalnızca sprint sonunda, manuel yapılır.</td></tr>
+    <tr><td>Lighthouse</td><td>Chrome'un yerleşik ölçüm aracı: performans, erişilebilirlik, SEO puanı verir. 4. hafta salı birlikte öğreneceğiz.</td></tr>
+    <tr><td>OG etiketleri</td><td>Open Graph. Link WhatsApp/Twitter'da paylaşıldığında çıkan başlık ve görseli belirleyen meta etiketler.</td></tr>
+    <tr><td>Backlog (iş listesi)</td><td>Şimdi yapılmayacak ama unutulmayacak işlerin listesi.</td></tr>
+  </table>
+  </div>
+</section>
+
+<section id="ritim">
+  <div class="section-head"><h2><span class="n">05</span>Günlük ritmin</h2><span class="sub">her günün aynı iskeleti var</span></div>
+
+  <div class="table-scroll">
+  <table>
+    <tr><th>Ne zaman</th><th>Ne yapacaksın</th></tr>
+    <tr><td class="day">Pzt 09.30</td><td>Standup + <strong>hafta hedefinin teyidi</strong>. Geçen haftadan devreden iş varsa hedef yeniden ifade edilir. Bu senin lehinedir: İlerleme puanın yeniden ifade edilen hedefe göre verilir, aynı gecikme iki kez puan düşürmez.</td></tr>
+    <tr><td class="day">Her gün 09.30</td><td>Standup, 15 dk, üç soru: <span class="lead-q">Dün ne bitirdim? Bugün ne bitireceğim? Önümde engel var mı?</span> Çözüm tartışması standup'ta yapılmaz — gerekirse hemen ardından ayrı bir görüşme ayarlanır. Standup sonunda o günün rengini sana açıkça söyleriz.</td></tr>
+    <tr><td class="day">Her gün 17.30</td><td><strong>Gün sonu mesajı</strong> — yazılı, tek mesaj, ⟨kanal⟩'a. Şablonu aşağıda. Bu mesaj İletişim puanının ana kanıtıdır ve tıkanıklığın ertesi sabaha kalmasını önler.</td></tr>
+    <tr><td class="day">Çar</td><td><strong>30 dk masa başı kontrolü (notsuz).</strong> Süpervizör o haftanın gerçek işine bakar: wireframe, canlı sayfa, taslak metin. Buraya bitmiş iş getirmen beklenmiyor — <em>gerçek</em> iş getirmen bekleniyor. Puanlanmaz.</td></tr>
+    <tr><td class="day">Per</td><td><strong>30 dk repo/kod incelemesi</strong> — İş kalitesi puanının kanıtı büyük ölçüde buradan gelir. Öğleden sonrası tampondur: hata ayıklama, yetişmeyen işler, cuma hazırlığı. Tamponu peşinen dolu varsayma.</td></tr>
+    <tr><td class="day">Cum</td><td>Sabah: toparlama + sunum provası. <strong>15.00: sunum</strong> (45 dk). Cuma günü yeni iş planlanmaz — cuma bitirme ve anlatma günüdür.</td></tr>
+  </table>
+  </div>
+
+  <div class="copy"><span class="lbl">Gün sonu mesajı — bu şablonu kopyala</span>📅 ⟨tarih⟩ — gün sonu
+
+✅ Bugün biten: ⟨madde madde, kısa⟩
+🔜 Yarın: ⟨yarının taahhüdü⟩
+🚧 Engel: ⟨varsa ne, kimden ne bekliyorum; yoksa "yok"⟩</div>
+
+  <p class="note-sm">İyi bir gün sonu mesajı üç satırdır ve dürüsttür. "Bugün ana sayfa bitti" yerine
+  "hero bölümü bitti, navigasyon yarım kaldı, yarın sabah kapatırım" yaz. Şişirilmiş taahhüt,
+  tutulmayan taahhüde dönüşür ve <strong>puanına asıl bu zarar verir</strong>.</p>
+
+  <div class="panel" style="margin-top:20px">
+    <h3>Günlük renk notu — ne anlama geliyor</h3>
+    <ul>
+      <li><strong>yeşil</strong> — günün taahhüdü bitti.</li>
+      <li><strong>sarı</strong> — kısmen bitti; sebebini <em>aynı gün</em> bildirdin. Sarı felaket değildir; bildirilmiş sarı, gizlenmiş yeşilden iyidir.</li>
+      <li><strong>kırmızı</strong> — bitmedi <em>ve</em> bildirim geç/eksik. İlk kırmızı günde süpervizör aynı gün müdahale eder; ikinci güne bırakmayız.</li>
+      <li><strong>T</strong> — engel takım tarafında. Bu not senin aleyhine sayılmaz; takımın taahhüt ihlali olarak <em>bizim</em> karnemize işlenir.</li>
+    </ul>
+    <p class="note-sm" style="margin-top:10px">Notun standup sonunda sana açıkça söylenir. Cuma günü daha önce duymadığın bir kanıtla karşılaşmazsın.
+    Aynı olaydan hem İlerleme hem İletişim puanı düşmez: İlerleme "ne bitti"ye, İletişim "nasıl ve ne zaman bildirildi"ye bakar.</p>
+  </div>
+</section>
+
+<section id="tikanma">
+  <div class="section-head"><h2><span class="n">06</span>Tıkandığında ne yapacaksın</h2><span class="sub">en kritik iki kural</span></div>
+
+  <div class="two-col">
+    <div class="panel">
+      <h3>2 saat kuralı — senin görevin</h3>
+      <ul>
+        <li>Bir problemde <strong>2 saatten uzun</strong> tıkalı kalmayacaksın.</li>
+        <li>2 saat dolduğunda sormak <strong>senin görevin</strong>, cevaplamak bizim.</li>
+        <li>Sormak "beceremedim" demek değildir. Sormamak, günün tamamını kaybetmektir — puan kaybettiren budur.</li>
+        <li>Sorduktan sonra beklerken boş oturma: aynı günün başka bir işine geç.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>1 saat kuralı — bizim görevimiz</h3>
+      <ul>
+        <li>Mesai içinde ⟨kanal⟩'dan sorduğun soruya <strong>en geç 1 saat içinde</strong> dönüş yapılır.</li>
+        <li>Mentorun ⟨mentor⟩; ulaşamazsan yedek ⟨yedek⟩ devralır.</li>
+        <li>"Müsait değildi" senin kaybettiğin gün olamaz. 1 saat geçtiyse yedeğe yaz — bu ısrar değil, kuralın işletilmesidir.</li>
+        <li>Cevap gecikirse gün sonu mesajına yaz. Gecikme <strong>T</strong> notuyla bizim tarafımıza işlenir.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="copy"><span class="lbl">İyi soru şablonu — 4 satır, kopyala</span>🎯 Ne yapmaya çalışıyorum: ⟨tek cümle⟩
+🔴 Ne oluyor: ⟨gördüğün hata / beklenmeyen davranış, varsa mesajın kendisi⟩
+🧪 Ne denedim: ⟨1-2 madde⟩
+❓ Sorum: ⟨net soru⟩</div>
+
+  <p class="note-sm">"Çalışmıyor, bakabilir misin?" bir soru değildir. Yukarıdaki dört satırı yazmak
+  çoğu zaman 5 dakika sürer ve <strong>yarısında cevabı kendin bulursun</strong>. Bulamazsan da
+  karşı taraf tek okumada anlar. Problem çözme puanının kanıtı tam olarak bu mesajlardır.</p>
+</section>
+
+<section id="haftalar">
+  <div class="section-head"><h2><span class="n">07</span>Hafta hafta planın</h2><span class="sub">gün satırları şablondur; hedefler sabit, günler esner</span></div>
+
+  <p class="note-sm">Gün satırlarını bir sözleşme değil, bir öneri olarak oku. Sabit olan
+  <strong>hafta hedefi</strong> ve <strong>cuma çıktısı</strong>. Günlerin dizilişi 1. hafta çarşambadaki
+  kalibrasyon görevinin sonucuna göre birlikte yeniden ölçeklenebilir.</p>
+
+  <!-- HAFTA 1 -->
+  <div class="week">
+    <div class="week-head"><span class="week-num">Hafta 1</span><h3>Keşif &amp; Tasarım</h3><span class="dates">24–28 Ağustos</span></div>
+    <p class="goal"><strong>Hafta hedefin:</strong> Sistemi tanı, mesajı netleştir, becerini göster, sitenin tasarımını onaya sun. Bu hafta kod yazmıyorsun — <em>ne</em> yazacağına karar veriyorsun.</p>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Gün</th><th>Yapacağın iş</th></tr>
+      <tr><td class="day">Pzt</td><td>Tanışma ve oryantasyon. <strong>CBS alan araştırması:</strong> internetten CBS kavramlarını, TUCBS'yi ve belediye CBS örneklerini incele; arşivdeki demo ekran görüntülerine yalnızca yardımcı bağlam olarak göz at (tek kaynak değil). <strong>Not tut</strong> — bu notlar 3. haftadaki mockup varyantlarının listesidir. Araç kurulumunu tamamla (<a href="#ilkgun">bölüm 03</a>).</td></tr>
+      <tr><td class="day">Sal</td><td><strong>Hedef kitle ve ana mesaj çalışması.</strong> Araştırma notlarını ve <a href="#icerik">İçerik cephanesi</a>ni kullanarak sitenin anlatacağı <strong>4–6 ana mesajı</strong> kesinleştir. Çıktıyı yazılı hâle getir — o liste haftanın kanıtı.</td></tr>
+      <tr><td class="day">Çar</td><td><strong>Sabah:</strong> benchmark — 4–5 referans site (belediye/kurum tanıtım siteleri, teknoloji ürün sayfaları) incele, her biri için 3 satır not: neyi iyi yapmış, neyi kötü, bizde ne işe yarar. <strong>Öğleden sonra:</strong> <a href="#kalibrasyon">kalibrasyon görevi</a> (2–3 saat).</td></tr>
+      <tr><td class="day">Per</td><td>Site haritası + <strong>wireframe'ler</strong>: ana sayfa, özellikler, hakkında/iletişim. Renk ve görsel yok — sadece yerleşim, başlık hiyerarşisi, hangi bölümde ne var. Öğleden sonra: tampon + cuma hazırlığı.</td></tr>
+      <tr><td class="day">Cum</td><td><strong>Sabah:</strong> görsel yön — renk paletini, tipografiyi ve logoyu kendin tasarla (tokens.css ilk sürümü), 1 örnek ekran taslağı (ana sayfa üst bölümü). Prova. <strong>15.00: Sunum #1.</strong></td></tr>
+    </table>
+    </div>
+    <div class="dod">
+      <span class="label">Cuma çıktın — tasarım onay kapısı</span>
+      <ul class="check">
+        <li>Site haritası ve wireframe'ler sunuldu; takım tasarımı onayladı ya da düzeltme istedi.</li>
+        <li>Ana mesaj listesi (4–6 madde) <strong>yazılı</strong> olarak kayıt altında.</li>
+        <li>Kalibrasyon görevi commit'lendi ve localhost'ta sunuldu; 2. hafta planı hızına göre ölçeklendi.</li>
+      </ul>
+    </div>
+    <h4>Bu hafta dikkat</h4>
+    <p class="note-sm">Sunum #1 <strong>kalibrasyondur</strong>: yalnızca şablona uyum puanlanır, sahne performansı 2. haftadan itibaren puanlanır. Rahat ol, ama şablona uy.</p>
+  </div>
+
+  <!-- HAFTA 2 -->
+  <div class="week">
+    <div class="week-head"><span class="week-num">Hafta 2</span><h3>İskelet</h3><span class="dates">31 Ağustos – 4 Eylül</span></div>
+    <p class="goal"><strong>Hafta hedefin:</strong> Localhost'ta gezilebilir bir site iskeleti. Hafta sonunda site aynı ağdaki telefondan da açılabilir olacak (<span class="mono">npm run dev -- --host</span>).</p>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Gün</th><th>Yapacağın iş</th></tr>
+      <tr><td class="day">Pzt</td><td>Depo (repo) kurulumu, Astro iskelet projesi — <strong>⟨mentor⟩ ile eşli çalışacaksın, bu günü tek başına geçirmiyorsun.</strong> Gün sonunda "boş ama çalışan" ilk sayfa localhost'ta açılacak.</td></tr>
+      <tr><td class="day">Sal</td><td>Ana sayfa: üst bölüm (hero), ana mesaj ve çağrı. Onaylanan paleti ve tipografiyi koda dök. <strong>Çalışma kuralı:</strong> her görsele alt metin, her metne yeterli kontrast — sonradan eklenmez, baştan yazılır.</td></tr>
+      <tr><td class="day">Çar</td><td>Navigasyon, alt bilgi (footer), duyarlı yerleşim düzeni. "Rakamlarla CBS" bandının iskeleti (rakamlar henüz yer tutucu olabilir). <strong>30 dk masa başı kontrolü.</strong></td></tr>
+      <tr><td class="day">Per</td><td>Özellikler sayfasının iskeleti: bölüm başlıkları, yer tutucu görsel alanları. <strong>30 dk repo incelemesi.</strong> Öğleden sonra: tampon + hata ayıklama.</td></tr>
+      <tr><td class="day">Cum</td><td><strong>Sabah:</strong> mobil kontrol (gerçek telefonda aç, emülatörle yetinme), toparlama, prova. <strong>15.00: Sunum #2</strong> — demo localhost'tan; mobil hâli telefonda aynı ağ üzerinden gösterilir.</td></tr>
+    </table>
+    </div>
+    <div class="dod">
+      <span class="label">Cuma çıktın</span>
+      <ul class="check">
+        <li>Ana sayfa + özellikler iskeleti localhost'ta gezilebilir.</li>
+        <li>Site mobilde kırılmadan açılıyor.</li>
+        <li>Her gün en az bir anlamlı commit + push yapıldı — küçük ve sık adımlar.</li>
+      </ul>
+    </div>
+    <h4>Bu hafta dikkat</h4>
+    <p class="note-sm">Bu haftanın gerçek riski "güzel görünsün" diye tek bir büyük değişikliği günlerce depoya sokmamaktır.
+    Yarım da olsa commit'le — depoya girmemiş iyi iş, girmiş vasat işten daha az değerlidir, çünkü kimse göremez.</p>
+  </div>
+
+  <!-- HAFTA 3 -->
+  <div class="week">
+    <div class="week-head"><span class="week-num">Hafta 3</span><h3>İçerik &amp; Görseller</h3><span class="dates">7–11 Eylül</span></div>
+    <p class="goal"><strong>Hafta hedefin:</strong> Gerçek içerik, bitmiş mockup ve görseller. Hafta sonunda site "içerik tamam" durumuna gelir; 4. haftaya yalnızca cila kalır.</p>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Gün</th><th>Yapacağın iş</th></tr>
+      <tr><td class="day">Pzt</td><td><strong>CbsMockup bileşeni</strong> — kodla (HTML/SVG) stilize CBS arayüzü: koyu tema harita alanı, katman paneli, tıklamayla açılan bilgi penceresi. <strong>Mockup listeni önceden hazırla</strong> (1. hafta pazartesi tuttuğun araştırma notlarından). Gerçek sistemden ekran görüntüsü kullanılmaz.</td></tr>
+      <tr><td class="day">Sal</td><td>Özellik bölümlerini yaz ve görsellerle birleştir: interaktif harita, katmanlar, hızlı vektör altyapısı. <strong>Gün sonunda metinler süpervizör redaksiyonuna gider</strong> — içerik onay kapısı. 24 saat kuralı gereği dönüş çarşamba gelir.</td></tr>
+      <tr><td class="day">Çar</td><td>"Rakamlarla CBS" ve "Ulusal standartlara uyum (TUCBS)" bölümleri. Redaksiyon dönüşlerini işle. <strong>30 dk masa başı kontrolü.</strong></td></tr>
+      <tr><td class="day">Per</td><td>Yol haritası bölümü, sık sorulan sorular, iletişim bölümü. <strong>30 dk repo incelemesi.</strong> Öğleden sonra: tampon + eksik görseller.</td></tr>
+      <tr><td class="day">Cum</td><td><strong>Sabah:</strong> son rötuşlar, toparlama, prova. <strong>15.00: Sunum #3.</strong></td></tr>
+    </table>
+    </div>
+    <div class="dod">
+      <span class="label">Cuma çıktın</span>
+      <ul class="check">
+        <li>Tüm sayfalarda yer tutucu (lorem metni, boş görsel kutusu) kalmadı.</li>
+        <li>Sitedeki <strong>her rakam</strong> yalnızca <span class="mono">src/data/rakamlar.js</span>'ten geliyor ve placeholder olduğu biliniyor; metne gömülü rakam yok.</li>
+        <li>En az bir CbsMockup varyantı sitede; üç varyant (katmanlar, bilgi-penceresi, genel) tamamsa artı puan.</li>
+      </ul>
+    </div>
+    <h4>Bu hafta dikkat</h4>
+    <p class="note-sm">Mockup ve görsellerde <strong>gerçek veri kullanılmaz</strong> — öznitelik tablolarındaki tüm değerler uydurma örnek verilerdir. Gerçeğe benzeyen ad, adres, telefon yazma.</p>
+  </div>
+
+  <!-- HAFTA 4 -->
+  <div class="week">
+    <div class="week-head"><span class="week-num">Hafta 4</span><h3>Cila &amp; Teslim</h3><span class="dates">14–18 Eylül</span></div>
+    <p class="goal"><strong>Hafta hedefin:</strong> Yayına hazır kalite. Bu hafta <strong>yeni özellik eklenmez</strong> — kalite, hız ve teslim odaklıdır. "Şunu da ekleyeyim" dürtüsü bu hafta en büyük risktir.</p>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Gün</th><th>Yapacağın iş</th></tr>
+      <tr><td class="day">Pzt</td><td>Tarayıcı ve cihaz testi: Chrome, Safari, Firefox × telefon, tablet, masaüstü. Bulduğun sorunları <strong>önce listele</strong>, sonra düzelt — liste hem yol haritan hem kanıtın olur.</td></tr>
+      <tr><td class="day">Sal</td><td>Performans: Lighthouse ölçümü (<strong>hedef ≥ 90 — bu bir hedeftir, geçme barajı değil</strong>) ve görsel sıkıştırma. İlk ölçümü süpervizörle birlikte yapacaksın; aracı bugün öğreneceksin, önceden bilmen beklenmiyor.</td></tr>
+      <tr><td class="day">Çar</td><td><strong>Sabah:</strong> temel erişilebilirlik (kontrast, alt metinler, klavyeyle gezinme) + SEO/meta/OG etiketleri. <strong>Öğleden sonra:</strong> Türkçe yazım redaksiyonu — son geçiş. <strong>30 dk masa başı kontrolü.</strong></td></tr>
+      <tr><td class="day">Per</td><td><a href="#teslim">Teslim dokümanı</a>nı yaz: dosya yapısı, içerik nasıl güncellenir, yayın nasıl yapılır. <strong>30 dk repo incelemesi.</strong> Final sunum provası.</td></tr>
+      <tr><td class="day">Cum</td><td><strong>Sabah:</strong> yayın hazırlığı (barındırma kararına göre) + son prova. <strong>15.00: Final sunum (#4)</strong> — dört haftanın tamamı: hedef, süreç, ürün, öğrenilenler. Ardından retrospektif ve staj değerlendirmesi.</td></tr>
+    </table>
+    </div>
+    <div class="dod">
+      <span class="label">Cuma çıktın — sprint bitişi</span>
+      <ul class="check">
+        <li>Site yayına hazır. (Barındırma kararı verildiyse yayında; karar çarşambaya kadar gelmediyse <strong>"yayına hazır" tam puandır</strong> — o karar sende değil.)</li>
+        <li>Teslim dokümanı depoda; siteyi sen olmadan güncelleyebiliyoruz.</li>
+        <li>Final sunum yapıldı, karne tamamlandı.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="kalibrasyon">
+  <div class="section-head"><h2><span class="n">08</span>Kalibrasyon görevi</h2><span class="sub">1. hafta çarşamba, öğleden sonra, 2–3 saat</span></div>
+
+  <p>Bu bir sınav değil, bir <strong>ayar işlemi</strong>. Amacı seni elemek değil; 2. ve 3. haftanın
+  gün planlarını senin gerçek hızına göre ölçeklemek.
+  Sonuç ne çıkarsa çıksın sprint devam eder — sadece planın ölçeği değişir.</p>
+
+  <div class="two-col">
+    <div class="panel">
+      <h3>Görev</h3>
+      <ul>
+        <li>Sana verilecek bir taslaktan (wireframe ya da örnek görsel) <strong>tek bölümlük duyarlı bir sayfa</strong> yap.</li>
+        <li>Masaüstünde ve telefonda düzgün görünsün.</li>
+        <li>Depoya <strong>commit'le</strong> ve localhost'ta çalışır hâlde göster.</li>
+        <li>Süre: 2–3 saat. Süre dolduğunda bulunduğun yerde bırak — bitmemiş olması sorun değil, nerede kaldığını anlatabilmen önemli.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Neye bakılacak</h3>
+      <ul>
+        <li>Taslağa sadakat: verilen yerleşimi ne kadar yakın kurdun.</li>
+        <li>Duyarlılık: telefonda kırılıyor mu.</li>
+        <li>Dosya düzeni ve kod okunabilirliği.</li>
+        <li>Kurulum: projeyi sıfırdan kurup çalıştırabildin mi.</li>
+        <li><strong>Bakılmayacak:</strong> tasarımın özgünlüğü, hız rekoru, kullandığın araç sayısı.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <span class="label">Sonucun ne anlama geleceği</span>
+    <ul>
+      <li>Teknoloji sabittir: <strong>Astro</strong> + sade CSS. Kalibrasyon bir teknoloji seçimi değil, hız ölçümüdür.</li>
+      <li>Sonuca göre 2.–3. hafta gün planları senin hızına göre yeniden dizilir — kapsam değişmez, diziliş değişir.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="sunum">
+  <div class="section-head"><h2><span class="n">09</span>Cuma sunumu</h2><span class="sub">her cuma 15.00 · 45 dakika</span></div>
+
+  <p><strong>Akış:</strong> 15 dk sunum + canlı demo · 15 dk soru-cevap · 15 dk değerlendirme ve geri bildirim.
+  Karne seninle birlikte, açık şekilde doldurulur — notun gizli değildir, gerekçesi yazılır ve sana söylenir.</p>
+
+  <div class="two-col">
+    <div class="panel">
+      <h3>Sunum şablonu — 4 slayt</h3>
+      <ul>
+        <li><strong>1.</strong> Hafta hedefi ve durum (tamam / kısmen / kaçtı)</li>
+        <li><strong>2.</strong> Yapılanlar + canlı demo</li>
+        <li><strong>3.</strong> Ne öğrendim, neyi farklı yapardım</li>
+        <li><strong>4.</strong> Gelecek hafta + engeller/ihtiyaçlar</li>
+      </ul>
+      <p class="note-sm" style="margin-top:10px">Şablon sabittir. Sunum biçimini sıfırdan icat etmek zorunda değilsin —
+      dört hafta boyunca aynı dört slayt. Fazladan slayt eklemek puan getirmez.</p>
+    </div>
+    <div class="panel">
+      <h3>Demo öncesi kontrol listesi</h3>
+      <ul class="check">
+        <li>Demoyu <strong>çalışan siteden</strong> yapacağım (<span class="mono">npm run dev</span>), dosyayı çift tıklayarak değil</li>
+        <li>Demo akışını bir kez temiz bir tarayıcı sekmesinde denedim</li>
+        <li>Telefonumda da açık — mobil hâli gösterilecek</li>
+        <li>Göstereceğim akışı bir kez baştan sona prova ettim</li>
+        <li>Bilinen bozuk bir yer varsa <strong>ben söyleyeceğim</strong>, sorulmasını beklemeyeceğim</li>
+        <li>Sunum 15 dakikayı geçmiyor (prova ederken süre tuttum)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <span class="label">Soru-cevap — kuralları bilmen senin lehine</span>
+    <ul>
+      <li>Sorular <strong>o hafta sunduğun işle sınırlıdır</strong>. Bu bir genel kültür ya da teknoloji sınavı değildir.</li>
+      <li>"Bilmiyorum, bakıp pazartesi dönerim" + tuttuğun takip sözü = <strong>iyi cevaptır</strong>. Cevabın dürüstlüğü ve yapısı puanlanır, her şeyi bilmen değil.</li>
+      <li>Uydurmak, bilmemekten çok daha fazla puan kaybettirir.</li>
+      <li>Sözünü verdiğin takibi pazartesi standup'ında kendin aç — hatırlatılmasını bekleme.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="degerlendirme">
+  <div class="section-head"><h2><span class="n">10</span>Nasıl değerlendirileceksin</h2><span class="sub">5 kriter · 100 puan · gizli hiçbir şey yok</span></div>
+
+  <p>Her kriter <strong>1–5</strong> arası puanlanır ve ağırlıkla çarpılır:
+  <span class="mono">kriter puanı = (verilen 1–5) × ağırlık ÷ 5</span></p>
+
+  <div class="table-scroll">
+  <table class="rubric">
+    <tr><th>Kriter</th><th>Neyi ölçer · kanıt nereden gelir</th><th class="w">Ağırlık</th></tr>
+    <tr><td>İlerleme</td><td>Pazartesi teyit edilen hafta hedefi ve cuma çıktısına göre gerçekleşme · günlük renk notların</td><td class="w">30</td></tr>
+    <tr><td>İş kalitesi</td><td>Tasarım tutarlılığı, mobil uyum, detay özeni, kod düzeni · cuma demosu + perşembe repo incelemesi</td><td class="w">25</td></tr>
+    <tr><td>Sunum</td><td>Şablona uyum, süre yönetimi, demonun akıcılığı, soruların ele alınışı · cuma sunumu</td><td class="w">20</td></tr>
+    <tr><td>Problem çözme &amp; öğrenme</td><td>Engelleri erken bildirme, denenen çözümler, geri bildirimin uygulanması · standup + masa başı kontrolleri</td><td class="w">15</td></tr>
+    <tr><td>İletişim &amp; disiplin</td><td>Standup ve gün sonu mesajı netliği, taahhüt kalibrasyonu, zamanında bilgilendirme · günlük kayıtlar</td><td class="w">10</td></tr>
+  </table>
+  </div>
+
+  <div class="callout green">
+    <span class="label">Bunları baştan bilmeni istiyoruz</span>
+    <ul>
+      <li><strong>4 = tam beklenen performans.</strong> 5 almak için kapsam dışı ekstra iş yapmak ya da fazla mesai gerekmez; 5, kapsam <em>içinde</em> ustalıktır.</li>
+      <li>Karne okuluna gidiyorsa: <strong>80/100 = "hedefi tam karşıladı"</strong> demektir.</li>
+      <li><strong>Takım gecikmesi sana yazılmaz.</strong> Bir cuma çıktısı maddesi, bizim yerine getirmediğimiz bir taahhüt yüzünden tamamlanamadıysa İlerleme puanlamasında <em>tamamlanmış sayılır</em> ve karneye "T" düşülür.</li>
+      <li><strong>Taahhüt kalibrasyonu:</strong> puan, taahhüdünün tutarlılığına bakar. Sürekli çok küçük taahhüt vermek de, sürekli tutmayan büyük taahhüt vermek de "sarı"dır. İsabetli tahmin ödüllendirilir.</li>
+      <li>1. haftada "geri bildirimin uygulanması" henüz ölçülemez; Problem çözme yalnızca gözlemlenebilir kısımlardan puanlanır.</li>
+    </ul>
+  </div>
+
+  <div class="panel" style="margin-top:20px">
+    <h3>Senin hakların</h3>
+    <ul>
+      <li>Panel dört hafta boyunca <strong>aynı 2–3 kişidir</strong>; puanlayanlar değişmez.</li>
+      <li>Önce herkes bağımsız olarak 1–5 verir, sonra uzlaşılır; eşitliği süpervizör bozar.</li>
+      <li>Karnedeki <strong>her hücreye bir cümlelik yazılı gerekçe</strong> düşülür — "iyiydi/kötüydü" yeterli değildir.</li>
+      <li>Katılmadığın bir puana <strong>karneye şerh düşebilirsin</strong>; o madde ertesi cuma yeniden görüşülür.</li>
+      <li>Cuma günü daha önce duymadığın bir kanıtla karşılaşmazsın — çarşamba masada görülmemiş bir şey kapıda sürpriz olarak çıkmaz.</li>
+    </ul>
+  </div>
+
+  <h3 style="margin-top:28px">Puan çıpaları — hangi davranış kaç puan</h3>
+  <div class="table-scroll">
+  <table class="anchors">
+    <tr><th>Kriter</th><th>5 — Üstün</th><th>4 — Tam</th><th>3 — Eksikli</th><th>1–2 — Yetersiz</th></tr>
+    <tr><td>İlerleme</td><td>Hedefin tamamı; sıfır rework ya da bir riski erken görüp önledin</td><td>Cuma çıktısı maddelerinin tamamı temiz şekilde tamam</td><td>Çoğu tamam; küçük eksikler var, telafi planı net</td><td>Hedefin önemli kısmı gerçekleşmedi; telafi planı yok ya da geç</td></tr>
+    <tr><td>İş kalitesi</td><td>Tasarım ve kod incelemede övgü alacak düzeyde; detaylar öngörülü</td><td>Demo temiz; repo incelemesinde yalnızca küçük notlar</td><td>Görünür pürüzler (hizalama, mobil kırılma) ya da dağınık dosya düzeni</td><td>Demo kırık; önceki inceleme bulguları düzeltilmeden tekrarlıyor</td></tr>
+    <tr><td>Sunum</td><td>Şablon + süre + akıcı demo + soruları yapılandırılmış ve dürüst ele alma</td><td>Şablona uyuldu, süre tutuldu, demo çalıştı</td><td>Süre aşıldı ya da demo hazırlıksızdı</td><td>Hazırlıksız; şablon yok sayıldı ya da sunum yapılamadı</td></tr>
+    <tr><td>Problem çözme</td><td>Engeli erken gördün, alternatif ürettin; geri bildirim üründe görünür</td><td>Engeller zamanında bildirildi; denenen çözümler anlatılabildi</td><td>Engeller geç bildirildi ya da tek yol denendi</td><td>Aynı engel bildirilmeden tekrar etti</td></tr>
+    <tr><td>İletişim</td><td>Standup + gün sonu mesajı her gün net; kalibrasyon isabetli</td><td>Standup'lar net; taahhütler çoğunlukla isabetli</td><td>Bildirimler ara ara geç ya da belirsiz</td><td>Günlerce sessizlik; taahhütler takip edilemiyor</td></tr>
+  </table>
+  </div>
+
+  <p class="note-sm" style="margin-top:16px"><strong>Staj genel notun:</strong>
+  <span class="mono">(H1 + H2 + H3 + 2 × H4) ÷ 5</span> — final haftası çift ağırlıklıdır, çünkü hem bitmiş ürünü
+  hem dört haftalık gelişimini yansıtır. Kötü başlayıp iyi bitirmek bu formülde ödüllendirilir.
+  Ayrıca pazartesi "hedefi yeniden ifade etme" kuralı sayesinde devreden bir iş ikinci kez puan düşürmez.</p>
+</section>
+
+<section id="icerik">
+  <div class="section-head"><h2><span class="n">11</span>İçerik cephanesi</h2><span class="sub">siteye yazacakların için başlangıç malzemesi</span></div>
+
+  <p>Aşağıdaki maddeler başlangıç malzemesidir; kendi internet araştırmanla doğrulayıp geliştireceksin (kurum içinden CBS bilgisi alınmaz). İşin bunları site diline çevirmek — teknik cümleyi, okuyanın anlayacağı bir değer cümlesine dönüştürmek.</p>
+
+  <div class="callout">
+    <span class="label">Tek şartı var</span>
+    <ul>
+      <li>Siteye gireceğin <strong>her rakam</strong> placeholder'dır ve yalnızca <span class="mono">src/data/rakamlar.js</span>'te durur — sonradan gerçekleriyle tek dosyadan değiştirilecek.</li>
+      <li>Rakamları gerçekmiş gibi sunma; iddiaları genel geçer CBS yetenekleri diliyle yaz, belirli bir kurumun canlı sistemine bağlama.</li>
+    </ul>
+  </div>
+
+  <div class="panel facts">
+    <h3>Anlatabileceğin gerçekler</h3>
+    <ul>
+      <li><span class="num">215 km</span> atıksu şebekesi haritada — <span class="num">308.220</span> satır ham CAD verisinden derlenen <span class="num">2.951</span> birleştirilmiş hat; <span class="num">7</span> çap sınıfı (Ø200–Ø1000) ve ayrı bir "çapı bilinmeyen" gösterimiyle.</li>
+      <li><span class="num">11.295</span> satırlık ham imar çiziminden derlenen planlı arazi kullanımı katmanı; <span class="num">58</span> kategorilik kod listesi, elle onaylanmış Türkçe etiketlerle. <span class="note-sm">(58 sayısı yayından önce canlı veritabanından teyit edilecek.)</span></li>
+      <li><strong>Ulusal standartlara uyum:</strong> tematik öznitelik adları TUCBS sözlüğünden çözülür, asla uydurulmaz; teknik alanlar (kimlik, etiket) açıkça listelenmiş istisnalardır. Uyum otomatik testle güvence altında.</li>
+      <li><strong>Modern ve hızlı:</strong> vektör karo (MVT) altyapısı; kurum içi ağda tüm şehir görünümü <span class="num">3 saniyenin altında</span> açılır, kaydırma/yakınlaştırma akıcıdır.</li>
+      <li><strong>Denetlenebilir veri kalitesi:</strong> her veri derleme/yenileme işlemi; kaynak ve küratörlü kayıt adetlerini, sınıf toplamlarını ve fark yüzdesini içeren bir kürasyon kaydı üretir. "Veri nereden geldi?" sorusunun her zaman cevabı vardır.</li>
+      <li><strong>Kesintisiz güncelleme:</strong> veri yenilenirken açık haritalar çalışmaya devam eder; kullanıcı asla yarım veri görmez.</li>
+      <li><strong>Kurum sunucusunda barındırılır:</strong> uygulama tek bir servis ve kurum içi veritabanından oluşur; harita kütüphaneleri uygulamayla birlikte sunulur, CDN kullanılmaz. Veri belediyenin kendi sunucusundadır.</li>
+      <li><strong>Yol haritası</strong> — yalnızca "yakında" diliyle: içme suyu ve yağmur suyu şebekeleri, mahalle sınırları, taşkın yayılım haritaları; kadastro/parsel katmanları (Kadastro Müdürlüğü ile veri paylaşımına bağlı).</li>
+    </ul>
+  </div>
+</section>
+
+<section id="kirmizi">
+  <div class="section-head"><h2><span class="n">12</span>Kırmızı çizgiler</h2><span class="sub">siteye asla yazmayacakların</span></div>
+
+  <div class="callout red">
+    <span class="label">Bunlar tartışmaya açık değil</span>
+    <ul>
+      <li><strong>Vatandaşa açık erişim vaat edilmez.</strong> Sistem şu an kurum içidir; kamuya açılması ayrı bir kurumsal karardır. "Yakında herkes kullanabilecek" gibi bir cümle kuramazsın.</li>
+      <li><strong>Yol haritası maddelerine tarih verilmez.</strong> "2027'de gelecek" yok; "yakında / planlanıyor" var. Kadastro/parsel gibi dış kuruma bağlı maddeler yalnızca "planlanıyor" dilinde yazılır.</li>
+      <li><strong>"Hiç dış bağımlılık yok" iddiası kurulmaz.</strong> Altlık harita şu an geliştirme amaçlı OpenStreetMap'tir; üretim altlık kararı ayrı bir gelecek özelliktir.</li>
+      <li><strong>Mockup ve görsellerde gerçek/kişisel veri kullanılmaz</strong> — tüm örnek veriler uydurmadır; bu kontrolü yapan sensin.</li>
+    </ul>
+  </div>
+
+  <p class="note-sm">Bu maddeler seni kısıtlamak için değil, <strong>korumak</strong> için var. Kurumun veremeyeceği
+  bir sözü siteye yazmak, en iyi tasarımı bile geri aldırır. Emin olmadığın bir iddiayı yazmadan önce sor —
+  soru sormak bu sprintte her zaman doğru cevaptır.</p>
+</section>
+
+<section id="kalite">
+  <div class="section-head"><h2><span class="n">13</span>Kalite kontrol listesi</h2><span class="sub">her cuma sunumundan önce baştan geç</span></div>
+
+  <div class="two-col">
+    <div class="panel">
+      <h3>Her sunum öncesi — hızlı</h3>
+      <ul class="check">
+        <li>Site localhost'ta hatasız açılıyor</li>
+        <li>Telefonda yatay kaydırma yok</li>
+        <li>Konsolda kırmızı hata yok</li>
+        <li>Eklediğim her görselin alt metni var</li>
+        <li>Bozuk (404) link yok</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Haftalık — cumadan önce</h3>
+      <ul class="check">
+        <li>Chrome, Safari, Firefox üçünde de açtım</li>
+        <li>Telefon + tablet + masaüstü genişliklerini gördüm</li>
+        <li>Yer tutucu metin/görsel kalmadı</li>
+        <li>Türkçe yazım ve noktalama bir kez okundu</li>
+        <li>Sitedeki rakamlar <a href="#icerik">içerik cephanesi</a>yle birebir aynı</li>
+        <li><a href="#kirmizi">Kırmızı çizgiler</a>e aykırı bir cümle yok</li>
+        <li>Metin/arka plan kontrastı yeterli</li>
+        <li>Klavye ile (Tab) tüm linkler gezilebiliyor</li>
+        <li>Görseller sıkıştırıldı — tek bir görsel sayfayı yavaşlatmıyor</li>
+        <li>Deponun README'si güncel</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="teslim">
+  <div class="section-head"><h2><span class="n">14</span>Teslim dokümanı</h2><span class="sub">4. hafta perşembe yazacaksın</span></div>
+
+  <p>Sprintin en kolay ihmal edilen ama en çok kalıcı değer üreten çıktısı bu. Ölçüt tek cümle:
+  <strong>sen olmadan siteyi güncelleyebilmeliyiz.</strong> Depodaki <span class="mono">README.md</span>
+  dosyası bu işi görebilir. İçinde şunlar olacak:</p>
+
+  <div class="panel">
+    <ul class="check">
+      <li><strong>Bu site nedir</strong> — 3 cümle: amacı, kim için, nerede yayında</li>
+      <li><strong>Dosya yapısı</strong> — hangi klasörde ne var; hangi dosya hangi sayfayı üretiyor</li>
+      <li><strong>Bir metni nasıl değiştiririm</strong> — adım adım, teknik olmayan biri de izleyebilsin</li>
+      <li><strong>Bir görseli nasıl değiştiririm</strong> — hangi boyut, hangi format, sıkıştırma nasıl yapılır</li>
+      <li><strong>Yeni bir bölüm nasıl eklenir</strong> — mevcut bir bölümü örnek göstererek</li>
+      <li><strong>Yayın (deploy) nasıl yapılır</strong> — manuel adımlar, komut komut</li>
+      <li><strong>Yerelde nasıl çalıştırılır</strong> — kurulum komutları dahil, sıfırdan</li>
+      <li><strong>Rakamlar nereden geliyor</strong> — hangi rakamın ne zaman güncellenmesi gerekir, kime doğrulatılır</li>
+      <li><strong>Bilinen eksikler ve backlog</strong> — sprintte kesilen "olması güzel" maddeleri buraya</li>
+      <li><strong>İletişim</strong> — kim sahibi, sorular kime</li>
+    </ul>
+  </div>
+
+  <p class="note-sm">İyi bir test: dokümanı yazdıktan sonra, projeyi hiç görmemiş birinden bir metni değiştirip
+  yayına almasını iste. Takıldığı her yer dokümanın eksiğidir.</p>
+</section>
+
+<section id="bizden">
+  <div class="section-head"><h2><span class="n">15</span>Bizden ne bekleyebilirsin</h2><span class="sub">takımın sana karşı taahhütleri</span></div>
+
+  <p>Dört haftalık bir stajın en sık başarısızlık nedeni stajyer değil, takımın girdi vermekte
+  gecikmesidir. Bu yüzden bizim taahhütlerimiz de yazılı. <strong>Bunları talep etmek senin hakkın</strong> —
+  hatırlatmak yüzsüzlük değil, planın işletilmesidir.</p>
+
+  <div class="two-col">
+    <div class="panel">
+      <h3>Söz verdiklerimiz</h3>
+      <ul>
+        <li>Onay kapılarında (tasarım, içerik) <strong>24 saat içinde</strong> dönüş.</li>
+        <li>Sorularına mesai içinde <strong>1 saat içinde</strong> dönüş; mentor yoksa yedek devralır.</li>
+        <li>Standup'a her gün 15 dk, cuma sunumuna 45 dk kesintisiz zaman; çarşamba 30 dk masa kontrolü, perşembe 30 dk repo incelemesi.</li>
+        <li>2. hafta pazartesi kurulum gününde <strong>eşli çalışacağız</strong> — tek başına bırakılmayacaksın.</li>
+        <li>Barındırma ve kimlik onayı kararları sahipli ve tarihli olacak (en geç 3. hafta cuma).</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Tutmazsak ne olur</h3>
+      <ul>
+        <li>Gecikme gün sonu mesajında yazılı hâle gelir.</li>
+        <li>Karneye <strong>"T"</strong> notu düşülür — takım taahhüt ihlali.</li>
+        <li>O maddeden <strong>senin puanın düşmez</strong>; ilgili cuma çıktısı maddesi tamamlanmış sayılır.</li>
+        <li>Barındırma kararı 4. hafta çarşambaya kadar gelmediyse, tam puan barı "yayında" değil <strong>"yayına hazır"</strong> olur.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <span class="label">Özetle senden beklediğimiz beş şey</span>
+    <ul>
+      <li>Her gün 09.30'da standup'ta ol, 17.30'da gün sonu mesajını yaz.</li>
+      <li>2 saatten fazla tıkalı kalma; sorarken dört satırlık şablonu kullan.</li>
+      <li>2. haftadan itibaren her gün en az bir anlamlı commit + push yap.</li>
+      <li>Cuma sunumuna şablonla ve prova edilmiş bir demoyla gel.</li>
+      <li>Bilmediğinde "bilmiyorum, bakıp döneceğim" de — ve dön.</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="doc">
+  Bingöl Belediyesi CBS Programı · Stajyer el kitabı · 24 Ağustos – 18 Eylül 2026 ·
+  Bu doküman cuma değerlendirmelerinde güncellenebilir; hedef sabittir.
+  ⟨…⟩ ile işaretli alanlar sprint başlamadan doldurulacaktır.
+  Anlaşılmayan ya da eksik bulduğun her madde için ⟨mentor⟩'a yaz — bu doküman da senin geri bildiriminle iyileşir.
+</footer>
+
+</div>
+</body>
+</html>
