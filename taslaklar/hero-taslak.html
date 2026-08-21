@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero Taslağı — Görsel Yön Denemesi</title>
+<link rel="stylesheet" href="../src/styles/tokens.css">
+<style>
+  /* Taslak: yalnızca hero bölümü. Renkler tokens.css'ten gelir. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--yazi-govde);
+    background: var(--renk-zemin);
+    color: var(--renk-metin);
+    line-height: var(--satir-metin);
+  }
+  .hero {
+    max-width: var(--icerik-genislik);
+    margin: 0 auto;
+    padding: var(--bosluk-7) var(--bosluk-4);
+    display: grid;
+    gap: var(--bosluk-6);
+  }
+  .rozet {
+    display: inline-block;
+    background: var(--renk-vurgu-acik);
+    color: var(--renk-vurgu);
+    font-size: var(--boyut-kucuk);
+    font-weight: 600;
+    padding: var(--bosluk-1) var(--bosluk-3);
+    border-radius: 999px;
+    margin-bottom: var(--bosluk-4);
+  }
+  h1 {
+    font-size: var(--boyut-h1);
+    line-height: var(--satir-baslik);
+    font-weight: var(--kalinlik-baslik);
+    margin-bottom: var(--bosluk-4);
+    max-width: 22ch;
+  }
+  .hero p {
+    color: var(--renk-metin-soluk);
+    font-size: var(--boyut-buyuk);
+    max-width: 46ch;
+    margin-bottom: var(--bosluk-5);
+  }
+  .butonlar { display: flex; flex-wrap: wrap; gap: var(--bosluk-3); }
+  .btn {
+    display: inline-block;
+    padding: var(--bosluk-3) var(--bosluk-5);
+    border-radius: var(--kose-kucuk);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .btn:focus-visible { outline: var(--odak-halka); outline-offset: var(--odak-bosluk); }
+  .btn-birincil { background: var(--renk-cta); color: var(--renk-metin); }
+  .btn-birincil:hover { background: var(--renk-cta-koyu); }
+  .btn-ikincil { border: 1px solid var(--renk-cizgi); color: var(--renk-metin); background: var(--renk-yuzey); }
+  .btn-ikincil:hover { border-color: var(--renk-vurgu); color: var(--renk-vurgu); }
+
+  /* Stilize harita kartı — CbsMockup'ın habercisi */
+  .harita-kart {
+    background: var(--renk-harita-zemin);
+    border-radius: var(--kose);
+    box-shadow: var(--golge-kart);
+    overflow: hidden;
+  }
+  .harita-kart .bar {
+    display: flex;
+    align-items: center;
+    gap: var(--bosluk-2);
+    padding: var(--bosluk-3) var(--bosluk-4);
+    background: var(--renk-harita-yuzey);
+    color: var(--renk-harita-metin);
+    font-size: var(--boyut-kucuk);
+  }
+  .nokta { width: 8px; height: 8px; border-radius: 50%; background: var(--renk-katman-1); }
+  .harita-kart svg { display: block; width: 100%; height: auto; }
+
+  @media (min-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: var(--bosluk-8);
+      padding-bottom: var(--bosluk-8);
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div>
+    <span class="rozet">Coğrafi Bilgi Sistemi</span>
+    <h1>Şehrin tüm altyapısı tek haritada</h1>
+    <p>Su, kanalizasyon, imar, numarataj — dağınık dosyalarda duran her şey tek bir sorgulanabilir kent haritasında birleşir.</p>
+    <div class="butonlar">
+      <a class="btn btn-birincil" href="#">Özellikleri İncele</a>
+      <a class="btn btn-ikincil" href="#">İletişime Geç</a>
+    </div>
+  </div>
+
+  <div class="harita-kart" role="img" aria-label="Stilize CBS harita arayüzü örneği">
+    <div class="bar"><span class="nokta"></span> Kent Haritası · 12 katman</div>
+    <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="480" height="300" fill="var(--renk-harita-zemin)"/>
+      <!-- imar poligonları -->
+      <path d="M40 60 L150 40 L180 110 L70 130 Z" fill="var(--renk-katman-2)" opacity="0.25"/>
+      <path d="M200 150 L320 130 L350 210 L230 235 Z" fill="var(--renk-katman-3)" opacity="0.22"/>
+      <path d="M330 40 L430 55 L415 120 L320 105 Z" fill="var(--renk-katman-1)" opacity="0.18"/>
+      <!-- şebeke hatları -->
+      <path d="M20 220 C 120 180, 200 240, 300 200 S 440 160, 470 190" fill="none" stroke="var(--renk-katman-1)" stroke-width="3"/>
+      <path d="M60 280 C 150 230, 260 280, 350 240 S 430 220, 465 235" fill="none" stroke="var(--renk-katman-2)" stroke-width="2.5"/>
+      <path d="M10 120 C 90 140, 140 90, 220 100" fill="none" stroke="var(--renk-katman-3)" stroke-width="2"/>
+      <!-- düğüm noktaları -->
+      <circle cx="300" cy="200" r="5" fill="var(--renk-katman-1)"/>
+      <circle cx="120" cy="197" r="4" fill="var(--renk-katman-1)"/>
+      <circle cx="350" cy="240" r="4" fill="var(--renk-katman-2)"/>
+      <!-- bilgi penceresi -->
+      <g>
+        <rect x="285" y="120" width="160" height="70" rx="8" fill="var(--renk-harita-yuzey)"/>
+        <circle cx="303" cy="140" r="4" fill="var(--renk-katman-1)"/>
+        <rect x="315" y="135" width="90" height="9" rx="3" fill="var(--renk-harita-metin)" opacity="0.9"/>
+        <rect x="303" y="155" width="118" height="7" rx="3" fill="var(--renk-harita-metin)" opacity="0.45"/>
+        <rect x="303" y="169" width="86" height="7" rx="3" fill="var(--renk-harita-metin)" opacity="0.45"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+/* ============================================================
+   TASARIM TOKENLARI — renk, tipografi, boşluk: TEK KAYNAK
+   Kural: renk kodu yalnızca bu dosyada yazılır.
+   Bileşenlerde her zaman var(--renk-*) kullanılır.
+   ============================================================ */
+
+:root {
+  /* ---- Renkler: zemin ve metin ---- */
+  --renk-zemin:        #f6f8f6;  /* sayfa arka planı — çok açık yeşilimsi gri */
+  --renk-yuzey:        #ffffff;  /* kart / panel zemini */
+  --renk-metin:        #182722;  /* ana metin — koyu yeşil-siyah */
+  --renk-metin-soluk:  #4e615a;  /* ikincil metin (zemin üzerinde ≥ 4.5:1) */
+  --renk-cizgi:        #d9e2dc;  /* ayraç, kart kenarlığı */
+
+  /* ---- Renkler: marka ---- */
+  --renk-vurgu:        #17604c;  /* ana marka rengi — koyu harita yeşili */
+  --renk-vurgu-koyu:   #0f4636;  /* hover / bası hali */
+  --renk-vurgu-acik:   #e3efe9;  /* vurgu zeminli rozet/şerit arka planı */
+  --renk-cta:          #f0a93f;  /* eylem rengi — amber (üzerine koyu metin) */
+  --renk-cta-koyu:     #d99427;
+
+  /* ---- Renkler: koyu harita alanı (CbsMockup) ---- */
+  --renk-harita-zemin: #10201b;  /* mockup koyu tema zemini */
+  --renk-harita-yuzey: #1a2f28;  /* mockup panel zemini */
+  --renk-harita-metin: #dbe7e1;
+  --renk-katman-1:     #35c4b5;  /* turkuaz — şebeke hatları */
+  --renk-katman-2:     #f0a93f;  /* amber — imar/poligon */
+  --renk-katman-3:     #9d8cf0;  /* mor — sınırlar */
+  --renk-katman-4:     #ef8368;  /* mercan — arıza/işaret */
+
+  /* ---- Tipografi ---- */
+  /* Not: latin-ext yerel font dosyaları 2. haftada Astro kurulumuyla eklenecek;
+     o zamana dek sistem yığını kullanılır. */
+  --yazi-govde: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --yazi-baslik: var(--yazi-govde);
+
+  --boyut-metin:    1rem;                                  /* 16px taban */
+  --boyut-kucuk:    0.875rem;
+  --boyut-buyuk:    1.125rem;
+  --boyut-h1: clamp(1.9rem, 1.2rem + 3.2vw, 3.1rem);
+  --boyut-h2: clamp(1.5rem, 1.1rem + 1.8vw, 2.15rem);
+  --boyut-h3: clamp(1.15rem, 1rem + 0.7vw, 1.35rem);
+
+  --satir-metin:  1.65;
+  --satir-baslik: 1.2;
+  --kalinlik-baslik: 700;
+
+  /* ---- Boşluk ölçeği (4px taban) ---- */
+  --bosluk-1: 0.25rem;   /*  4px */
+  --bosluk-2: 0.5rem;    /*  8px */
+  --bosluk-3: 0.75rem;   /* 12px */
+  --bosluk-4: 1rem;      /* 16px */
+  --bosluk-5: 1.5rem;    /* 24px */
+  --bosluk-6: 2rem;      /* 32px */
+  --bosluk-7: 3rem;      /* 48px */
+  --bosluk-8: 4rem;      /* 64px */
+  --bosluk-9: 6rem;      /* 96px */
+
+  /* ---- Biçim ---- */
+  --kose:        10px;   /* kart köşe yumuşatma */
+  --kose-kucuk:  6px;
+  --golge-kart:  0 1px 2px rgb(24 39 34 / 0.06), 0 8px 24px rgb(24 39 34 / 0.07);
+  --icerik-genislik: 72rem;   /* 1152px — ana içerik sütunu */
+
+  /* ---- Odak halkası (klavye erişilebilirliği) ---- */
+  --odak-halka: 2px solid var(--renk-vurgu);
+  --odak-bosluk: 2px;
+}
+
+/* Kırılma noktaları (media query'lerde custom property kullanılamaz — sabit değerler):
+   640px · 900px · 1200px */
