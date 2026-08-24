@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logo Seçenekleri</title>
+<style>
+  /* Token değerleri tokens.css'ten kopya (taslak tek başına açılabilsin diye). */
+  :root {
+    --renk-zemin: #faf6ec;
+    --renk-yuzey: #ffffff;
+    --renk-metin: #1e2a24;
+    --renk-metin-soluk: #58635a;
+    --renk-cizgi: #e8e1d2;
+    --renk-vurgu: #17604c;
+    --renk-cta: #f0a93f;
+    --renk-harita-zemin: #10201b;
+    --renk-harita-metin: #eaf3ee;
+    --renk-katman-1: #35c4b5;
+    --renk-katman-2: #f0a93f;
+    --yazi-govde: "Segoe UI", system-ui, Roboto, Arial, sans-serif;
+    --yazi-baslik: Georgia, "Cambria", "Times New Roman", serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--yazi-govde);
+    background: var(--renk-zemin);
+    color: var(--renk-metin);
+    padding: 2rem 1rem 4rem;
+  }
+  h1 { font-family: var(--yazi-baslik); text-align: center; margin-bottom: 0.5rem; }
+  .aciklama { text-align: center; color: var(--renk-metin-soluk); margin-bottom: 2.5rem; }
+  .secenekler { max-width: 64rem; margin: 0 auto; display: grid; gap: 2rem; }
+  .secenek {
+    background: var(--renk-yuzey);
+    border: 1px solid var(--renk-cizgi);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .secenek h2 {
+    font-size: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--renk-cizgi);
+  }
+  .secenek h2 span { color: var(--renk-metin-soluk); font-weight: 400; font-size: 0.875rem; }
+  .ornekler { display: grid; grid-template-columns: 1fr 1fr; }
+  .ornek { display: flex; align-items: center; justify-content: center; padding: 2.25rem 1rem; }
+  .ornek.acik { background: var(--renk-zemin); }
+  .ornek.koyu { background: var(--renk-harita-zemin); }
+  .logo { display: inline-flex; align-items: center; gap: 0.7rem; }
+  .yazi {
+    font-family: var(--yazi-baslik);
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .acik .yazi { color: var(--renk-metin); }
+  .koyu .yazi { color: var(--renk-harita-metin); }
+  @media (min-width: 900px) { .secenekler { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<h1>Logo Seçenekleri</h1>
+<p class="aciklama">Her seçenek açık (krem) ve koyu zeminde gösteriliyor. İşaret + "CBS" yazısı birlikte logo bütünüdür.</p>
+
+<div class="secenekler">
+
+  <!-- SEÇENEK A: Katmanlar -->
+  <div class="secenek">
+    <h2>A — Katmanlar <span>· üst üste veri katmanları, CBS'nin özü</span></h2>
+    <div class="ornekler">
+      <div class="ornek acik">
+        <span class="logo">
+          <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+            <path d="M22 6 L38 14 L22 22 L6 14 Z" fill="var(--renk-vurgu)"/>
+            <path d="M22 17 L38 25 L22 33 L6 25 Z" fill="var(--renk-katman-1)" opacity="0.85"/>
+            <path d="M22 28 L38 36 L22 44 L6 36 Z" fill="var(--renk-cta)" opacity="0.9"/>
+          </svg>
+          <span class="yazi">CBS</span>
+        </span>
+      </div>
+      <div class="ornek koyu">
+        <span class="logo">
+          <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+            <path d="M22 6 L38 14 L22 22 L6 14 Z" fill="var(--renk-katman-1)"/>
+            <path d="M22 17 L38 25 L22 33 L6 25 Z" fill="var(--renk-harita-metin)" opacity="0.8"/>
+            <path d="M22 28 L38 36 L22 44 L6 36 Z" fill="var(--renk-cta)" opacity="0.9"/>
+          </svg>
+          <span class="yazi">CBS</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇENEK B: Parsel + düğüm -->
+  <div class="secenek">
+    <h2>B — Parsel &amp; Ağ <span>· parsel poligonu içinden geçen şebeke hattı</span></h2>
+    <div class="ornekler">
+      <div class="ornek acik">
+        <span class="logo">
+          <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+            <path d="M8 12 L30 6 L38 20 L32 38 L10 34 Z" fill="none" stroke="var(--renk-vurgu)" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M4 26 C 14 20, 24 30, 42 22" fill="none" stroke="var(--renk-cta)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="23" cy="25.5" r="4" fill="var(--renk-katman-1)"/>
+          </svg>
+          <span class="yazi">CBS</span>
+        </span>
+      </div>
+      <div class="ornek koyu">
+        <span class="logo">
+          <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+            <path d="M8 12 L30 6 L38 20 L32 38 L10 34 Z" fill="none" stroke="var(--renk-harita-metin)" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M4 26 C 14 20, 24 30, 42 22" fill="none" stroke="var(--renk-cta)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="23" cy="25.5" r="4" fill="var(--renk-katman-1)"/>
+          </svg>
+          <span class="yazi">CBS</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇENEK C: Konum karesi -->
+  <div class="secenek">
+    <h2>C — Konum Karesi <span>· harita karosu içinde konum işareti</span></h2>
+    <div class="ornekler">
+      <div class="ornek acik">
+        <span class="logo">
+          <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+            <rect x="4" y="4" width="36" height="36" rx="9" fill="var(--renk-vurgu)"/>
+            <path d="M13 22 H31 M22 13 V31" stroke="var(--renk-katman-1)" stroke-width="1.6" opacity="0.55"/>
+            <circle cx="22" cy="22" r="6.5" fill="none" stroke="var(--renk-cta)" stroke-width="3"/>
+            <circle cx="22" cy="22" r="2" fill="var(--renk-cta)"/>
+          </svg>
+          <span class="yazi">CBS</span>
+        </span>
+      </div>
+      <div class="ornek koyu">
+        <span class="logo">
+          <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+            <rect x="4" y="4" width="36" height="36" rx="9" fill="var(--renk-katman-1)"/>
+            <path d="M13 22 H31 M22 13 V31" stroke="var(--renk-harita-zemin)" stroke-width="1.6" opacity="0.5"/>
+            <circle cx="22" cy="22" r="6.5" fill="none" stroke="var(--renk-harita-zemin)" stroke-width="3"/>
+            <circle cx="22" cy="22" r="2" fill="var(--renk-harita-zemin)"/>
+          </svg>
+          <span class="yazi">CBS</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
