@@ -22,7 +22,11 @@
   /* ---- Renkler: koyu harita alanı (CbsMockup) ---- */
   --renk-harita-zemin: #10201b;  /* mockup koyu tema zemini */
   --renk-harita-yuzey: #1a2f28;  /* mockup panel zemini */
-  --renk-harita-metin: #dbe7e1;
+  --renk-harita-metin: #eaf3ee;
+  --renk-harita-metin-soluk: #9cb2a8;   /* koyu zeminde ikincil metin */
+  --renk-harita-cizgi: rgb(219 231 225 / 0.18);  /* koyu zeminde kenarlık */
+  --renk-izgara:  rgb(53 196 181 / 0.05);  /* koyu hero ızgara deseni */
+  --renk-parlama: rgb(53 196 181 / 0.14);  /* koyu hero ışıma */
   --renk-katman-1:     #35c4b5;  /* turkuaz — şebeke hatları */
   --renk-katman-2:     #f0a93f;  /* amber — imar/poligon */
   --renk-katman-3:     #9d8cf0;  /* mor — sınırlar */
@@ -37,7 +41,7 @@
   --boyut-metin:    1rem;                                  /* 16px taban */
   --boyut-kucuk:    0.875rem;
   --boyut-buyuk:    1.125rem;
-  --boyut-h1: clamp(1.9rem, 1.2rem + 3.2vw, 3.1rem);
+  --boyut-h1: clamp(2.1rem, 1.2rem + 3.8vw, 3.6rem);
   --boyut-h2: clamp(1.5rem, 1.1rem + 1.8vw, 2.15rem);
   --boyut-h3: clamp(1.15rem, 1rem + 0.7vw, 1.35rem);
 
