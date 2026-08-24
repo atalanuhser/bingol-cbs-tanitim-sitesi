@@ -35,10 +35,10 @@
   --renk-katman-4:     #ef8368;  /* mercan — arıza/işaret */
 
   /* ---- Tipografi ---- */
-  /* Not: latin-ext yerel font dosyaları 2. haftada Astro kurulumuyla eklenecek;
-     o zamana dek sistem yığını kullanılır. */
+  /* KARAR (Gün 6): sistem fontları kalıcıdır — Georgia başlık, Segoe UI gövde.
+     Yerel font dosyası eklenmez; yığındaki alternatifler diğer platformları karşılar. */
   --yazi-govde: "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
-  --yazi-baslik: Georgia, "Cambria", "Times New Roman", serif;  /* zarif serif başlık — kalıcı font 2. haftada yerel dosyayla gelecek */
+  --yazi-baslik: Georgia, "Cambria", "Times New Roman", serif;
 
   --boyut-metin:    1rem;                                  /* 16px taban */
   --boyut-kucuk:    0.875rem;
