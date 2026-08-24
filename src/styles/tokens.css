@@ -6,11 +6,13 @@
 
 :root {
   /* ---- Renkler: zemin ve metin ---- */
-  --renk-zemin:        #f6f8f6;  /* sayfa arka planı — çok açık yeşilimsi gri */
+  --renk-zemin:        #faf6ec;  /* sayfa arka planı — sıcak krem */
   --renk-yuzey:        #ffffff;  /* kart / panel zemini */
-  --renk-metin:        #182722;  /* ana metin — koyu yeşil-siyah */
-  --renk-metin-soluk:  #4e615a;  /* ikincil metin (zemin üzerinde ≥ 4.5:1) */
-  --renk-cizgi:        #d9e2dc;  /* ayraç, kart kenarlığı */
+  --renk-metin:        #1e2a24;  /* ana metin — koyu yeşil-siyah */
+  --renk-metin-soluk:  #58635a;  /* ikincil metin (zemin üzerinde ≥ 4.5:1) */
+  --renk-cizgi:        #e8e1d2;  /* ayraç, kart kenarlığı — sıcak ton */
+  --renk-izgara-acik:  rgb(23 96 76 / 0.05);   /* krem zeminde ince ızgara */
+  --renk-parlama-acik: rgb(240 169 63 / 0.12); /* krem zeminde amber ışıma */
 
   /* ---- Renkler: marka ---- */
   --renk-vurgu:        #17604c;  /* ana marka rengi — koyu harita yeşili */
@@ -35,8 +37,8 @@
   /* ---- Tipografi ---- */
   /* Not: latin-ext yerel font dosyaları 2. haftada Astro kurulumuyla eklenecek;
      o zamana dek sistem yığını kullanılır. */
-  --yazi-govde: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --yazi-baslik: var(--yazi-govde);
+  --yazi-govde: "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --yazi-baslik: Georgia, "Cambria", "Times New Roman", serif;  /* zarif serif başlık — kalıcı font 2. haftada yerel dosyayla gelecek */
 
   --boyut-metin:    1rem;                                  /* 16px taban */
   --boyut-kucuk:    0.875rem;
