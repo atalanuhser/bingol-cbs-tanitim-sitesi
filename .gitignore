@@ -2,4 +2,6 @@ CBS_Screens_Archive_GitIgnore/
 __MACOSX/
 node_modules/
 dist/
+.astro/
+.claude/
 .DS_Store

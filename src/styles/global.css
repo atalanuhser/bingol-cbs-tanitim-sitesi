@@ -1,0 +1,89 @@
+/* ============================================================
+   GLOBAL — reset + temel stiller
+   Renk/tipografi/boşluk değerleri tokens.css'ten gelir.
+   ============================================================ */
+
+/* ---- Reset ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--renk-zemin);
+  color: var(--renk-metin);
+  font-family: var(--yazi-govde);
+  font-size: var(--boyut-metin);
+  line-height: var(--satir-metin);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* ---- Başlıklar ---- */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--yazi-baslik);
+  font-weight: var(--kalinlik-baslik);
+  line-height: var(--satir-baslik);
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--boyut-h1); }
+h2 { font-size: var(--boyut-h2); }
+h3 { font-size: var(--boyut-h3); }
+
+p {
+  max-width: 65ch;
+}
+
+/* ---- Bağlantılar ---- */
+a {
+  color: var(--renk-vurgu);
+}
+
+a:hover {
+  color: var(--renk-vurgu-koyu);
+}
+
+/* ---- Odak halkası (klavye gezinmesi) ---- */
+:focus-visible {
+  outline: var(--odak-halka);
+  outline-offset: var(--odak-bosluk);
+  border-radius: var(--kose-kucuk);
+}
+
+/* ---- İçerik sütunu ---- */
+.icerik {
+  max-width: var(--icerik-genislik);
+  margin-inline: auto;
+  padding-inline: var(--bosluk-4);
+}
+
+@media (min-width: 640px) {
+  .icerik {
+    padding-inline: var(--bosluk-6);
+  }
+}

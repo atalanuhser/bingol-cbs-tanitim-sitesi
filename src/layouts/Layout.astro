@@ -1,0 +1,60 @@
+---
+// Ortak sayfa iskeleti: head + header + footer.
+// Her sayfa benzersiz title ve description göndermek ZORUNDA (kalite çıtası).
+import "../styles/tokens.css";
+import "../styles/global.css";
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <header class="site-baslik">
+      <div class="icerik">
+        <!-- Gün 8: logo + nav linkleri buraya gelecek -->
+        <a href="/">CBS Tanıtım</a>
+      </div>
+    </header>
+
+    <main id="icerik">
+      <slot />
+    </main>
+
+    <footer class="site-alt">
+      <div class="icerik">
+        <!-- Gün 8: logo, tek cümle, nav tekrarı, iletişim linki -->
+        <p>© 2026 Piramittek</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-baslik {
+    padding-block: var(--bosluk-4);
+    border-bottom: 1px solid var(--renk-cizgi);
+  }
+
+  .site-baslik a {
+    font-family: var(--yazi-baslik);
+    font-weight: var(--kalinlik-baslik);
+    color: var(--renk-vurgu);
+    text-decoration: none;
+  }
+
+  .site-alt {
+    margin-top: var(--bosluk-9);
+    padding-block: var(--bosluk-6);
+    border-top: 1px solid var(--renk-cizgi);
+    color: var(--renk-metin-soluk);
+    font-size: var(--boyut-kucuk);
+  }
+</style>
