@@ -1,0 +1,228 @@
+---
+// CbsMockup — stilize CBS arayüzü. Gerçek sistem ekran görüntüsü DEĞİLDİR;
+// temiz ve modern bir temsil hedeflenir (CLAUDE.md).
+// Kaynak: notlar/cbs-arastirma-notlari.md §7 (CBS arayüz kalıpları).
+// Bugünkü varyant: "katmanlar" → checkbox'lı katman paneli + koyu harita.
+// "bilgi-penceresi" ve "genel" varyantları Gün 12'de dolacak; şimdilik
+// yalnızca harita alanını gösterirler.
+const { variant = "genel" } = Astro.props;
+
+// Panel içeriği — işaretli olmayan katman haritada da çizilmez (tutarlılık).
+const katmanlar = [
+  {
+    ad: "Atıksu Şebekesi",
+    renk: "var(--renk-katman-1)",
+    acik: true,
+    altlar: ["Ana kolektör", "Tali hat"],
+  },
+  { ad: "İmar Planı", renk: "var(--renk-katman-2)", acik: true, altlar: [] },
+  { ad: "Mahalle Sınırları", renk: "var(--renk-katman-3)", acik: true, altlar: [] },
+  { ad: "İçme Suyu", renk: "var(--renk-katman-4)", acik: false, altlar: [] },
+  { ad: "Binalar", renk: "var(--renk-harita-metin-soluk)", acik: false, altlar: [] },
+];
+---
+
+<figure
+  class="mockup"
+  role="img"
+  aria-label="Stilize CBS arayüzü örneği: solda açılıp kapanabilir katman listesi, koyu harita alanında atıksu hatları, imar planı ve mahalle sınırı katmanları"
+>
+  <div class="bar">
+    <span class="nokta"></span> Kent Haritası
+    <span class="bar-sag">güncel</span>
+  </div>
+
+  <div class="govde">
+    {
+      variant === "katmanlar" && (
+        <aside class="panel">
+          <div class="panel-baslik">Katmanlar</div>
+          {katmanlar.map((katman) => (
+            <>
+              <div class:list={["katman", { kapali: !katman.acik }]}>
+                <span class="kutu">
+                  {katman.acik && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                  )}
+                </span>
+                <span class="renk" style={`--katman-renk:${katman.renk}`} />
+                <span class="ad">{katman.ad}</span>
+              </div>
+              {katman.altlar.map((alt, i) => (
+                <div class="alt-sinif">
+                  <span class="ornek" style={`--katman-renk:${katman.renk}; --kalinlik:${i === 0 ? "3px" : "1.5px"}`} />
+                  <span>{alt}</span>
+                </div>
+              ))}
+            </>
+          ))}
+        </aside>
+      )
+    }
+
+    <div class="harita">
+      <svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="640" height="420" fill="var(--renk-harita-zemin)"/>
+
+        <!-- ince harita ızgarası -->
+        <g stroke="var(--renk-izgara)" stroke-width="1">
+          <path d="M0 84 H640"/><path d="M0 168 H640"/><path d="M0 252 H640"/><path d="M0 336 H640"/>
+          <path d="M107 0 V420"/><path d="M214 0 V420"/><path d="M320 0 V420"/><path d="M427 0 V420"/><path d="M534 0 V420"/>
+        </g>
+
+        <!-- KATMAN: imar planı (amber poligonlar) -->
+        <g fill="var(--renk-katman-2)" stroke="var(--renk-katman-2)" stroke-width="1.5">
+          <path d="M60 70 L185 48 L215 128 L92 152 Z" opacity="0.22"/>
+          <path d="M255 165 L390 142 L425 235 L288 262 Z" opacity="0.18"/>
+          <path d="M430 55 L555 72 L538 148 L418 130 Z" opacity="0.22"/>
+          <path d="M120 260 L235 245 L258 330 L142 348 Z" opacity="0.15"/>
+        </g>
+
+        <!-- KATMAN: mahalle sınırı (mor kesikli) -->
+        <path d="M30 390 C 120 330, 150 250, 250 230 C 360 208, 420 250, 520 200 C 580 170, 610 120, 635 100"
+              fill="none" stroke="var(--renk-katman-3)" stroke-width="2.5" stroke-dasharray="10 7" opacity="0.85"/>
+
+        <!-- KATMAN: atıksu şebekesi (turkuaz) — ana kolektör + tali hatlar -->
+        <g fill="none" stroke="var(--renk-katman-1)" stroke-linecap="round">
+          <path d="M20 210 C 120 190, 210 235, 320 210 S 540 160, 630 185" stroke-width="4"/>
+          <path d="M175 215 C 190 160, 205 120, 240 85" stroke-width="2"/>
+          <path d="M320 210 C 335 265, 350 300, 395 340" stroke-width="2"/>
+          <path d="M480 190 C 495 150, 520 120, 560 100" stroke-width="2"/>
+        </g>
+        <g fill="var(--renk-harita-zemin)" stroke="var(--renk-katman-1)" stroke-width="2.5">
+          <circle cx="175" cy="215" r="6"/>
+          <circle cx="320" cy="210" r="6"/>
+          <circle cx="480" cy="190" r="6"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</figure>
+
+<style>
+  .mockup {
+    margin: 0;
+    background: var(--renk-harita-yuzey);
+    border: 1px solid var(--renk-harita-cizgi);
+    border-radius: var(--kose-orta);
+    overflow: hidden;
+    box-shadow: var(--golge-vitrin);
+  }
+
+  /* üst bar — hero'daki harita kartıyla aynı dil */
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: var(--bosluk-2);
+    padding: var(--bosluk-3) var(--bosluk-4);
+    border-bottom: 1px solid var(--renk-harita-cizgi);
+    color: var(--renk-harita-metin-soluk);
+    font-size: var(--boyut-kucuk);
+  }
+  .nokta {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--renk-katman-1);
+  }
+  .bar-sag {
+    margin-left: auto;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--renk-katman-1);
+  }
+
+  .govde {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  /* ---- katman paneli ---- */
+  .panel {
+    padding: var(--bosluk-4);
+    border-bottom: 1px solid var(--renk-harita-cizgi);
+    font-size: 0.8125rem; /* 13px */
+    color: var(--renk-harita-metin);
+  }
+  .panel-baslik {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--renk-harita-metin-soluk);
+    margin-bottom: var(--bosluk-3);
+  }
+  .katman {
+    display: flex;
+    align-items: center;
+    gap: var(--bosluk-2);
+    padding-block: var(--bosluk-2);
+  }
+  .katman.kapali {
+    opacity: 0.45;
+  }
+  .kutu {
+    display: grid;
+    place-items: center;
+    width: 15px;
+    height: 15px;
+    border: 1.5px solid var(--renk-harita-cizgi);
+    border-radius: 4px;
+    color: var(--renk-harita-zemin);
+    flex-shrink: 0;
+  }
+  .katman:not(.kapali) .kutu {
+    background: var(--renk-katman-1);
+    border-color: var(--renk-katman-1);
+  }
+  .kutu svg {
+    width: 10px;
+    height: 10px;
+  }
+  .renk {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--katman-renk);
+    flex-shrink: 0;
+  }
+  .ad {
+    white-space: nowrap;
+  }
+  .alt-sinif {
+    display: flex;
+    align-items: center;
+    gap: var(--bosluk-2);
+    padding: var(--bosluk-1) 0 var(--bosluk-1) calc(15px + var(--bosluk-2) * 2 + 9px);
+    font-size: 0.72rem;
+    color: var(--renk-harita-metin-soluk);
+  }
+  .ornek {
+    width: 18px;
+    height: var(--kalinlik);
+    border-radius: 2px;
+    background: var(--katman-renk);
+    flex-shrink: 0;
+  }
+
+  /* ---- harita alanı ---- */
+  .harita svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 240px;
+  }
+
+  @media (min-width: 640px) {
+    .govde {
+      grid-template-columns: 200px 1fr;
+    }
+    .panel {
+      border-bottom: none;
+      border-right: 1px solid var(--renk-harita-cizgi);
+    }
+  }
+</style>

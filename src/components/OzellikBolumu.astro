@@ -1,8 +1,12 @@
 ---
-// Tek özellik bölümü — h2 + taslak paragraf + yer tutucu görsel alanı.
+// Tek özellik bölümü — h2 + taslak paragraf + görsel alanı.
 // ≥900px'te zigzag: çift sıradakilerde görsel sola geçer (CSS nth-of-type).
-// Görsel alanına Hafta 3'te CbsMockup (variant={mockup}) gelecek.
+// Hazır CbsMockup varyantları gerçek bileşeni, kalanlar yer tutucuyu gösterir.
+import CbsMockup from "./CbsMockup.astro";
+
 const { ozellik } = Astro.props;
+const hazirVaryantlar = ["katmanlar"]; // Gün 12: "bilgi-penceresi" ve "genel" eklenecek
+const mockupHazir = hazirVaryantlar.includes(ozellik.mockup);
 ---
 
 <section class="ozellik" id={ozellik.id} aria-labelledby={`${ozellik.id}-baslik`}>
@@ -10,9 +14,17 @@ const { ozellik } = Astro.props;
     <h2 id={`${ozellik.id}-baslik`}>{ozellik.baslik}</h2>
     <p>{ozellik.aciklama}</p>
   </div>
-  <div class="gorsel-alani" aria-hidden="true">
-    <span>CbsMockup · {ozellik.mockup} — yakında</span>
-  </div>
+  {
+    mockupHazir ? (
+      <div class="gorsel-sarici">
+        <CbsMockup variant={ozellik.mockup} />
+      </div>
+    ) : (
+      <div class="gorsel-alani" aria-hidden="true">
+        <span>CbsMockup · {ozellik.mockup} — yakında</span>
+      </div>
+    )
+  }
 </section>
 
 <style>
@@ -63,8 +75,8 @@ const { ozellik } = Astro.props;
       grid-template-columns: repeat(2, 1fr);
       gap: var(--bosluk-8);
     }
-    /* zigzag: çift bölümlerde görsel sola */
-    .ozellik:nth-of-type(even) .gorsel-alani {
+    /* zigzag: çift bölümlerde görsel (son çocuk: mockup veya yer tutucu) sola */
+    .ozellik:nth-of-type(even) > :last-child {
       order: -1;
     }
   }
