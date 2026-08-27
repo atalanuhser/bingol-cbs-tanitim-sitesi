@@ -1,0 +1,71 @@
+---
+// Tek özellik bölümü — h2 + taslak paragraf + yer tutucu görsel alanı.
+// ≥900px'te zigzag: çift sıradakilerde görsel sola geçer (CSS nth-of-type).
+// Görsel alanına Hafta 3'te CbsMockup (variant={mockup}) gelecek.
+const { ozellik } = Astro.props;
+---
+
+<section class="ozellik" id={ozellik.id} aria-labelledby={`${ozellik.id}-baslik`}>
+  <div class="metin">
+    <h2 id={`${ozellik.id}-baslik`}>{ozellik.baslik}</h2>
+    <p>{ozellik.aciklama}</p>
+  </div>
+  <div class="gorsel-alani" aria-hidden="true">
+    <span>CbsMockup · {ozellik.mockup} — yakında</span>
+  </div>
+</section>
+
+<style>
+  .ozellik {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--bosluk-5);
+    align-items: center;
+    padding-block: var(--bosluk-7);
+    border-top: 1px solid var(--renk-cizgi);
+  }
+  .ozellik:first-of-type {
+    border-top: none;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2rem);
+    letter-spacing: -0.015em;
+    color: var(--renk-metin);
+    margin-bottom: var(--bosluk-3);
+  }
+
+  p {
+    color: var(--renk-metin-soluk);
+    line-height: 1.68;
+    max-width: 52ch;
+    text-wrap: pretty;
+  }
+
+  /* Yer tutucu görsel alanı — 1px kesikli çerçeve, Hafta 3'te CbsMockup gelecek */
+  .gorsel-alani {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 4 / 3;
+    border: 1px dashed var(--renk-vurgu-cizgi);
+    border-radius: var(--kose-orta);
+    background: var(--renk-vurgu-acik);
+  }
+  .gorsel-alani span {
+    font-size: var(--boyut-kucuk);
+    font-weight: 600;
+    color: var(--renk-vurgu);
+  }
+
+  @media (min-width: 900px) {
+    .ozellik {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--bosluk-8);
+    }
+    /* zigzag: çift bölümlerde görsel sola */
+    .ozellik:nth-of-type(even) .gorsel-alani {
+      order: -1;
+    }
+  }
+</style>

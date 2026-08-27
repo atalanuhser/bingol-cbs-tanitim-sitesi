@@ -1,0 +1,107 @@
+---
+// Ana sayfa "öne çıkan özellikler" bölümü — başlıklar ozellikler.js'ten,
+// her satır özellikler sayfasındaki ilgili bölüme (#id) gider.
+import { ozellikler } from "../data/ozellikler.js";
+---
+
+<section class="one-cikanlar icerik" aria-labelledby="ozellikler-baslik">
+  <h2 id="ozellikler-baslik" class="ustbaslik">Öne çıkan özellikler</h2>
+  <ul>
+    {
+      ozellikler.map((ozellik) => (
+        <li>
+          <a href={`/ozellikler#${ozellik.id}`}>
+            {ozellik.baslik}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <a class="btn" href="/ozellikler">Tüm özellikleri incele</a>
+</section>
+
+<style>
+  .one-cikanlar {
+    padding-block: var(--bosluk-8);
+  }
+
+  .ustbaslik {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--yazi-govde);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--renk-vurgu);
+    margin-bottom: var(--bosluk-5);
+  }
+  .ustbaslik::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--renk-vurgu);
+    border-radius: 2px;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--bosluk-3);
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--bosluk-6);
+  }
+
+  li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--bosluk-3);
+    padding: var(--bosluk-4) var(--bosluk-5);
+    background: var(--renk-yuzey);
+    border: 1px solid var(--renk-cizgi);
+    border-radius: var(--kose-cip);
+    font-weight: 600;
+    color: var(--renk-metin);
+    text-decoration: none;
+    transition: border-color 180ms ease, color 180ms ease;
+  }
+  li a:hover {
+    border-color: var(--renk-vurgu-cizgi);
+    color: var(--renk-vurgu);
+  }
+  li svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--renk-vurgu);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: var(--bosluk-3) var(--bosluk-6);
+    border-radius: var(--kose-kucuk);
+    background: var(--renk-cta);
+    color: var(--renk-metin);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .btn:hover {
+    background: var(--renk-cta-koyu);
+    color: var(--renk-metin);
+  }
+
+  @media (min-width: 640px) {
+    ul {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 900px) {
+    ul {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
