@@ -7,7 +7,7 @@
 - [ ] CLAUDE.md'deki klasör yapısını aç: `src/pages/`, `src/layouts/`, `src/components/`, `src/content/`
 - [ ] `Layout.astro`: ortak head (charset, viewport, title/description prop'ları, favicon), header/footer yer tutucuları, `<html lang="tr">`
 - [ ] `tokens.css` + `global.css` (reset + temel stiller) Layout'a bağlanır
-- [x] Font kararı: sistem fontları kalıcı (Georgia başlık, Segoe UI gövde) — yerel woff2 eklenmeyecek, `@font-face` gerekmez; Türkçe karakterler sistem fontlarında mevcut
+- [x] Font kararı (28 Ağu revizyonu): yerel Lora (başlık) + Figtree (gövde) — latin+latin-ext woff2 `public/fonts/`te, `@font-face` `src/styles/fontlar.css`te; önceki "sistem fontları kalıcı" kararının yerine geçti
 - [ ] 3 boş sayfa rotası: `index.astro`, `ozellikler.astro`, `hakkinda.astro`
 - [ ] `.gitignore`'a `.astro/` eklenir; `npm run dev` doğrulaması; commit + push
 - **Çıktı:** boş ama çalışan 3 sayfalık site localhost'ta

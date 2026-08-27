@@ -1,26 +1,46 @@
-// Ana mesajlar (değer önerileri) — ana sayfadaki sıralama bu dizinin sırasıdır.
-// Kaynak: notlar/cbs-arastirma-notlari.md (Gün 1 araştırması ile doğrulandı, çelişki yok).
+// "CBS belediyenize ne sağlar?" bölümü içeriği.
+// Kaynak: onaylı bölüm taslağı (cbs-bolum-taslak.html, 28 Ağu) — metinler
+// Gün 2 mesajlarının taslakta düzenlenmiş hâlidir.
+
+export const bolumGiris = {
+  eyebrow: "Coğrafi Bilgi Sistemi",
+  baslikDuz: "CBS belediyenize",
+  baslikVurgu: "ne sağlar?",
+  aciklama:
+    "Dağınık dosyalarda duran altyapı verisi tek bir sorgulanabilir kent haritasında toplanır. Aşağıdaki haritada katmanları açıp kapatarak deneyin.",
+};
+
+// Öne çıkan koyu kart — canlı katman demosu
+export const oneCikan = {
+  etiket: "Canlı örnek",
+  baslik: "Her veri katmanı ayrı ayrı açılıp kapanır",
+  aciklama:
+    "Su hattı, imar parselleri, numarataj — her veri kümesi kendi katmanında yaşar. O an neye ihtiyacınız varsa onu açarsınız; harita hiç kalabalıklaşmaz.",
+  ipucu: "Sağdaki katman düğmelerine tıklayın",
+};
+
+// Standart kartlar — sıralama taslaktaki sıradır.
 export const mesajlar = [
   {
-    baslik: "Şehrin tüm altyapısı tek haritada, sorgulanabilir",
+    baslik: "Şehrin tüm altyapısı tek haritada",
     aciklama:
-      "Su, kanalizasyon, imar, numarataj — dağınık dosyalarda duran her şey tek bir kent haritasında birleşir. Aradığınız hattı, parseli veya binayı saniyeler içinde bulur, üzerine tıklayıp tüm bilgisini görürsünüz.",
+      "Su, kanalizasyon, imar, numarataj — ayrı dosyalarda duran her şey tek kent haritasında birleşir. Aradığınız hattı veya parseli saniyeler içinde bulur, tıklayıp tüm bilgisini görürsünüz.",
   },
   {
-    baslik: "Her veri katmanı ayrı ayrı açılıp kapanır",
+    baslik: "Tarayıcıda, hızlı ve akıcı",
     aciklama:
-      "Atıksu şebekesi, imar planı, mahalle sınırları — her veri kümesi kendi katmanında yaşar. O an neye ihtiyacınız varsa onu açar, gerisini kapatırsınız; harita hiç kalabalıklaşmaz.",
+      "Kurulum gerektirmez; ekipler haritayı doğrudan tarayıcıdan açar. Binlerce nesne yüklüyken bile yakınlaştırma ve sorgular gecikmesiz çalışır, sahada tabletten de kullanılır.",
   },
   {
-    baslik: "Hızlı ve akıcı harita deneyimi",
+    baslik: "Veri kurumunuzda kalır",
     aciklama:
-      "Modern vektör karo (MVT) altyapısı sayesinde büyük şehir verisi küçük parçalar hâlinde iletilir; harita masaüstünde de telefonda da takılmadan açılır, yakınlaştıkça netliğini korur.",
+      "Tüm katmanlar belediyenin kendi sunucusunda barındırılır; üçüncü taraf buluta veri çıkmaz. Kimin neyi görüp düzenleyeceğini birim bazında yetkilerle siz belirlersiniz.",
   },
-  {
-    baslik: "Veri kurumun kendi sunucusunda — dışarı çıkmaz",
-    aciklama:
-      "Sistem kurumun kendi sunucusunda çalışır; hiçbir veri üçüncü taraf bulut hizmetine gönderilmez. Veri konumu üzerinde tam kontrol kurumdadır.",
-  },
+];
+
+// Taslakta yer almayan onaylı Gün 2 mesajları — silinmedi; özellikler
+// sayfasında (TUCBS ve veri kalitesi bölümlerinde) kullanılacak.
+export const yedekMesajlar = [
   {
     baslik: "Ulusal standartlarla (TUCBS) uyumlu",
     aciklama:

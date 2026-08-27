@@ -1,104 +1,492 @@
 ---
-// Değer önerileri bölümü — içerik src/data/mesajlar.js'ten döngüyle gelir.
-// İkonlar Lucide setinden inline SVG kopyası (dış CDN yok, CLAUDE.md kural 6).
-// Sıra mesajlar.js dizisiyle birebir eşleşir.
-import { mesajlar } from "../data/mesajlar.js";
+// "CBS belediyenize ne sağlar?" bölümü — onaylı taslağın (cbs-bolum-taslak.html,
+// 28 Ağu) bileşen hâli. Metinler src/data/mesajlar.js'ten, tüm renkler tokens.css'ten.
+// Yapı: editoryal başlık → öne çıkan koyu kart (canlı katman demosu) → 3 standart kart.
+import { bolumGiris, oneCikan, mesajlar } from "../data/mesajlar.js";
 
+// Kart ikonları — Lucide kopyası inline SVG; sıra mesajlar dizisiyle eşleşir.
 const ikonlar = [
-  // 1) tek haritada → map
-  `<polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/>`,
-  // 2) katman yönetimi → layers
-  `<path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>`,
-  // 3) hızlı harita (MVT) → zap
+  // tek haritada → map
+  `<path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/>`,
+  // hızlı ve akıcı → zap
   `<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>`,
-  // 4) veri kurumda → server
+  // veri kurumda → server
   `<rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/>`,
-  // 5) TUCBS uyumu → shield-check
-  `<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>`,
-  // 6) veri kalitesi → search-check
-  `<path d="m8 11 2 2 4-4"/><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>`,
+];
+
+// Demo katman düğmeleri — id'ler SVG'deki katman gruplarıyla eşleşir.
+const katmanlar = [
+  { id: "layer-su", ad: "Su hattı", renk: "var(--renk-demo-su)" },
+  { id: "layer-imar", ad: "İmar parselleri", renk: "var(--renk-demo-imar)" },
+  { id: "layer-num", ad: "Numarataj", renk: "var(--renk-demo-numarataj)" },
 ];
 ---
 
-<section class="mesajlar icerik" aria-labelledby="mesajlar-baslik">
-  <h2 id="mesajlar-baslik">CBS belediyenize ne sağlar?</h2>
-  <div class="kartlar">
-    {
-      mesajlar.map((mesaj, i) => (
-        <article class="kart">
-          <div class="ikon" aria-hidden="true">
-            <svg
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              set:html={ikonlar[i]}
-            />
+<section class="bolum" aria-labelledby="cbs-baslik">
+  <!-- Eş yükselti eğrileri — arka plan dokusu -->
+  <svg class="konturlar" viewBox="0 0 1400 900" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+    <path d="M-50 120 C 200 40, 420 180, 700 110 S 1150 30, 1450 140"/>
+    <path d="M-50 200 C 220 110, 440 260, 700 190 S 1160 110, 1450 220"/>
+    <path d="M-50 290 C 240 190, 460 340, 710 270 S 1170 200, 1450 310"/>
+    <path d="M-50 390 C 250 280, 470 430, 720 360 S 1180 300, 1450 410"/>
+    <path d="M-50 500 C 260 380, 480 530, 730 460 S 1190 410, 1450 520"/>
+    <path d="M-50 620 C 270 490, 490 640, 740 570 S 1200 530, 1450 640"/>
+    <ellipse cx="300" cy="180" rx="130" ry="52" transform="rotate(-12 300 180)"/>
+    <ellipse cx="300" cy="180" rx="86" ry="32" transform="rotate(-12 300 180)"/>
+    <ellipse cx="300" cy="180" rx="44" ry="15" transform="rotate(-12 300 180)"/>
+    <ellipse cx="1120" cy="330" rx="150" ry="60" transform="rotate(9 1120 330)"/>
+    <ellipse cx="1120" cy="330" rx="98" ry="37" transform="rotate(9 1120 330)"/>
+    <ellipse cx="1120" cy="330" rx="50" ry="17" transform="rotate(9 1120 330)"/>
+  </svg>
+
+  <div class="icerik">
+    <header class="baslik-blok belirme" style="--d:0ms">
+      <span class="ustbaslik">{bolumGiris.eyebrow}</span>
+      <h2 id="cbs-baslik">{bolumGiris.baslikDuz} <em>{bolumGiris.baslikVurgu}</em></h2>
+      <p>{bolumGiris.aciklama}</p>
+    </header>
+
+    <div class="kartlar">
+      <!-- ÖNE ÇIKAN: canlı katman demosu -->
+      <article class="one-cikan belirme" style="--d:80ms">
+        <div class="one-cikan-metin">
+          <span class="etiket">{oneCikan.etiket}</span>
+          <h3>{oneCikan.baslik}</h3>
+          <p>{oneCikan.aciklama}</p>
+          <span class="ipucu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+            {oneCikan.ipucu}
+          </span>
+        </div>
+
+        <div class="harita-panel">
+          <div class="harita-cerceve">
+            <svg viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Katmanları açılıp kapanabilen örnek kent haritası">
+              <!-- yol ağı (taban) -->
+              <g stroke="var(--renk-demo-yol)" stroke-width="10" fill="none" stroke-linecap="round">
+                <path d="M0 92 H560"/>
+                <path d="M0 238 H560"/>
+                <path d="M132 0 V340"/>
+                <path d="M336 0 V340"/>
+                <path d="M336 92 C 420 120, 470 180, 560 190"/>
+              </g>
+              <g stroke="var(--renk-demo-yol-ince)" stroke-width="4" fill="none">
+                <path d="M0 165 H560"/>
+                <path d="M234 0 V340"/>
+                <path d="M448 0 V92"/>
+              </g>
+
+              <!-- KATMAN: imar parselleri -->
+              <g id="layer-imar" class="katman-grubu" fill="var(--renk-demo-imar-dolgu)" stroke="var(--renk-demo-imar-cizgi)" stroke-width="1.5">
+                <rect x="146" y="14" width="76" height="62" rx="3"/>
+                <rect x="146" y="106" width="76" height="46" rx="3"/>
+                <rect x="248" y="14" width="74" height="62" rx="3"/>
+                <rect x="248" y="106" width="74" height="46" rx="3"/>
+                <rect x="146" y="178" width="76" height="46" rx="3"/>
+                <rect x="248" y="178" width="74" height="46" rx="3"/>
+                <rect x="146" y="252" width="76" height="70" rx="3"/>
+                <rect x="248" y="252" width="74" height="70" rx="3"/>
+                <rect x="14" y="106" width="102" height="46" rx="3"/>
+                <rect x="14" y="178" width="102" height="46" rx="3"/>
+                <path d="M352 108 h72 a3 3 0 0 1 3 3 v38 a3 3 0 0 1-3 3 h-72 a3 3 0 0 1-3-3 v-38 a3 3 0 0 1 3-3 z"/>
+                <path d="M352 254 h96 v66 h-96 z" />
+              </g>
+
+              <!-- KATMAN: su hattı -->
+              <g id="layer-su" class="katman-grubu" fill="none">
+                <path class="akis" d="M18 320 C 90 300, 110 250, 132 210 C 154 168, 200 150, 260 148 C 330 146, 360 120, 392 78 C 414 50, 460 40, 542 36"
+                      stroke="var(--renk-demo-su)" stroke-width="3.5" stroke-linecap="round"/>
+                <g fill="var(--renk-demo-zemin)" stroke="var(--renk-demo-su)" stroke-width="2.5">
+                  <circle cx="132" cy="210" r="5.5"/>
+                  <circle cx="260" cy="148" r="5.5"/>
+                  <circle cx="392" cy="78" r="5.5"/>
+                </g>
+              </g>
+
+              <!-- KATMAN: numarataj -->
+              <g id="layer-num" class="katman-grubu" font-family="Figtree, sans-serif" font-size="11" font-weight="600">
+                <g fill="var(--renk-demo-numarataj)">
+                  <circle cx="184" cy="45" r="9"/>
+                  <circle cx="285" cy="45" r="9"/>
+                  <circle cx="184" cy="129" r="9"/>
+                  <circle cx="285" cy="129" r="9"/>
+                  <circle cx="65" cy="129" r="9"/>
+                  <circle cx="184" cy="287" r="9"/>
+                  <circle cx="400" cy="287" r="9"/>
+                </g>
+                <g fill="var(--renk-demo-zemin)" text-anchor="middle" dominant-baseline="central">
+                  <text x="184" y="46">12</text>
+                  <text x="285" y="46">14</text>
+                  <text x="184" y="130">7</text>
+                  <text x="285" y="130">9</text>
+                  <text x="65" y="130">3</text>
+                  <text x="184" y="288">21</text>
+                  <text x="400" y="288">36</text>
+                </g>
+              </g>
+
+              <!-- sorgu balonu -->
+              <g id="popup">
+                <path d="M388 108 l8 12 h-16 z" fill="var(--renk-demo-kart)"/>
+                <rect x="330" y="42" width="150" height="66" rx="8" fill="var(--renk-demo-kart)"/>
+                <text x="344" y="66" font-family="Figtree, sans-serif" font-size="12.5" font-weight="700" fill="var(--renk-metin)">Ada 1043 / Parsel 214</text>
+                <text x="344" y="86" font-family="Figtree, sans-serif" font-size="11.5" fill="var(--renk-metin-soluk)">Konut alanı · 486 m²</text>
+              </g>
+            </svg>
           </div>
-          <h3>{mesaj.baslik}</h3>
-          <p>{mesaj.aciklama}</p>
-        </article>
-      ))
-    }
+
+          <div class="katman-dugmeleri" role="group" aria-label="Harita katmanları">
+            {
+              katmanlar.map((katman) => (
+                <button type="button" data-layer={katman.id} aria-pressed="true" style={`--nokta-renk:${katman.renk}`}>
+                  <span class="nokta" /> {katman.ad}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+      </article>
+
+      <!-- Standart kartlar -->
+      {
+        mesajlar.map((mesaj, i) => (
+          <article class="kart belirme" style={`--d:${160 + i * 80}ms`}>
+            <div class="cip" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                set:html={ikonlar[i]}
+              />
+            </div>
+            <h3>{mesaj.baslik}</h3>
+            <p>{mesaj.aciklama}</p>
+          </article>
+        ))
+      }
+    </div>
   </div>
 </section>
 
 <style>
-  .mesajlar {
-    padding-block: var(--bosluk-8);
-    text-align: center;
+  .bolum {
+    position: relative;
+    background: var(--renk-zemin); /* gövdedeki ızgara desenini örter — taslak zemini düz */
+    padding: 64px 0 84px;
+    overflow: hidden;
   }
 
-  h2 {
-    margin-bottom: var(--bosluk-7);
+  /* Eş yükselti eğrileri — CBS'nin kendi dokusu */
+  .konturlar {
+    position: absolute;
+    inset: -5% -10%;
+    width: 120%;
+    height: 110%;
+    color: var(--renk-vurgu);
+    opacity: 0.07;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
+            mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
   }
 
+  .icerik { position: relative; }
+
+  /* ---- Editoryal başlık: sola hizalı, üst başlık + italik vurgu ---- */
+  .baslik-blok {
+    max-width: 720px;
+    margin-bottom: 44px;
+  }
+  .ustbaslik {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--renk-vurgu);
+    margin-bottom: 18px;
+  }
+  .ustbaslik::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--renk-vurgu);
+    border-radius: 2px;
+  }
+  .baslik-blok h2 {
+    font-weight: 700;
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--renk-metin);
+  }
+  .baslik-blok h2 em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--renk-vurgu);
+  }
+  .baslik-blok > p {
+    margin-top: 18px;
+    font-size: 17.5px;
+    line-height: 1.6;
+    color: var(--renk-metin-silik);
+    max-width: 56ch;
+    text-wrap: pretty;
+  }
+
+  /* ---- Izgara ---- */
   .kartlar {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--bosluk-5);
-    text-align: left;
+    gap: 18px;
   }
 
+  /* ---- Öne çıkan kart: koyu yeşil + canlı katman demosu ---- */
+  .one-cikan {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: center;
+    background: radial-gradient(90% 130% at 100% 0%, var(--renk-vurgu-derin-2) 0%, var(--renk-vurgu-derin) 58%);
+    border-radius: var(--kose-orta);
+    padding: 28px 24px;
+    color: var(--renk-krem);
+    box-shadow: var(--golge-vitrin);
+    overflow: hidden;
+    position: relative;
+  }
+  .one-cikan::after {
+    /* zeminde çok hafif ızgara — harita hissi */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, var(--renk-demo-izgara) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--renk-demo-izgara) 1px, transparent 1px);
+    background-size: 44px 44px;
+    pointer-events: none;
+  }
+  .one-cikan-metin { position: relative; z-index: 1; }
+  .etiket {
+    display: inline-block;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--renk-vurgu-derin);
+    background: var(--renk-krem);
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  .one-cikan-metin h3 {
+    font-weight: 600;
+    font-size: clamp(26px, 3vw, 34px);
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    color: var(--renk-demo-kart);
+    max-width: 20ch;
+  }
+  .one-cikan-metin p {
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--renk-krem-soluk);
+    max-width: 46ch;
+    text-wrap: pretty;
+  }
+  .ipucu {
+    margin-top: 26px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--renk-krem-silik);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ipucu svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  /* --- Mini harita paneli --- */
+  .harita-panel {
+    position: relative;
+    z-index: 1;
+    background: var(--renk-demo-panel-zemin);
+    border: 1px solid var(--renk-demo-panel-cizgi);
+    border-radius: 16px;
+    padding: 14px;
+    backdrop-filter: blur(2px);
+  }
+  .harita-cerceve {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--renk-demo-zemin);
+  }
+  .harita-cerceve svg { display: block; width: 100%; height: auto; }
+
+  .katman-grubu { transition: opacity 260ms ease; }
+  .katman-grubu.kapali { opacity: 0; pointer-events: none; }
+
+  /* su hattı akış animasyonu */
+  .akis { stroke-dasharray: 7 9; animation: akis 2.6s linear infinite; }
+  @keyframes akis { to { stroke-dashoffset: -32; } }
+
+  /* katman anahtarları */
+  .katman-dugmeleri {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .katman-dugmeleri button {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--renk-demo-dugme-cizgi);
+    background: transparent;
+    color: var(--renk-krem);
+    cursor: pointer;
+    transition: background 180ms ease, border-color 180ms ease, opacity 180ms ease;
+  }
+  .katman-dugmeleri .nokta {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--nokta-renk, var(--renk-krem));
+    transition: transform 180ms ease;
+  }
+  .katman-dugmeleri button[aria-pressed="true"] {
+    background: var(--renk-demo-dugme-zemin);
+    border-color: var(--renk-demo-dugme-aktif);
+  }
+  .katman-dugmeleri button[aria-pressed="false"] { opacity: 0.5; }
+  .katman-dugmeleri button[aria-pressed="false"] .nokta { transform: scale(0.6); }
+  .katman-dugmeleri button:focus-visible {
+    outline: 2px solid var(--renk-krem);
+    outline-offset: 2px;
+  }
+
+  /* ---- Standart kartlar: gölge yerine 1px çerçeve ---- */
   .kart {
     background: var(--renk-yuzey);
     border: 1px solid var(--renk-cizgi);
-    border-radius: var(--kose);
-    box-shadow: var(--golge-kart);
-    padding: var(--bosluk-6);
+    border-radius: var(--kose-orta);
+    padding: 34px 30px 32px;
+    box-shadow: var(--golge-ince);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+  }
+  .kart:hover {
+    border-color: var(--renk-vurgu-cizgi);
+    transform: translateY(-4px);
+    box-shadow: var(--golge-vurgu);
   }
 
-  .ikon {
-    display: inline-flex;
-    padding: var(--bosluk-3);
-    border-radius: var(--kose-kucuk);
+  .cip {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--kose-cip);
     background: var(--renk-vurgu-acik);
+    display: grid;
+    place-items: center;
     color: var(--renk-vurgu);
-    margin-bottom: var(--bosluk-4);
+    margin-bottom: 20px;
+    transition: transform 220ms ease;
   }
+  .cip svg { width: 21px; height: 21px; }
+  .kart:hover .cip { transform: rotate(-6deg) scale(1.06); }
 
   .kart h3 {
-    margin-bottom: var(--bosluk-3);
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 1.28;
+    letter-spacing: -0.01em;
+    color: var(--renk-metin);
+    max-width: 18ch;
   }
-
   .kart p {
+    margin-top: 12px;
+    font-size: 15.5px;
+    line-height: 1.68;
     color: var(--renk-metin-soluk);
-    font-size: var(--boyut-kucuk);
+    text-wrap: pretty;
   }
 
+  /* ---- Giriş animasyonu (kademeli) ---- */
+  .belirme {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 600ms ease, transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: var(--d, 0ms);
+  }
+  .belirme.goster { opacity: 1; transform: none; }
+
+  /* ---- Duyarlılık: mobil öncelikli, kırılmalar 640 / 900 ---- */
   @media (min-width: 640px) {
-    .kartlar {
-      grid-template-columns: repeat(2, 1fr);
+    .bolum { padding: 100px 0 120px; }
+    .baslik-blok { margin-bottom: 64px; }
+    .kartlar { grid-template-columns: repeat(2, 1fr); gap: 26px; }
+    .kartlar > .kart:last-child { grid-column: 1 / -1; }
+    .one-cikan { padding: 36px 32px; }
+  }
+  @media (min-width: 900px) {
+    .kartlar { grid-template-columns: repeat(3, 1fr); }
+    .kartlar > .kart:last-child { grid-column: auto; }
+    .one-cikan {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 40px;
+      padding: 48px 48px 44px;
+      border-radius: var(--kose-buyuk);
     }
   }
 
-  @media (min-width: 1200px) {
-    .kartlar {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  @media (prefers-reduced-motion: reduce) {
+    .belirme { opacity: 1; transform: none; transition: none; }
+    .akis { animation: none; }
+    .kart, .cip { transition: none; }
+    .kart:hover { transform: none; }
   }
 </style>
+
+<script>
+  // Katman aç/kapa — düğme, id'si data-layer'da yazan SVG grubunu gizler/gösterir.
+  document.querySelectorAll(".katman-dugmeleri button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const katman = document.getElementById(btn.dataset.layer);
+      const acik = btn.getAttribute("aria-pressed") === "true";
+      btn.setAttribute("aria-pressed", String(!acik));
+      if (katman) katman.classList.toggle("kapali", acik);
+    });
+  });
+
+  // Kademeli giriş — görünüme girince .goster eklenir; hareket azaltma tercihine saygılı.
+  const azalt = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ogeler = document.querySelectorAll(".belirme");
+  if (azalt || !("IntersectionObserver" in window)) {
+    ogeler.forEach((el) => el.classList.add("goster"));
+  } else {
+    const io = new IntersectionObserver(
+      (girdiler) => {
+        girdiler.forEach((g) => {
+          if (g.isIntersecting) {
+            g.target.classList.add("goster");
+            io.unobserve(g.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    ogeler.forEach((el) => io.observe(el));
+  }
+</script>

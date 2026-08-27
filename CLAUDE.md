@@ -56,6 +56,25 @@ public/             → favicon, robots.txt
 8. Metinde tarih vaadi yok: yol haritası maddeleri "yakında / planlanıyor" dilinde.
 9. Rakamlar sadece `src/data/rakamlar.js`'ten gelir. Metin içine rakam gömme — sonradan gerçekleriyle tek dosyadan değiştirilecek.
 
+## Tasarım dili v2 (28 Ağustos — onaylı bölüm taslağıyla güncellendi)
+Kaynak: `cbs-bolum-taslak.html` (kullanıcı onaylı). Önceki kararların yerine geçer.
+
+**Renk paleti** (değerler yalnızca `tokens.css`'te; buradakiler referans):
+- Zemin `#F6F2E8` (krem) · yüzey `#FFFDF8` · ana metin `#1D2420` · ikincil `#47504A` · üçüncül `#646D66`
+- Marka yeşili `#1E6B4E` — **yeşil sadece vurgu için** kullanılır (eyebrow, italik vurgu, ikon, hover); geniş yüzeylere yayılmaz. Tek istisna: öne çıkan koyu kart (`#0E3527` → `#124232` gradyan).
+- Demo harita renkleri: su `#6FBFC4`, imar `#96D6B2`, numarataj `#F2C94C`, koyu zemin `#10261D`, krem metin `#EDE7D6`
+- CTA amber (`#F0A93F`) hero'da korunuyor.
+
+**Fontlar:** Lora (başlık; italik vurgu serbest) + Figtree (gövde). Yerel woff2, latin + latin-ext, `public/fonts/` + `src/styles/fontlar.css`. CDN'den font çekilmez.
+
+**İlkeler:**
+- **Gölge yerine 1px çerçeve:** kartlar `1px solid var(--renk-cizgi)` + çok hafif iz (`--golge-ince`); belirgin gölge yalnızca hover (`--golge-vurgu`) ve koyu vitrin kartında (`--golge-vitrin`).
+- Editoryal başlık düzeni: sola hizalı, eyebrow (çizgi + büyük harf) + büyük serif başlık + italik yeşil vurgu.
+- Doku: bölüm arka planında eş yükselti eğrileri (kontur SVG, opacity ~0.07, maske ile üstte yoğun); koyu kartta 44px ince ızgara.
+- Köşeler: kart 18px, öne çıkan kart 22px, ikon çipi 12px (tokens: `--kose-orta/buyuk/cip`).
+- Giriş animasyonu: kademeli `.belirme` (opacity + 22px yukarı kayma, 600ms, 80ms basamak); `prefers-reduced-motion` her animasyonu kapatır.
+- Kontrast ≥ 4.5:1 kuralı taslak değerlerinin önündedir (ör. `#6C756E` → `#646D66` koyulaştırıldı).
+
 ## Placeholder veriler (başlangıç)
 ```js
 // src/data/rakamlar.js

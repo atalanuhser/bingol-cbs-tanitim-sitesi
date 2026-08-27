@@ -5,19 +5,23 @@
    ============================================================ */
 
 :root {
-  /* ---- Renkler: zemin ve metin ---- */
-  --renk-zemin:        #faf6ec;  /* sayfa arka planı — sıcak krem */
-  --renk-yuzey:        #ffffff;  /* kart / panel zemini */
-  --renk-metin:        #1e2a24;  /* ana metin — koyu yeşil-siyah */
-  --renk-metin-soluk:  #58635a;  /* ikincil metin (zemin üzerinde ≥ 4.5:1) */
-  --renk-cizgi:        #e8e1d2;  /* ayraç, kart kenarlığı — sıcak ton */
-  --renk-izgara-acik:  rgb(23 96 76 / 0.05);   /* krem zeminde ince ızgara */
+  /* ---- Renkler: zemin ve metin (tasarım dili v2 — 28 Ağu taslak) ---- */
+  --renk-zemin:        #f6f2e8;  /* sayfa arka planı — sıcak krem */
+  --renk-yuzey:        #fffdf8;  /* kart / panel zemini */
+  --renk-metin:        #1d2420;  /* ana metin — koyu yeşil-siyah */
+  --renk-metin-soluk:  #47504a;  /* ikincil metin */
+  --renk-metin-silik:  #646d66;  /* üçüncül metin — taslakta #6c756e; kontrast ≥ 4.5:1 için koyulaştırıldı */
+  --renk-cizgi:        rgb(29 36 32 / 0.10);   /* ayraç, kart kenarlığı */
+  --renk-izgara-acik:  rgb(30 107 78 / 0.05);  /* krem zeminde ince ızgara */
   --renk-parlama-acik: rgb(240 169 63 / 0.12); /* krem zeminde amber ışıma */
 
   /* ---- Renkler: marka ---- */
-  --renk-vurgu:        #17604c;  /* ana marka rengi — koyu harita yeşili */
+  --renk-vurgu:        #1e6b4e;  /* ana marka rengi — yeşil sadece vurgu için */
   --renk-vurgu-koyu:   #0f4636;  /* hover / bası hali */
-  --renk-vurgu-acik:   #e3efe9;  /* vurgu zeminli rozet/şerit arka planı */
+  --renk-vurgu-acik:   #e3efe8;  /* vurgu zeminli rozet/çip arka planı */
+  --renk-vurgu-derin:  #0e3527;  /* öne çıkan koyu kart zemini */
+  --renk-vurgu-derin-2:#124232;  /* koyu kart gradyan ucu */
+  --renk-vurgu-cizgi:  rgb(30 107 78 / 0.40);  /* kart hover kenarlığı */
   --renk-cta:          #f0a93f;  /* eylem rengi — amber (üzerine koyu metin) */
   --renk-cta-koyu:     #d99427;
 
@@ -34,11 +38,31 @@
   --renk-katman-3:     #9d8cf0;  /* mor — sınırlar */
   --renk-katman-4:     #ef8368;  /* mercan — arıza/işaret */
 
+  /* ---- Renkler: "ne sağlar" bölümü — koyu kart + canlı harita demosu ---- */
+  --renk-krem:              #ede7d6;                /* koyu zemin üstü ana metin */
+  --renk-krem-soluk:        rgb(237 231 214 / 0.68);
+  --renk-krem-silik:        rgb(237 231 214 / 0.65); /* ipucu — taslakta 0.55; kontrast için yükseltildi */
+  --renk-demo-zemin:        #10261d;                /* demo harita zemini */
+  --renk-demo-kart:         #fdfbf4;                /* sorgu balonu + koyu karttaki başlık */
+  --renk-demo-yol:          rgb(237 231 214 / 0.22);
+  --renk-demo-yol-ince:     rgb(237 231 214 / 0.10);
+  --renk-demo-izgara:       rgb(237 231 214 / 0.05);
+  --renk-demo-panel-zemin:  rgb(253 251 244 / 0.06);
+  --renk-demo-panel-cizgi:  rgb(237 231 214 / 0.16);
+  --renk-demo-dugme-cizgi:  rgb(237 231 214 / 0.28);
+  --renk-demo-dugme-aktif:  rgb(237 231 214 / 0.50);
+  --renk-demo-dugme-zemin:  rgb(237 231 214 / 0.14);
+  --renk-demo-su:           #6fbfc4;  /* su hattı katmanı */
+  --renk-demo-imar:         #96d6b2;  /* imar katmanı düğme noktası */
+  --renk-demo-imar-dolgu:   rgb(120 190 150 / 0.13);
+  --renk-demo-imar-cizgi:   rgb(150 214 178 / 0.55);
+  --renk-demo-numarataj:    #f2c94c;  /* numarataj katmanı */
+
   /* ---- Tipografi ---- */
-  /* KARAR (Gün 6): sistem fontları kalıcıdır — Georgia başlık, Segoe UI gövde.
-     Yerel font dosyası eklenmez; yığındaki alternatifler diğer platformları karşılar. */
-  --yazi-govde: "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
-  --yazi-baslik: Georgia, "Cambria", "Times New Roman", serif;
+  /* KARAR v2 (28 Ağu, onaylı bölüm taslağı): yerel Lora (başlık) + Figtree (gövde).
+     woff2 dosyaları public/fonts/, @font-face tanımları src/styles/fontlar.css. */
+  --yazi-govde: "Figtree", "Segoe UI", system-ui, Roboto, Arial, sans-serif;
+  --yazi-baslik: "Lora", Georgia, "Times New Roman", serif;
 
   --boyut-metin:    1rem;                                  /* 16px taban */
   --boyut-kucuk:    0.875rem;
@@ -65,7 +89,13 @@
   /* ---- Biçim ---- */
   --kose:        10px;   /* kart köşe yumuşatma */
   --kose-kucuk:  6px;
+  --kose-cip:    12px;   /* ikon çipi */
+  --kose-orta:   18px;   /* standart kart (v2) */
+  --kose-buyuk:  22px;   /* öne çıkan kart (v2) */
   --golge-kart:  0 1px 2px rgb(24 39 34 / 0.06), 0 8px 24px rgb(24 39 34 / 0.07);
+  --golge-ince:  0 1px 2px rgb(29 36 32 / 0.04);            /* v2: gölge yerine 1px çerçeve + iz */
+  --golge-vurgu: 0 18px 40px -18px rgb(30 107 78 / 0.10);   /* v2: kart hover */
+  --golge-vitrin: 0 24px 60px -24px rgb(14 53 39 / 0.45);   /* v2: koyu öne çıkan kart */
   --icerik-genislik: 72rem;   /* 1152px — ana içerik sütunu */
 
   /* ---- Odak halkası (klavye erişilebilirliği) ---- */
