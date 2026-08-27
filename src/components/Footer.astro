@@ -1,0 +1,107 @@
+---
+// Site altbilgisi — logo, tek cümle, nav tekrarı, iletişim linki.
+const linkler = [
+  { href: "/", ad: "Ana Sayfa" },
+  { href: "/ozellikler", ad: "Özellikler" },
+  { href: "/hakkinda", ad: "Hakkında" },
+  { href: "/hakkinda", ad: "İletişim" },
+];
+const yil = new Date().getFullYear();
+---
+
+<footer class="altbilgi">
+  <div class="icerik ic">
+    <div class="marka">
+      <a class="logo" href="/" aria-label="CBS ana sayfa">
+        <svg width="26" height="26" viewBox="0 0 44 44" aria-hidden="true">
+          <path d="M22 6 L38 14 L22 22 L6 14 Z" fill="var(--renk-vurgu)"/>
+          <path d="M22 17 L38 25 L22 33 L6 25 Z" fill="var(--renk-katman-1)" opacity="0.85"/>
+          <path d="M22 28 L38 36 L22 44 L6 36 Z" fill="var(--renk-cta)" opacity="0.9"/>
+        </svg>
+        <span>CBS</span>
+      </a>
+      <p>Belediyeler için coğrafi bilgi sistemi — şehrin verisi tek haritada.</p>
+    </div>
+
+    <nav aria-label="Alt gezinme">
+      <ul>
+        {
+          linkler.map((link) => (
+            <li>
+              <a href={link.href}>{link.ad}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <div class="icerik telif">
+    <p>© {yil} Piramittek</p>
+  </div>
+</footer>
+
+<style>
+  .altbilgi {
+    margin-top: var(--bosluk-9);
+    border-top: 1px solid var(--renk-cizgi);
+    padding-block: var(--bosluk-7) var(--bosluk-5);
+    font-size: var(--boyut-kucuk);
+  }
+
+  .ic {
+    display: flex;
+    flex-direction: column;
+    gap: var(--bosluk-5);
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bosluk-2);
+    text-decoration: none;
+  }
+  .logo span {
+    font-family: var(--yazi-baslik);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--renk-metin);
+  }
+
+  .marka p {
+    margin-top: var(--bosluk-3);
+    color: var(--renk-metin-soluk);
+    max-width: 40ch;
+  }
+
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--bosluk-4) var(--bosluk-5);
+    list-style: none;
+    padding: 0;
+  }
+  nav a {
+    font-weight: 600;
+    color: var(--renk-metin-soluk);
+    text-decoration: none;
+  }
+  nav a:hover {
+    color: var(--renk-vurgu);
+  }
+
+  .telif {
+    margin-top: var(--bosluk-6);
+    padding-top: var(--bosluk-5);
+    border-top: 1px solid var(--renk-cizgi);
+    color: var(--renk-metin-silik);
+  }
+
+  @media (min-width: 900px) {
+    .ic {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+  }
+</style>

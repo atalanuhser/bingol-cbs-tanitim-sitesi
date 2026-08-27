@@ -2,7 +2,7 @@
   <!-- CBS logo işareti — Seçenek A: veri katmanları.
        Renkler tokens.css'teki --renk-vurgu / --renk-katman-1 / --renk-cta değerleridir;
        favicon bağımsız dosya olduğu için değerler burada sabittir. -->
-  <path d="M22 6 L38 14 L22 22 L6 14 Z" fill="#17604c"/>
+  <path d="M22 6 L38 14 L22 22 L6 14 Z" fill="#1e6b4e"/>
   <path d="M22 17 L38 25 L22 33 L6 25 Z" fill="#35c4b5" opacity="0.85"/>
   <path d="M22 28 L38 36 L22 44 L6 36 Z" fill="#f0a93f" opacity="0.9"/>
 </svg>

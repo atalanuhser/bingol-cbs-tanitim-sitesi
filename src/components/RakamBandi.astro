@@ -1,0 +1,98 @@
+---
+// "Rakamlarla CBS" bandı — değerler src/data/rakamlar.js'ten (hepsi placeholder,
+// sprint sonunda tek dosyadan gerçekleriyle değiştirilecek).
+import { rakamlar } from "../data/rakamlar.js";
+---
+
+<section class="bant-sarici" aria-labelledby="rakamlar-baslik">
+  <div class="icerik">
+    <h2 id="rakamlar-baslik" class="ustbaslik">Rakamlarla CBS</h2>
+    <dl class="bant">
+      {
+        rakamlar.map((rakam) => (
+          <div class="hucre">
+            <dt>{rakam.etiket}</dt>
+            <dd>{rakam.deger}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .bant-sarici {
+    padding-block: var(--bosluk-8);
+  }
+
+  .ustbaslik {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--yazi-govde);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--renk-vurgu);
+    margin-bottom: var(--bosluk-5);
+  }
+  .ustbaslik::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--renk-vurgu);
+    border-radius: 2px;
+  }
+
+  /* Gölge yerine 1px çerçeve (tasarım dili v2) */
+  .bant {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background: var(--renk-yuzey);
+    border: 1px solid var(--renk-cizgi);
+    border-radius: var(--kose-orta);
+    box-shadow: var(--golge-ince);
+    overflow: hidden;
+  }
+
+  .hucre {
+    padding: var(--bosluk-6) var(--bosluk-5);
+    border-top: 1px solid var(--renk-cizgi);
+    border-left: 1px solid var(--renk-cizgi);
+  }
+  /* dış kenarlıkla çakışan iç çizgileri kaldır: 2×2 düzen */
+  .hucre:nth-child(-n + 2) { border-top: none; }
+  .hucre:nth-child(odd) { border-left: none; }
+
+  /* dl düzeninde değer görsel olarak üstte: dd'yi dt'nin üstüne taşı */
+  .hucre {
+    display: flex;
+    flex-direction: column;
+  }
+  dd {
+    order: -1;
+    margin: 0 0 var(--bosluk-2);
+    font-family: var(--yazi-baslik);
+    font-weight: 700;
+    font-size: clamp(1.9rem, 1.4rem + 2vw, 2.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--renk-metin);
+  }
+  dt {
+    font-size: var(--boyut-kucuk);
+    line-height: 1.45;
+    color: var(--renk-metin-soluk);
+  }
+
+  @media (min-width: 900px) {
+    .bant {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .hucre { border-top: none; }
+    .hucre:nth-child(odd) { border-left: 1px solid var(--renk-cizgi); }
+    .hucre:first-child { border-left: none; }
+    .hucre { padding: var(--bosluk-6); }
+  }
+</style>

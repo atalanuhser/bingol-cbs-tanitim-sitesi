@@ -1,0 +1,98 @@
+---
+// Site üstbilgisi — logo + 3 nav linki, aktif sayfa vurgusu. Hamburger yok:
+// üç link mobilde de yan yana sığıyor.
+const yol = Astro.url.pathname;
+const linkler = [
+  { href: "/", ad: "Ana Sayfa" },
+  { href: "/ozellikler", ad: "Özellikler" },
+  { href: "/hakkinda", ad: "Hakkında" },
+];
+// "/" sadece ana sayfada aktif; diğerleri alt yolları da kapsar (/ozellikler/).
+const aktifMi = (href) => (href === "/" ? yol === "/" : yol.startsWith(href));
+---
+
+<header class="ustbilgi">
+  <div class="icerik ic">
+    <a class="logo" href="/" aria-label="CBS ana sayfa">
+      <svg width="30" height="30" viewBox="0 0 44 44" aria-hidden="true">
+        <path d="M22 6 L38 14 L22 22 L6 14 Z" fill="var(--renk-vurgu)"/>
+        <path d="M22 17 L38 25 L22 33 L6 25 Z" fill="var(--renk-katman-1)" opacity="0.85"/>
+        <path d="M22 28 L38 36 L22 44 L6 36 Z" fill="var(--renk-cta)" opacity="0.9"/>
+      </svg>
+      <span>CBS</span>
+    </a>
+    <nav aria-label="Ana gezinme">
+      <ul>
+        {
+          linkler.map((link) => (
+            <li>
+              <a href={link.href} aria-current={aktifMi(link.href) ? "page" : undefined}>
+                {link.ad}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .ustbilgi {
+    border-bottom: 1px solid var(--renk-cizgi);
+    background: var(--renk-zemin);
+  }
+
+  .ic {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--bosluk-4);
+    padding-block: var(--bosluk-4);
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bosluk-2);
+    text-decoration: none;
+  }
+  .logo span {
+    font-family: var(--yazi-baslik);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--renk-metin);
+  }
+
+  nav ul {
+    display: flex;
+    align-items: center;
+    gap: var(--bosluk-4);
+    list-style: none;
+    padding: 0;
+  }
+
+  nav a {
+    font-size: 0.9375rem; /* 15px */
+    font-weight: 600;
+    color: var(--renk-metin-soluk);
+    text-decoration: none;
+    padding-block: var(--bosluk-2);
+  }
+  nav a:hover {
+    color: var(--renk-metin);
+  }
+  /* Aktif sayfa: yeşil vurgu + alt çizgi */
+  nav a[aria-current="page"] {
+    color: var(--renk-vurgu);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
+
+  @media (min-width: 640px) {
+    nav ul {
+      gap: var(--bosluk-6);
+    }
+  }
+</style>
