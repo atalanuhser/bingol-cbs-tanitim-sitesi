@@ -17,7 +17,12 @@ html {
 
 body {
   min-height: 100dvh;
-  background: var(--renk-zemin);
+  /* Onaylı tasarım dili: krem zemin + ince yeşil ızgara deseni */
+  background-color: var(--renk-zemin);
+  background-image:
+    linear-gradient(var(--renk-izgara-acik) 1px, transparent 1px),
+    linear-gradient(90deg, var(--renk-izgara-acik) 1px, transparent 1px);
+  background-size: 44px 44px;
   color: var(--renk-metin);
   font-family: var(--yazi-govde);
   font-size: var(--boyut-metin);

@@ -1,0 +1,180 @@
+---
+// Onaylı hero taslağının (taslaklar/hero-taslak.html) bileşen hâli.
+// Taslaktaki kopya token'lar atıldı — tüm değerler gerçek tokens.css'ten gelir.
+import { rakamlar } from "../data/rakamlar.js";
+
+// Kural 9: rakam metne gömülmez — katman sayısı rakamlar.js'ten çekilir.
+const katmanSayisi = rakamlar.find((r) => r.etiket.includes("katman"))?.deger;
+---
+
+<section class="hero">
+  <div class="hero-icerik">
+    <span class="ustbaslik">Coğrafi Bilgi Sistemi</span>
+    <h1>Şehrin tüm altyapısı <span class="vurgulu">tek haritada</span></h1>
+    <p>
+      <strong>Su, kanalizasyon, imar, numarataj</strong> — dağınık dosyalarda
+      duran her şey tek bir sorgulanabilir kent haritasında birleşir.
+    </p>
+    <div class="butonlar">
+      <a class="btn btn-birincil" href="/ozellikler">Özellikleri İncele</a>
+      <a class="btn btn-ikincil" href="/hakkinda">İletişime Geç</a>
+    </div>
+
+    <div class="harita-kart" role="img" aria-label="Stilize CBS harita arayüzü örneği">
+      <div class="bar"><span class="nokta"></span> Kent Haritası · {katmanSayisi} katman</div>
+      <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="480" height="300" fill="var(--renk-harita-zemin)"/>
+        <!-- imar poligonları -->
+        <path d="M40 60 L150 40 L180 110 L70 130 Z" fill="var(--renk-katman-2)" opacity="0.25"/>
+        <path d="M200 150 L320 130 L350 210 L230 235 Z" fill="var(--renk-katman-3)" opacity="0.22"/>
+        <path d="M330 40 L430 55 L415 120 L320 105 Z" fill="var(--renk-katman-1)" opacity="0.18"/>
+        <!-- şebeke hatları -->
+        <path d="M20 220 C 120 180, 200 240, 300 200 S 440 160, 470 190" fill="none" stroke="var(--renk-katman-1)" stroke-width="3"/>
+        <path d="M60 280 C 150 230, 260 280, 350 240 S 430 220, 465 235" fill="none" stroke="var(--renk-katman-2)" stroke-width="2.5"/>
+        <path d="M10 120 C 90 140, 140 90, 220 100" fill="none" stroke="var(--renk-katman-3)" stroke-width="2"/>
+        <!-- düğüm noktaları -->
+        <circle cx="300" cy="200" r="5" fill="var(--renk-katman-1)"/>
+        <circle cx="120" cy="197" r="4" fill="var(--renk-katman-1)"/>
+        <circle cx="350" cy="240" r="4" fill="var(--renk-katman-2)"/>
+        <!-- bilgi penceresi -->
+        <g>
+          <rect x="285" y="120" width="160" height="70" rx="8" fill="var(--renk-harita-yuzey)"/>
+          <circle cx="303" cy="140" r="4" fill="var(--renk-katman-1)"/>
+          <rect x="315" y="135" width="90" height="9" rx="3" fill="var(--renk-harita-metin)" opacity="0.9"/>
+          <rect x="303" y="155" width="118" height="7" rx="3" fill="var(--renk-harita-metin)" opacity="0.45"/>
+          <rect x="303" y="169" width="86" height="7" rx="3" fill="var(--renk-harita-metin)" opacity="0.45"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Amber ışıma yalnızca hero'da; ince ızgara deseni global.css'te (body) */
+  .hero {
+    background: radial-gradient(
+      700px 380px at 50% -5%,
+      var(--renk-parlama-acik),
+      transparent 70%
+    );
+  }
+
+  .hero-icerik {
+    max-width: var(--icerik-genislik);
+    margin: 0 auto;
+    padding: var(--bosluk-8) var(--bosluk-4);
+    text-align: center;
+  }
+
+  .ustbaslik {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bosluk-3);
+    color: var(--renk-vurgu);
+    font-size: var(--boyut-kucuk);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: var(--bosluk-5);
+  }
+  .ustbaslik::before,
+  .ustbaslik::after {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: var(--renk-vurgu);
+    opacity: 0.5;
+  }
+
+  h1 {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    max-width: 22ch;
+    margin: 0 auto var(--bosluk-5);
+  }
+  h1 .vurgulu {
+    color: var(--renk-vurgu);
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  .hero-icerik > p {
+    color: var(--renk-metin-soluk);
+    font-size: var(--boyut-buyuk);
+    max-width: 52ch;
+    margin: 0 auto var(--bosluk-6);
+  }
+  .hero-icerik > p strong {
+    color: var(--renk-metin);
+    font-weight: 600;
+  }
+
+  .butonlar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--bosluk-3);
+    margin-bottom: var(--bosluk-7);
+  }
+  .btn {
+    display: inline-block;
+    padding: var(--bosluk-3) var(--bosluk-6);
+    border-radius: var(--kose-kucuk);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .btn-birincil {
+    background: var(--renk-cta);
+    color: var(--renk-metin);
+  }
+  .btn-birincil:hover {
+    background: var(--renk-cta-koyu);
+    color: var(--renk-metin);
+  }
+  .btn-ikincil {
+    border: 1px solid var(--renk-metin-soluk);
+    color: var(--renk-metin);
+  }
+  .btn-ikincil:hover {
+    border-color: var(--renk-vurgu);
+    color: var(--renk-vurgu);
+  }
+
+  /* Harita kartı — korunan koyu blok, krem sahnede vitrin gibi */
+  .harita-kart {
+    max-width: 56rem;
+    margin: 0 auto;
+    text-align: left;
+    background: var(--renk-harita-yuzey);
+    border: 1px solid var(--renk-harita-cizgi);
+    border-radius: var(--kose);
+    box-shadow: 0 30px 70px rgb(30 42 36 / 0.28);
+    overflow: hidden;
+  }
+  .harita-kart .bar {
+    display: flex;
+    align-items: center;
+    gap: var(--bosluk-2);
+    padding: var(--bosluk-3) var(--bosluk-4);
+    border-bottom: 1px solid var(--renk-harita-cizgi);
+    color: var(--renk-harita-metin-soluk);
+    font-size: var(--boyut-kucuk);
+  }
+  .nokta {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--renk-katman-1);
+  }
+  .harita-kart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 900px) {
+    .hero-icerik {
+      padding-top: var(--bosluk-9);
+    }
+  }
+</style>
