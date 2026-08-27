@@ -2,9 +2,10 @@
 // CbsMockup — stilize CBS arayüzü. Gerçek sistem ekran görüntüsü DEĞİLDİR;
 // temiz ve modern bir temsil hedeflenir (CLAUDE.md).
 // Kaynak: notlar/cbs-arastirma-notlari.md §7 (CBS arayüz kalıpları).
-// Bugünkü varyant: "katmanlar" → checkbox'lı katman paneli + koyu harita.
-// "bilgi-penceresi" ve "genel" varyantları Gün 12'de dolacak; şimdilik
-// yalnızca harita alanını gösterirler.
+// Varyantlar:
+//   katmanlar       → checkbox'lı katman paneli + harita
+//   bilgi-penceresi → haritada seçili nesne + açık öznitelik kartı
+//   genel           → arama kutusu + yakınlaştırma araçları + durum çubuğu
 const { variant = "genel" } = Astro.props;
 
 // Panel içeriği — işaretli olmayan katman haritada da çizilmez (tutarlılık).
@@ -20,19 +21,33 @@ const katmanlar = [
   { ad: "İçme Suyu", renk: "var(--renk-katman-4)", acik: false, altlar: [] },
   { ad: "Binalar", renk: "var(--renk-harita-metin-soluk)", acik: false, altlar: [] },
 ];
+
+// Öznitelik kartı içeriği (bilgi-penceresi) — tüm değerler temsilîdir.
+const oznitelikler = [
+  ["Boru çapı", "Ø300 mm"],
+  ["Uzunluk", "184 m"],
+  ["Kaynak", "Saha ölçümü (GPS)"],
+  ["TUCBS sınıfı", "Altyapı › Atıksu Hattı"],
+  ["İlişkili kayıt", "3 bakım işi"],
+];
+
+const etiketler = {
+  katmanlar:
+    "Stilize CBS arayüzü örneği: solda açılıp kapanabilir katman listesi, koyu harita alanında atıksu hatları, imar planı ve mahalle sınırı katmanları",
+  "bilgi-penceresi":
+    "Stilize CBS arayüzü örneği: haritada seçili bir atıksu hattı ve açık öznitelik kartında boru çapı, uzunluk, veri kaynağı ile TUCBS sınıfı bilgileri",
+  genel:
+    "Stilize CBS arayüzü örneği: üstte ada-parsel arama kutusu, sağda yakınlaştırma araçları, altta koordinat sistemi ve veri güncelliği durum çubuğu",
+};
 ---
 
-<figure
-  class="mockup"
-  role="img"
-  aria-label="Stilize CBS arayüzü örneği: solda açılıp kapanabilir katman listesi, koyu harita alanında atıksu hatları, imar planı ve mahalle sınırı katmanları"
->
+<figure class="mockup" role="img" aria-label={etiketler[variant] ?? etiketler.genel}>
   <div class="bar">
     <span class="nokta"></span> Kent Haritası
     <span class="bar-sag">güncel</span>
   </div>
 
-  <div class="govde">
+  <div class:list={["govde", { panelli: variant === "katmanlar" }]}>
     {
       variant === "katmanlar" && (
         <aside class="panel">
@@ -63,6 +78,26 @@ const katmanlar = [
     }
 
     <div class="harita">
+      {
+        variant === "genel" && (
+          <div class="arama">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            <span>Ada / parsel veya adres ara…</span>
+          </div>
+        )
+      }
+      {
+        variant === "genel" && (
+          <div class="araclar">
+            <span>+</span>
+            <span>−</span>
+          </div>
+        )
+      }
+
       <svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
         <rect width="640" height="420" fill="var(--renk-harita-zemin)"/>
 
@@ -96,9 +131,54 @@ const katmanlar = [
           <circle cx="320" cy="210" r="6"/>
           <circle cx="480" cy="190" r="6"/>
         </g>
+
+        {
+          variant === "bilgi-penceresi" && (
+            <g>
+              <!-- seçili nesne vurgusu: amber halka + seçim parlaması -->
+              <path d="M20 210 C 120 190, 210 235, 320 210" fill="none" stroke="var(--renk-cta)" stroke-width="5" stroke-linecap="round" opacity="0.9" />
+              <circle cx="320" cy="210" r="11" fill="none" stroke="var(--renk-cta)" stroke-width="2.5" />
+              <circle cx="320" cy="210" r="6" fill="var(--renk-cta)" />
+              <path d="M320 199 L320 132" stroke="var(--renk-cta)" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.7" />
+            </g>
+          )
+        }
       </svg>
+
+      {
+        variant === "bilgi-penceresi" && (
+          <div class="bilgi-karti">
+            <div class="bilgi-baslik">
+              <span class="bilgi-nokta" />
+              Atıksu Hattı · AS-1042
+            </div>
+            <dl>
+              {oznitelikler.map(([etiket, deger]) => (
+                <div class="satir">
+                  <dt>{etiket}</dt>
+                  <dd>{deger}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )
+      }
     </div>
   </div>
+
+  {
+    variant === "genel" && (
+      <div class="durum">
+        <span>EPSG:5256 · TUREF</span>
+        <span class="durum-guncel">
+          <span class="durum-nokta" /> Veri güncel
+        </span>
+        <span class="olcek">
+          <span class="olcek-cizgi" /> 200 m
+        </span>
+      </div>
+    )
+  }
 </figure>
 
 <style>
@@ -209,15 +289,148 @@ const katmanlar = [
   }
 
   /* ---- harita alanı ---- */
-  .harita svg {
+  .harita {
+    position: relative;
+  }
+  .harita > svg {
     display: block;
     width: 100%;
     height: 100%;
     min-height: 240px;
   }
 
+  /* ---- bilgi-penceresi: öznitelik kartı ---- */
+  .bilgi-karti {
+    position: absolute;
+    top: var(--bosluk-3);
+    right: var(--bosluk-3);
+    width: min(230px, calc(100% - var(--bosluk-6)));
+    background: var(--renk-demo-kart);
+    border-radius: var(--kose-cip);
+    padding: var(--bosluk-3) var(--bosluk-4);
+    font-size: 0.75rem;
+    box-shadow: 0 12px 32px rgb(10 25 19 / 0.45);
+  }
+  .bilgi-baslik {
+    display: flex;
+    align-items: center;
+    gap: var(--bosluk-2);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    color: var(--renk-metin);
+    padding-bottom: var(--bosluk-2);
+    border-bottom: 1px solid var(--renk-cizgi);
+    margin-bottom: var(--bosluk-2);
+  }
+  .bilgi-nokta {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--renk-cta);
+    flex-shrink: 0;
+  }
+  .bilgi-karti dl {
+    margin: 0;
+  }
+  .bilgi-karti .satir {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--bosluk-3);
+    padding-block: 3px;
+  }
+  .bilgi-karti dt {
+    color: var(--renk-metin-silik);
+  }
+  .bilgi-karti dd {
+    margin: 0;
+    font-weight: 600;
+    color: var(--renk-metin);
+    text-align: right;
+  }
+
+  /* ---- genel: arama + araçlar + durum çubuğu ---- */
+  .arama {
+    position: absolute;
+    top: var(--bosluk-3);
+    left: var(--bosluk-3);
+    display: flex;
+    align-items: center;
+    gap: var(--bosluk-2);
+    background: var(--renk-harita-yuzey);
+    border: 1px solid var(--renk-harita-cizgi);
+    border-radius: 999px;
+    padding: var(--bosluk-2) var(--bosluk-4);
+    font-size: 0.75rem;
+    color: var(--renk-harita-metin-soluk);
+    max-width: calc(100% - var(--bosluk-8));
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .arama svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+    color: var(--renk-katman-1);
+  }
+  .araclar {
+    position: absolute;
+    top: var(--bosluk-3);
+    right: var(--bosluk-3);
+    display: flex;
+    flex-direction: column;
+    background: var(--renk-harita-yuzey);
+    border: 1px solid var(--renk-harita-cizgi);
+    border-radius: var(--kose-kucuk);
+    overflow: hidden;
+  }
+  .araclar span {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--renk-harita-metin);
+  }
+  .araclar span:first-child {
+    border-bottom: 1px solid var(--renk-harita-cizgi);
+  }
+  .durum {
+    display: flex;
+    align-items: center;
+    gap: var(--bosluk-5);
+    padding: var(--bosluk-2) var(--bosluk-4);
+    border-top: 1px solid var(--renk-harita-cizgi);
+    font-size: 0.72rem;
+    color: var(--renk-harita-metin-soluk);
+  }
+  .durum-guncel {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bosluk-1);
+  }
+  .durum-nokta {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--renk-katman-1);
+  }
+  .olcek {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bosluk-2);
+  }
+  .olcek-cizgi {
+    width: 44px;
+    height: 4px;
+    border: 1px solid var(--renk-harita-metin-soluk);
+    border-top: none;
+  }
+
   @media (min-width: 640px) {
-    .govde {
+    /* yalnızca katmanlar varyantında iki sütun (panel + harita) */
+    .govde.panelli {
       grid-template-columns: 200px 1fr;
     }
     .panel {

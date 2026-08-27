@@ -7,7 +7,7 @@ export const ozellikler = [
     id: "interaktif-harita",
     baslik: "İnteraktif harita",
     aciklama:
-      "Su, kanalizasyon, imar ve numarataj verisi katmanlar hâlinde aynı ekranda. Aradığınız hattı veya parseli saniyeler içinde bulur, üzerine tıklayıp tüm özniteliklerini görürsünüz.",
+      "Su, kanalizasyon, imar ve numarataj verisi tek ekranda buluşur. Haritada gezinir, aradığınız hattı ya da parseli sorguyla bulur, üzerine tıklayıp tüm özniteliklerini görürsünüz.",
     mockup: "genel",
   },
   {
@@ -35,14 +35,14 @@ export const ozellikler = [
     id: "mvt",
     baslik: "Hızlı vektör karo (MVT) altyapısı",
     aciklama:
-      "Modern vektör karo altyapısı büyük şehir verisini küçük parçalar hâlinde iletir; harita masaüstünde de telefonda da takılmadan açılır, yakınlaştıkça netliğini korur.",
+      "Modern vektör karo altyapısı büyük şehir verisini küçük parçalar hâlinde iletir; çizim tarayıcıda yapıldığı için sunucu yorulmaz. Harita masaüstünde de telefonda da takılmadan açılır, yakınlaştıkça netliğini korur.",
     mockup: "genel",
   },
   {
     id: "kurum-sunucusu",
     baslik: "Kurum sunucusunda barındırma",
     aciklama:
-      "Sistem kurumun kendi sunucusunda çalışır; hiçbir veri üçüncü taraf buluta gönderilmez. Kimin neyi görüp düzenleyeceği birim bazında yetkilerle belirlenir.",
+      "Sistem kurumun kendi sunucusunda çalışır; hiçbir veri üçüncü taraf buluta gönderilmez, veri konumu üzerindeki kontrol tümüyle kurumda kalır. Kimin neyi görüp düzenleyeceğini birim bazında yetkiler belirler.",
     mockup: "genel",
   },
 ];
