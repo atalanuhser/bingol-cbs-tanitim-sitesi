@@ -1,13 +1,233 @@
 ---
+// Hakkında / İletişim sayfası — metinler src/data/hakkinda.js'ten gelir.
+// Kontur görseli dekoratiftir (alt=""); sayfanın en üst görseli olduğu için
+// lazy yüklenmez (kural 7'nin hero istisnası).
 import Layout from "../layouts/Layout.astro";
+import { sayfaBasi, tanitim, iletisim } from "../data/hakkinda.js";
+import konturGorsel from "../assets/img/hakkinda-kontur.webp";
 ---
 
 <Layout
   title="Hakkında ve İletişim | Piramittek CBS"
-  description="Piramittek CBS hakkında bilgi ve iletişim kanalları."
+  description="Piramittek CBS'yi tanıyın: belediyeler için TUCBS uyumlu, kurum sunucusunda çalışan coğrafi bilgi sistemi. İletişim bilgilerimiz bu sayfada."
 >
-  <section class="icerik">
-    <h1>Hakkında</h1>
-    <p>Hafta 3'te hakkında ve iletişim içeriği buraya gelecek.</p>
-  </section>
+  <div class="icerik">
+    <header class="sayfa-basi">
+      <span class="ustbaslik">{sayfaBasi.eyebrow}</span>
+      <h1>{sayfaBasi.baslikDuz} <em>{sayfaBasi.baslikVurgu}</em></h1>
+      <p>{sayfaBasi.aciklama}</p>
+    </header>
+
+    <div class="gorsel-kart">
+      <img
+        src={konturGorsel.src}
+        width={konturGorsel.width}
+        height={konturGorsel.height}
+        alt=""
+      />
+    </div>
+
+    <section class="tanitim" aria-label="Piramittek CBS tanıtımı">
+      {tanitim.map((paragraf) => <p>{paragraf}</p>)}
+    </section>
+
+    <section class="iletisim" id="iletisim" aria-labelledby="iletisim-baslik">
+      <div class="iletisim-kart">
+        <header>
+          <span class="ustbaslik">{iletisim.eyebrow}</span>
+          <h2 id="iletisim-baslik">
+            {iletisim.baslikDuz} <em>{iletisim.baslikVurgu}</em>
+          </h2>
+          <p>{iletisim.aciklama}</p>
+        </header>
+
+        <ul class="kanallar">
+          <li>
+            <span class="cip" aria-hidden="true">
+              <!-- Lucide: mail -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+            </span>
+            <div>
+              <span class="etiket">E-posta</span>
+              <a href={`mailto:${iletisim.eposta}`}>{iletisim.eposta}</a>
+            </div>
+          </li>
+          <li>
+            <span class="cip" aria-hidden="true">
+              <!-- Lucide: map-pin -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </span>
+            <div>
+              <span class="etiket">Adres</span>
+              <span class="deger">{iletisim.adres}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
 </Layout>
+
+<style>
+  /* Sayfa başı — özellikler sayfasındaki v2 editoryal düzenin aynısı */
+  .sayfa-basi {
+    max-width: 720px;
+    padding-block: var(--bosluk-8) var(--bosluk-6);
+  }
+
+  .ustbaslik {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--renk-vurgu);
+    margin-bottom: 18px;
+  }
+  .ustbaslik::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--renk-vurgu);
+    border-radius: 2px;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--renk-metin);
+  }
+  h1 em,
+  h2 em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--renk-vurgu);
+  }
+
+  .sayfa-basi p {
+    margin-top: 18px;
+    font-size: 17.5px;
+    line-height: 1.6;
+    color: var(--renk-metin-silik);
+    max-width: 56ch;
+    text-wrap: pretty;
+  }
+
+  /* Kontur görseli — 1px çerçeveli geniş kart (v2: gölge yerine çerçeve) */
+  .gorsel-kart {
+    border: 1px solid var(--renk-cizgi);
+    border-radius: var(--kose-buyuk);
+    overflow: hidden;
+    box-shadow: var(--golge-ince);
+  }
+  .gorsel-kart img {
+    width: 100%;
+    height: clamp(220px, 38vw, 420px);
+    object-fit: cover;
+  }
+
+  /* Tanıtım paragrafları */
+  .tanitim {
+    padding-block: var(--bosluk-7);
+    display: grid;
+    gap: var(--bosluk-5);
+  }
+  .tanitim p {
+    max-width: 65ch;
+    color: var(--renk-metin-soluk);
+    text-wrap: pretty;
+  }
+
+  /* İletişim — yüzey zeminli, 1px çerçeveli kart; footer linki buraya çapayla gelir */
+  .iletisim {
+    scroll-margin-top: var(--bosluk-6);
+    padding-block: var(--bosluk-2) var(--bosluk-6);
+  }
+
+  .iletisim-kart {
+    background: var(--renk-yuzey);
+    border: 1px solid var(--renk-cizgi);
+    border-radius: var(--kose-buyuk);
+    box-shadow: var(--golge-ince);
+    padding: var(--bosluk-6) var(--bosluk-5);
+  }
+
+  .iletisim-kart h2 {
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  .iletisim-kart header p {
+    margin-top: var(--bosluk-4);
+    color: var(--renk-metin-soluk);
+    max-width: 52ch;
+    text-wrap: pretty;
+  }
+
+  .kanallar {
+    margin-top: var(--bosluk-6);
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--bosluk-5);
+  }
+
+  .kanallar li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--bosluk-4);
+  }
+
+  .cip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: var(--kose-cip);
+    background: var(--renk-vurgu-acik);
+    color: var(--renk-vurgu);
+  }
+
+  .etiket {
+    display: block;
+    font-size: var(--boyut-kucuk);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--renk-metin-silik);
+    margin-bottom: var(--bosluk-1);
+  }
+
+  .kanallar a {
+    font-weight: 600;
+    color: var(--renk-vurgu);
+  }
+  .kanallar a:hover {
+    color: var(--renk-vurgu-koyu);
+  }
+
+  .deger {
+    color: var(--renk-metin-soluk);
+  }
+
+  @media (min-width: 640px) {
+    .iletisim-kart {
+      padding: var(--bosluk-7) var(--bosluk-7);
+    }
+    .kanallar {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
