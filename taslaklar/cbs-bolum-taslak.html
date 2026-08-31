@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBS belediyenize ne sağlar? — Bölüm taslağı v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,600&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F6F2E8;
+    --surface: #FFFDF8;
+    --ink: #1D2420;
+    --ink-body: #47504A;
+    --ink-soft: #6C756E;
+    --brand: #1E6B4E;
+    --brand-deep: #0E3527;      /* öne çıkan kart zemini */
+    --brand-deep-2: #124232;
+    --cream-on-deep: #EDE7D6;
+    --cream-soft: rgba(237, 231, 214, 0.68);
+    --chip-bg: #E3EFE8;
+    --water: #6FBFC4;           /* harita içi su hattı verisi */
+    --line: rgba(29, 36, 32, 0.10);
+    --shadow-tint: rgba(30, 107, 78, 0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Figtree', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .section {
+    position: relative;
+    padding: 100px 24px 120px;
+    overflow: hidden;
+  }
+
+  /* Eş yükselti eğrileri — CBS'nin kendi dokusu */
+  .contours {
+    position: absolute;
+    inset: -5% -10%;
+    width: 120%;
+    height: 110%;
+    color: var(--brand);
+    opacity: 0.07;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
+            mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
+  }
+
+  .container {
+    position: relative;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Editoryal başlık: sola hizalı, eyebrow + italik vurgu ---------- */
+  .section-head {
+    max-width: 720px;
+    margin-bottom: 64px;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 18px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--brand);
+    border-radius: 2px;
+  }
+  .section-head h2 {
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .section-head h2 em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--brand);
+  }
+  .section-head > p {
+    margin-top: 18px;
+    font-size: 17.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    text-wrap: pretty;
+  }
+
+  /* ---------- Grid ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+
+  /* ---------- Öne çıkan kart: koyu yeşil + canlı katman demosu ---------- */
+  .card--featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 40px;
+    align-items: center;
+    background:
+      radial-gradient(90% 130% at 100% 0%, var(--brand-deep-2) 0%, var(--brand-deep) 58%);
+    border-radius: 22px;
+    padding: 48px 48px 44px;
+    color: var(--cream-on-deep);
+    box-shadow: 0 24px 60px -24px rgba(14, 53, 39, 0.45);
+    overflow: hidden;
+    position: relative;
+  }
+  .card--featured::after {
+    /* zeminde çok hafif grid — harita hissi */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(237,231,214,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(237,231,214,0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    pointer-events: none;
+  }
+  .featured-copy { position: relative; z-index: 1; }
+  .featured-copy .tag {
+    display: inline-block;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand-deep);
+    background: var(--cream-on-deep);
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  .featured-copy h3 {
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3vw, 34px);
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    color: #FDFBF4;
+    text-wrap: balance;
+    max-width: 20ch;
+  }
+  .featured-copy p {
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--cream-soft);
+    max-width: 46ch;
+    text-wrap: pretty;
+  }
+  .featured-copy .hint {
+    margin-top: 26px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: rgba(237, 231, 214, 0.55);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .featured-copy .hint svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  /* --- Mini harita paneli --- */
+  .map-panel {
+    position: relative;
+    z-index: 1;
+    background: rgba(253, 251, 244, 0.06);
+    border: 1px solid rgba(237, 231, 214, 0.16);
+    border-radius: 16px;
+    padding: 14px;
+    backdrop-filter: blur(2px);
+  }
+  .map-frame {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #10261D;
+  }
+  .map-frame svg { display: block; width: 100%; height: auto; }
+
+  .layer-group { transition: opacity 260ms ease; }
+  .layer-group.off { opacity: 0; pointer-events: none; }
+
+  /* su hattı akış animasyonu */
+  .flow { stroke-dasharray: 7 9; animation: flow 2.6s linear infinite; }
+  @keyframes flow { to { stroke-dashoffset: -32; } }
+
+  /* katman anahtarları */
+  .layer-toggles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .layer-toggles button {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    border: 1px solid rgba(237, 231, 214, 0.28);
+    background: transparent;
+    color: var(--cream-on-deep);
+    cursor: pointer;
+    transition: background 180ms ease, border-color 180ms ease, opacity 180ms ease;
+  }
+  .layer-toggles button .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--swatch, var(--cream-on-deep));
+    transition: transform 180ms ease;
+  }
+  .layer-toggles button[aria-pressed="true"] {
+    background: rgba(237, 231, 214, 0.14);
+    border-color: rgba(237, 231, 214, 0.5);
+  }
+  .layer-toggles button[aria-pressed="false"] { opacity: 0.5; }
+  .layer-toggles button[aria-pressed="false"] .dot { transform: scale(0.6); }
+  .layer-toggles button:focus-visible {
+    outline: 2px solid var(--cream-on-deep);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Standart kartlar ---------- */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 34px 30px 32px;
+    box-shadow: 0 1px 2px rgba(29, 36, 32, 0.04);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+  }
+  .card:hover {
+    border-color: rgba(30, 107, 78, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -18px var(--shadow-tint);
+  }
+
+  .chip {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--chip-bg);
+    display: grid;
+    place-items: center;
+    color: var(--brand);
+    margin-bottom: 20px;
+    transition: transform 220ms ease;
+  }
+  .chip svg { width: 21px; height: 21px; }
+  .card:hover .chip { transform: rotate(-6deg) scale(1.06); }
+
+  .card h3 {
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 1.28;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-wrap: balance;
+    max-width: 18ch;
+  }
+  .card p {
+    margin-top: 12px;
+    font-size: 15.5px;
+    line-height: 1.68;
+    color: var(--ink-body);
+    text-wrap: pretty;
+  }
+
+  /* ---------- Giriş animasyonu (stagger) ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 600ms ease, transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: var(--d, 0ms);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- Duyarlılık ---------- */
+  @media (max-width: 960px) {
+    .card--featured { grid-template-columns: 1fr; gap: 30px; padding: 36px 32px; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .grid > .card:last-child { grid-column: 1 / -1; }
+  }
+  @media (max-width: 620px) {
+    .section { padding: 64px 20px 84px; }
+    .section-head { margin-bottom: 44px; }
+    .grid { grid-template-columns: 1fr; gap: 18px; }
+    .grid > .card:last-child { grid-column: auto; }
+    .card--featured { padding: 28px 24px; border-radius: 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .flow { animation: none; }
+    .card, .chip { transition: none; }
+    .card:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<section class="section" aria-labelledby="cbs-baslik">
+
+  <!-- Eş yükselti eğrileri (arka plan dokusu) -->
+  <svg class="contours" viewBox="0 0 1400 900" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+    <path d="M-50 120 C 200 40, 420 180, 700 110 S 1150 30, 1450 140"/>
+    <path d="M-50 200 C 220 110, 440 260, 700 190 S 1160 110, 1450 220"/>
+    <path d="M-50 290 C 240 190, 460 340, 710 270 S 1170 200, 1450 310"/>
+    <path d="M-50 390 C 250 280, 470 430, 720 360 S 1180 300, 1450 410"/>
+    <path d="M-50 500 C 260 380, 480 530, 730 460 S 1190 410, 1450 520"/>
+    <path d="M-50 620 C 270 490, 490 640, 740 570 S 1200 530, 1450 640"/>
+    <ellipse cx="300" cy="180" rx="130" ry="52" transform="rotate(-12 300 180)"/>
+    <ellipse cx="300" cy="180" rx="86" ry="32" transform="rotate(-12 300 180)"/>
+    <ellipse cx="300" cy="180" rx="44" ry="15" transform="rotate(-12 300 180)"/>
+    <ellipse cx="1120" cy="330" rx="150" ry="60" transform="rotate(9 1120 330)"/>
+    <ellipse cx="1120" cy="330" rx="98" ry="37" transform="rotate(9 1120 330)"/>
+    <ellipse cx="1120" cy="330" rx="50" ry="17" transform="rotate(9 1120 330)"/>
+  </svg>
+
+  <div class="container">
+
+    <header class="section-head reveal" style="--d:0ms">
+      <span class="eyebrow">Coğrafi Bilgi Sistemi</span>
+      <h2 id="cbs-baslik">CBS belediyenize <em>ne sağlar?</em></h2>
+      <p>Dağınık dosyalarda duran altyapı verisi tek bir sorgulanabilir kent haritasında
+      toplanır. Aşağıdaki haritada katmanları açıp kapatarak deneyin.</p>
+    </header>
+
+    <div class="grid">
+
+      <!-- ÖNE ÇIKAN: canlı katman demosu -->
+      <article class="card--featured reveal" style="--d:80ms">
+        <div class="featured-copy">
+          <span class="tag">Canlı örnek</span>
+          <h3>Her veri katmanı ayrı ayrı açılıp kapanır</h3>
+          <p>Su hattı, imar parselleri, numarataj — her veri kümesi kendi katmanında yaşar.
+          O an neye ihtiyacınız varsa onu açarsınız; harita hiç kalabalıklaşmaz.</p>
+          <span class="hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            Sağdaki katman düğmelerine tıklayın
+          </span>
+        </div>
+
+        <div class="map-panel">
+          <div class="map-frame">
+            <svg viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Katmanları açılıp kapanabilen örnek kent haritası">
+              <!-- yol ağı (taban) -->
+              <g stroke="rgba(237,231,214,0.22)" stroke-width="10" fill="none" stroke-linecap="round">
+                <path d="M0 92 H560"/>
+                <path d="M0 238 H560"/>
+                <path d="M132 0 V340"/>
+                <path d="M336 0 V340"/>
+                <path d="M336 92 C 420 120, 470 180, 560 190"/>
+              </g>
+              <g stroke="rgba(237,231,214,0.10)" stroke-width="4" fill="none">
+                <path d="M0 165 H560"/>
+                <path d="M234 0 V340"/>
+                <path d="M448 0 V92"/>
+              </g>
+
+              <!-- KATMAN: imar parselleri -->
+              <g id="layer-imar" class="layer-group" fill="rgba(120, 190, 150, 0.13)" stroke="rgba(150, 214, 178, 0.55)" stroke-width="1.5">
+                <rect x="146" y="14" width="76" height="62" rx="3"/>
+                <rect x="146" y="106" width="76" height="46" rx="3"/>
+                <rect x="248" y="14" width="74" height="62" rx="3"/>
+                <rect x="248" y="106" width="74" height="46" rx="3"/>
+                <rect x="146" y="178" width="76" height="46" rx="3"/>
+                <rect x="248" y="178" width="74" height="46" rx="3"/>
+                <rect x="146" y="252" width="76" height="70" rx="3"/>
+                <rect x="248" y="252" width="74" height="70" rx="3"/>
+                <rect x="14" y="106" width="102" height="46" rx="3"/>
+                <rect x="14" y="178" width="102" height="46" rx="3"/>
+                <path d="M352 108 h72 a3 3 0 0 1 3 3 v38 a3 3 0 0 1-3 3 h-72 a3 3 0 0 1-3-3 v-38 a3 3 0 0 1 3-3 z"/>
+                <path d="M352 254 h96 v66 h-96 z" />
+              </g>
+
+              <!-- KATMAN: su hattı -->
+              <g id="layer-su" class="layer-group" fill="none">
+                <path class="flow" d="M18 320 C 90 300, 110 250, 132 210 C 154 168, 200 150, 260 148 C 330 146, 360 120, 392 78 C 414 50, 460 40, 542 36"
+                      stroke="var(--water)" stroke-width="3.5" stroke-linecap="round"/>
+                <g fill="#10261D" stroke="var(--water)" stroke-width="2.5">
+                  <circle cx="132" cy="210" r="5.5"/>
+                  <circle cx="260" cy="148" r="5.5"/>
+                  <circle cx="392" cy="78" r="5.5"/>
+                </g>
+              </g>
+
+              <!-- KATMAN: numarataj -->
+              <g id="layer-num" class="layer-group" font-family="Figtree, sans-serif" font-size="11" font-weight="600">
+                <g fill="#F2C94C">
+                  <circle cx="184" cy="45" r="9"/>
+                  <circle cx="285" cy="45" r="9"/>
+                  <circle cx="184" cy="129" r="9"/>
+                  <circle cx="285" cy="129" r="9"/>
+                  <circle cx="65" cy="129" r="9"/>
+                  <circle cx="184" cy="287" r="9"/>
+                  <circle cx="400" cy="287" r="9"/>
+                </g>
+                <g fill="#10261D" text-anchor="middle" dominant-baseline="central">
+                  <text x="184" y="46">12</text>
+                  <text x="285" y="46">14</text>
+                  <text x="184" y="130">7</text>
+                  <text x="285" y="130">9</text>
+                  <text x="65" y="130">3</text>
+                  <text x="184" y="288">21</text>
+                  <text x="400" y="288">36</text>
+                </g>
+              </g>
+
+              <!-- sorgu balonu -->
+              <g id="popup">
+                <path d="M388 108 l8 12 h-16 z" fill="#FDFBF4"/>
+                <rect x="330" y="42" width="150" height="66" rx="8" fill="#FDFBF4"/>
+                <text x="344" y="66" font-family="Figtree, sans-serif" font-size="12.5" font-weight="700" fill="#1D2420">Ada 1043 / Parsel 214</text>
+                <text x="344" y="86" font-family="Figtree, sans-serif" font-size="11.5" fill="#47504A">Konut alanı · 486 m²</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="layer-toggles" role="group" aria-label="Harita katmanları">
+            <button type="button" data-layer="layer-su" aria-pressed="true" style="--swatch:#6FBFC4">
+              <span class="dot"></span> Su hattı
+            </button>
+            <button type="button" data-layer="layer-imar" aria-pressed="true" style="--swatch:#96D6B2">
+              <span class="dot"></span> İmar parselleri
+            </button>
+            <button type="button" data-layer="layer-num" aria-pressed="true" style="--swatch:#F2C94C">
+              <span class="dot"></span> Numarataj
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Standart kartlar -->
+      <article class="card reveal" style="--d:160ms">
+        <div class="chip" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg>
+        </div>
+        <h3>Şehrin tüm altyapısı tek haritada</h3>
+        <p>Su, kanalizasyon, imar, numarataj — ayrı dosyalarda duran her şey tek kent
+        haritasında birleşir. Aradığınız hattı veya parseli saniyeler içinde bulur, tıklayıp
+        tüm bilgisini görürsünüz.</p>
+      </article>
+
+      <article class="card reveal" style="--d:240ms">
+        <div class="chip" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+        </div>
+        <h3>Tarayıcıda, hızlı ve akıcı</h3>
+        <p>Kurulum gerektirmez; ekipler haritayı doğrudan tarayıcıdan açar. Binlerce nesne
+        yüklüyken bile yakınlaştırma ve sorgular gecikmesiz çalışır, sahada tabletten de
+        kullanılır.</p>
+      </article>
+
+      <article class="card reveal" style="--d:320ms">
+        <div class="chip" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>
+        </div>
+        <h3>Veri kurumunuzda kalır</h3>
+        <p>Tüm katmanlar belediyenin kendi sunucusunda barındırılır; üçüncü taraf buluta veri
+        çıkmaz. Kimin neyi görüp düzenleyeceğini birim bazında yetkilerle siz belirlersiniz.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  // Katman aç/kapa
+  document.querySelectorAll('.layer-toggles button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var layer = document.getElementById(btn.dataset.layer);
+      var on = btn.getAttribute('aria-pressed') === 'true';
+      btn.setAttribute('aria-pressed', String(!on));
+      if (layer) layer.classList.toggle('off', on);
+    });
+  });
+
+  // Kademeli giriş
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+</script>
+
+</body>
+</html>
