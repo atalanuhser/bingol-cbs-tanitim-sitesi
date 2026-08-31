@@ -29,6 +29,8 @@ export const ozellikler = [
     baslik: "Ulusal standartlara (TUCBS) uyum",
     aciklama:
       "Öznitelik yapısı Türkiye Ulusal Coğrafi Bilgi Sistemi standartlarına göre kurulur. Aynı dili konuşan veri, kurumlar arası paylaşımda dönüştürme derdi yaşatmaz.",
+    // TUCBS birincil veri temalarından örnekler (notlar/cbs-arastirma-notlari.md §3)
+    etiketler: ["Adres", "Bina", "Tapu-Kadastro", "Ulaşım", "Hidrografya", "Altyapı"],
     mockup: "bilgi-penceresi",
   },
   {
