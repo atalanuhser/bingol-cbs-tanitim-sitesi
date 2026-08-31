@@ -19,11 +19,11 @@ Not: plan ~4 gün önde işliyor; buradaki gün numaraları plan günleridir, ta
 - **Çıktı:** 3 mockup varyantı sitede + taslak metinler redaksiyonda
 
 ## Gün 13 — Çarşamba 9 Eylül: Rakam bandı + TUCBS son hâli + AI görseller
-- [ ] Redaksiyon dönüşleri `ozellikler.js` / `mesajlar.js`'e işlenir (rakam gömme kuralı korunur)
-- [ ] "Rakamlarla CBS" bandı son hâline getirilir (görsel rötuş; değerler placeholder kalır — bilinçli)
-- [ ] TUCBS bölümü son hâli: metin + görsel alanı (bilgi-penceresi varyantı ya da AI görsel)
-- [ ] AI görseller üretilir → WebP'ye çevrilir, tek görsel < 200 KB, `width`/`height` + `loading="lazy"` + Türkçe `alt`
-- [ ] Görseller `src/assets/img/` altına, commit + push
+- [ ] Redaksiyon dönüşleri `ozellikler.js` / `mesajlar.js`'e işlenir (rakam gömme kuralı korunur) — **dönüş bekleniyor**
+- [x] "Rakamlarla CBS" bandı son hâline getirildi (değerler marka yeşili; placeholder kalır — bilinçli)
+- [x] TUCBS bölümü son hâli: bilgi-penceresi mockup + 6 veri teması çipi
+- [x] AI görseller üretildi (kullanıcı) → WebP: hakkinda-kontur 115 KB, kapanis-harita 185 KB; `width`/`height` + `loading="lazy"`
+- [x] Kapanış CTA bölümü ana sayfaya eklendi (koyu harita görseli + örtü + amber CTA); kontur görseli Gün 14'te hakkında sayfasında kullanılacak
 - **Çıktı:** rakam bandı + TUCBS bitmiş, görseller yerinde
 
 ## Gün 14 — Perşembe 10 Eylül: Hakkında / İletişim sayfası

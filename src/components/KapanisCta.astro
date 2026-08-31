@@ -1,0 +1,100 @@
+---
+// Ana sayfa kapanış CTA'sı — koyu kart, AI üretimi harita görseli zeminde
+// (dekoratif: alt=""), üstünde koyu örtü ile metin kontrastı garanti edilir.
+import { kapanis } from "../data/mesajlar.js";
+import kapanisHarita from "../assets/img/kapanis-harita.webp";
+---
+
+<section class="kapanis icerik" aria-labelledby="kapanis-baslik">
+  <div class="kart">
+    <img
+      src={kapanisHarita.src}
+      width={kapanisHarita.width}
+      height={kapanisHarita.height}
+      alt=""
+      loading="lazy"
+    />
+    <div class="ortu" aria-hidden="true"></div>
+    <div class="metin">
+      <h2 id="kapanis-baslik">{kapanis.baslik}</h2>
+      <p>{kapanis.aciklama}</p>
+      <a class="btn" href="/hakkinda">{kapanis.buton}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .kapanis {
+    padding-block: var(--bosluk-8) var(--bosluk-6);
+  }
+
+  .kart {
+    position: relative;
+    border-radius: var(--kose-buyuk);
+    overflow: hidden;
+    box-shadow: var(--golge-vitrin);
+  }
+
+  .kart img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* metin kontrastı için soldan koyulaşan örtü */
+  .ortu {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      rgb(14 53 39 / 0.92) 0%,
+      rgb(14 53 39 / 0.72) 55%,
+      rgb(14 53 39 / 0.45) 100%
+    );
+  }
+
+  .metin {
+    position: relative;
+    padding: var(--bosluk-7) var(--bosluk-5);
+    max-width: 34rem;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: clamp(26px, 3.4vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--renk-demo-kart);
+  }
+
+  p {
+    margin-top: var(--bosluk-4);
+    color: var(--renk-krem);
+    line-height: 1.7;
+    max-width: 44ch;
+    text-wrap: pretty;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: var(--bosluk-5);
+    padding: var(--bosluk-3) var(--bosluk-6);
+    border-radius: var(--kose-kucuk);
+    background: var(--renk-cta);
+    color: var(--renk-metin);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .btn:hover {
+    background: var(--renk-cta-koyu);
+    color: var(--renk-metin);
+  }
+
+  @media (min-width: 900px) {
+    .metin {
+      padding: var(--bosluk-8) var(--bosluk-8);
+    }
+  }
+</style>

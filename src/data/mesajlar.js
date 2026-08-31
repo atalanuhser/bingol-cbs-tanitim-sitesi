@@ -38,6 +38,14 @@ export const mesajlar = [
   },
 ];
 
+// Ana sayfa kapanış CTA bölümü
+export const kapanis = {
+  baslik: "Şehrinizin verisini tek haritada toplayın",
+  aciklama:
+    "Kurulum, veri aktarımı ve TUCBS uyumu için ekibimizle tanışın; sistemin kurumunuzda nasıl çalışacağını birlikte planlayalım.",
+  buton: "İletişime Geç",
+};
+
 // Taslakta yer almayan onaylı Gün 2 mesajları — silinmedi; özellikler
 // sayfasında (TUCBS ve veri kalitesi bölümlerinde) kullanılacak.
 export const yedekMesajlar = [
