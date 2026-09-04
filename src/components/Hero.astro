@@ -2,6 +2,7 @@
 // Onaylı hero taslağının (taslaklar/hero-taslak.html) bileşen hâli.
 // Taslaktaki kopya token'lar atıldı — tüm değerler gerçek tokens.css'ten gelir.
 import { rakamlar } from "../data/rakamlar.js";
+import heroSehir from "../assets/img/hero-sehir.webp";
 
 // Kural 9: rakam metne gömülmez — katman sayısı rakamlar.js'ten çekilir.
 const katmanSayisi = rakamlar.find((r) => r.etiket.includes("katman"))?.deger;
@@ -20,31 +21,14 @@ const katmanSayisi = rakamlar.find((r) => r.etiket.includes("katman"))?.deger;
       <a class="btn btn-ikincil" href="/hakkinda#iletisim">İletişime Geç</a>
     </div>
 
-    <div class="harita-kart" role="img" aria-label="Stilize CBS harita arayüzü örneği">
+    <div class="harita-kart">
       <div class="bar"><span class="nokta"></span> Kent Haritası · {katmanSayisi} katman</div>
-      <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect width="480" height="300" fill="var(--renk-harita-zemin)"/>
-        <!-- imar poligonları -->
-        <path d="M40 60 L150 40 L180 110 L70 130 Z" fill="var(--renk-katman-2)" opacity="0.25"/>
-        <path d="M200 150 L320 130 L350 210 L230 235 Z" fill="var(--renk-katman-3)" opacity="0.22"/>
-        <path d="M330 40 L430 55 L415 120 L320 105 Z" fill="var(--renk-katman-1)" opacity="0.18"/>
-        <!-- şebeke hatları -->
-        <path d="M20 220 C 120 180, 200 240, 300 200 S 440 160, 470 190" fill="none" stroke="var(--renk-katman-1)" stroke-width="3"/>
-        <path d="M60 280 C 150 230, 260 280, 350 240 S 430 220, 465 235" fill="none" stroke="var(--renk-katman-2)" stroke-width="2.5"/>
-        <path d="M10 120 C 90 140, 140 90, 220 100" fill="none" stroke="var(--renk-katman-3)" stroke-width="2"/>
-        <!-- düğüm noktaları -->
-        <circle cx="300" cy="200" r="5" fill="var(--renk-katman-1)"/>
-        <circle cx="120" cy="197" r="4" fill="var(--renk-katman-1)"/>
-        <circle cx="350" cy="240" r="4" fill="var(--renk-katman-2)"/>
-        <!-- bilgi penceresi -->
-        <g>
-          <rect x="285" y="120" width="160" height="70" rx="8" fill="var(--renk-harita-yuzey)"/>
-          <circle cx="303" cy="140" r="4" fill="var(--renk-katman-1)"/>
-          <rect x="315" y="135" width="90" height="9" rx="3" fill="var(--renk-harita-metin)" opacity="0.9"/>
-          <rect x="303" y="155" width="118" height="7" rx="3" fill="var(--renk-harita-metin)" opacity="0.45"/>
-          <rect x="303" y="169" width="86" height="7" rx="3" fill="var(--renk-harita-metin)" opacity="0.45"/>
-        </g>
-      </svg>
+      <img
+        src={heroSehir.src}
+        width={heroSehir.width}
+        height={heroSehir.height}
+        alt="Katmanlara ayrılmış stilize üç boyutlu kent haritası — bölgeler ulaşım, altyapı ve çevre katmanlarını temsil eden renklerle ayrılıyor"
+      />
     </div>
   </div>
 </section>
@@ -166,10 +150,16 @@ const katmanSayisi = rakamlar.find((r) => r.etiket.includes("katman"))?.deger;
     border-radius: 50%;
     background: var(--renk-katman-1);
   }
-  .harita-kart svg {
+  /* Görsel dikey kırpılır (object-fit: cover); üstteki %20 odak üç konum
+     iğnesini de kadrajda tutar. Kenar boşlukları görselin kendi zemin
+     rengiyle doldurulur ki kırpım belli olmasın. */
+  .harita-kart img {
     display: block;
     width: 100%;
-    height: auto;
+    height: clamp(320px, 46vw, 600px);
+    object-fit: cover;
+    object-position: center 20%;
+    background: var(--renk-hero-gorsel-zemin);
   }
 
   @media (min-width: 900px) {

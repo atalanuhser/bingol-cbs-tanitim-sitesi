@@ -25,6 +25,10 @@
   --renk-cta:          #f0a93f;  /* eylem rengi — amber (üzerine koyu metin) */
   --renk-cta-koyu:     #d99427;
 
+  /* Hero görselinin (hero-sehir.webp) kendi zemin rengi — kartta kenar
+     boşlukları görselle kaynaşsın diye birebir aynı değer kullanılır. */
+  --renk-hero-gorsel-zemin: #f7f7f7;
+
   /* ---- Renkler: koyu harita alanı (CbsMockup) ---- */
   --renk-harita-zemin: #10201b;  /* mockup koyu tema zemini */
   --renk-harita-yuzey: #1a2f28;  /* mockup panel zemini */
