@@ -27,7 +27,7 @@ const katmanSayisi = rakamlar.find((r) => r.etiket.includes("katman"))?.deger;
         src={heroSehir.src}
         width={heroSehir.width}
         height={heroSehir.height}
-        alt="Katmanlara ayrılmış stilize üç boyutlu kent haritası — bölgeler ulaşım, altyapı ve çevre katmanlarını temsil eden renklerle ayrılıyor"
+        alt="Akıllı şehirler için coğrafi bilgi sistemi tanıtım görseli — katmanlara ayrılmış üç boyutlu kent haritası, katman paneli ve istatistik kartları"
       />
     </div>
   </div>
@@ -150,15 +150,11 @@ const katmanSayisi = rakamlar.find((r) => r.etiket.includes("katman"))?.deger;
     border-radius: 50%;
     background: var(--renk-katman-1);
   }
-  /* Görsel dikey kırpılır (object-fit: cover); üstteki %20 odak üç konum
-     iğnesini de kadrajda tutar. Kenar boşlukları görselin kendi zemin
-     rengiyle doldurulur ki kırpım belli olmasın. */
+  /* Görsel kırpılmadan tam gösterilir; yükseklik en-boy oranından gelir. */
   .harita-kart img {
     display: block;
     width: 100%;
-    height: clamp(320px, 46vw, 600px);
-    object-fit: cover;
-    object-position: center 20%;
+    height: auto;
     background: var(--renk-hero-gorsel-zemin);
   }
 
