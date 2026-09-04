@@ -19,7 +19,7 @@ Not: plan ~4 gün önde işliyor; buradaki gün numaraları plan günleridir, ta
 - **Çıktı:** 3 mockup varyantı sitede + taslak metinler redaksiyonda
 
 ## Gün 13 — Çarşamba 9 Eylül: Rakam bandı + TUCBS son hâli + AI görseller
-- [ ] Redaksiyon dönüşleri `ozellikler.js` / `mesajlar.js`'e işlenir (rakam gömme kuralı korunur) — **dönüş bekleniyor**
+- [x] Redaksiyon dönüşü geldi (4 Eylül): tüm metinler **değişikliksiz onaylandı** — `ozellikler.js` / `mesajlar.js`'e işlenecek bir şey yok
 - [x] "Rakamlarla CBS" bandı son hâline getirildi (değerler marka yeşili; placeholder kalır — bilinçli)
 - [x] TUCBS bölümü son hâli: bilgi-penceresi mockup + 6 veri teması çipi
 - [x] AI görseller üretildi (kullanıcı) → WebP: hakkinda-kontur 115 KB, kapanis-harita 185 KB; `width`/`height` + `loading="lazy"`

@@ -1,6 +1,6 @@
 // Özellikler sayfası içeriği — sıra CLAUDE.md'deki sıradır.
-// Açıklamalar TASLAK metindir (Gün 2 onaylı mesajlardan türetildi);
-// Hafta 3'te süpervizör redaksiyonundan geçecek.
+// Metinler 4 Eylül 2026'da süpervizör redaksiyonundan DEĞİŞİKLİKSİZ onaylandı
+// (içerik onay kapısı kapandı; artık taslak değil, kesin metinlerdir).
 // mockup: Hafta 3'te eklenecek CbsMockup varyantı (katmanlar | bilgi-penceresi | genel).
 export const ozellikler = [
   {
