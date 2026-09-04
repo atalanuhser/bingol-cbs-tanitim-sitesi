@@ -1,0 +1,9 @@
+// Cloudflare Workers yapılandırması — statik site (dist/) "static assets" olarak yayınlanır.
+// Yayın komutu: npm run build && npx wrangler deploy  (manuel, sprint sonu)
+{
+  "name": "cbs-tanitim-sitesi",
+  "compatibility_date": "2026-09-04",
+  "assets": {
+    "directory": "./dist"
+  }
+}
