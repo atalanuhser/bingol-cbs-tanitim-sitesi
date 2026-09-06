@@ -34,9 +34,9 @@ Not: plan ~4 gün önde işliyor; buradaki gün numaraları plan günleridir, ta
 - **Çıktı:** tüm sayfalar içerikli
 
 ## Gün 15 — Cuma 11 Eylül: Tarama + Sunum #3
-- [ ] Lorem/boş kutu taraması: hiçbir yer tutucu metin/kutu kalmaz (rakamlar placeholder kalabilir — bilinçli; "yakında" yer tutucu görsel alanı kalmamalı)
-- [ ] Konsol temiz + 404 link kontrolü + 375px tur
-- [ ] Sunum #3 hazırlanır (içerik tamam kapısı) + prova
+- [x] Lorem/boş kutu taraması: temiz — OzellikBolumu'ndaki kullanılmayan "yakında" yer tutucu dalı da silindi
+- [x] Konsol temiz (3 sayfa) + kırık iç link 0 (dist taraması) + 375px turu taşmasız
+- [x] Sunum #3 hazırlandı (`sunumlar/sunum-3.pptx`, sunum-2 üslubunda, konuşmacı notlu) — prova sende
 - [ ] **15.00 Sunum #3**
 - **Cuma çıktısı:** "içerik tamam" onayı — 4. haftaya yalnızca test/cila kalır
 
