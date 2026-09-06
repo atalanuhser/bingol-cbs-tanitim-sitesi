@@ -24,8 +24,8 @@ Not: plan önde işliyor; buradaki gün numaraları plan günleridir, takvim gü
 - **Çıktı:** kalite çıtası maddeleri kapanmış
 
 ## Gün 19 — Perşembe 17 Eylül: README + prova
-- [ ] README: site nedir (3 cümle) · dosya yapısı · metin/görsel değiştirme (teknik olmayan biri için) · yeni bölüm ekleme · yerelde çalıştırma · manuel yayın (`npx wrangler deploy`) · rakamlar notu
-- [ ] Final sunum (#4) hazırlığı + prova
+- [x] README yazıldı: CLAUDE.md'deki tüm başlıklar + telefon testi ipucu + deneme yayını adresi
+- [x] Final sunum hazırlandı (`sunumlar/sunum-4-final.pptx`, aynı üslup, konuşmacı notlu) — prova kullanıcıda
 - **Çıktı:** README depoda + prova tamam
 
 ## — Cuma 18 Eylül: Teslim
