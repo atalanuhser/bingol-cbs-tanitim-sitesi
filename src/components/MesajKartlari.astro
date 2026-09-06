@@ -319,6 +319,8 @@ const katmanlar = [
     border: 1px solid var(--renk-demo-panel-cizgi);
     border-radius: 16px;
     padding: 14px;
+    /* Safari 18 öncesi öneksiz hâli tanımaz — önekli satır önce gelir */
+    -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
   }
   .harita-cerceve {
