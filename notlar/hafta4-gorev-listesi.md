@@ -5,16 +5,16 @@ Not: plan önde işliyor; buradaki gün numaraları plan günleridir, takvim gü
 
 ## Gün 16 — Pazartesi 14 Eylül: Tarayıcı/cihaz testleri
 - [x] Chrome/Chromium: 3 sayfa × etkileşimler (katman demosu, SSS, çapalar) + konsol — temiz
-- [ ] Firefox (masaüstü): kullanıcı elle gezecek (CSS uyumluluk taraması yapıldı: yalnızca `text-wrap` aşamalı iyileştirme — beklenen)
-- [ ] Safari: Windows'ta yok — gerçek iPhone'da tur kullanıcıda; kod taraması yapıldı, `backdrop-filter` önek eksiği bulundu ve düzeltildi
+- [x] Firefox (masaüstü): kullanıcı elle gezdi — sorun yok (CSS taraması: yalnızca `text-wrap` aşamalı iyileştirme)
+- [x] Safari/telefon: kullanıcı canlı adresten (workers.dev) gezdi — sorun yok; `backdrop-filter` önek düzeltmesi yayında
 - [x] 375 / 768 / 1280 görünüm turları — üç sayfada da yatay taşma yok
 - [x] Bulgu listesi çıkarıldı; tek gerçek hata (`-webkit-backdrop-filter`) düzeltildi; commit + push
 - **Çıktı:** hata listesi + düzeltmeler
 
 ## Gün 17 — Salı 15 Eylül: Build + Lighthouse
-- [ ] `npm run build` + Lighthouse (mobil): Performans / Erişilebilirlik / SEO ≥ 90
-- [ ] Görsel denetimi: WebP, < 200 KB, `loading="lazy"` (hero hariç), `width`/`height`
-- [ ] Bulunan optimizasyonlar uygulanır; commit + push
+- [x] Lighthouse (mobil, canlı adres): Ana 98/100/100/100 · Özellikler 99/100/100/100 · Hakkında 95/100/100/100 (P/E/BP/SEO)
+- [x] Görsel denetimi: 3 görsel de WebP < 200 KB; lazy (hero ve sayfa başı hariç) + width/height tam
+- [x] Optimizasyonlar: CSS HTML'e gömüldü (FCP 2.5s→0.9s, Perf 87→98); mockup kapalı katman etiketi kontrast düzeltmesi (Erişilebilirlik 96→100)
 - **Çıktı:** Lighthouse raporu + optimizasyonlar
 
 ## Gün 18 — Çarşamba 16 Eylül: Erişilebilirlik + SEO/OG + yazım

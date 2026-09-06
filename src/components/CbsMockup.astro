@@ -241,8 +241,14 @@ const etiketler = {
     gap: var(--bosluk-2);
     padding-block: var(--bosluk-2);
   }
-  .katman.kapali {
+  /* Kapalı katman: soluk görünüm kutu/renk noktasında kalır; etiket metni
+     kontrast ≥ 4.5:1 kuralı gereği opaklıkla değil renkle soluklaştırılır. */
+  .katman.kapali .kutu,
+  .katman.kapali .renk {
     opacity: 0.45;
+  }
+  .katman.kapali .ad {
+    color: var(--renk-harita-metin-soluk);
   }
   .kutu {
     display: grid;
