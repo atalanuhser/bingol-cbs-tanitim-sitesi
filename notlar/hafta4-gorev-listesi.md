@@ -18,9 +18,9 @@ Not: plan önde işliyor; buradaki gün numaraları plan günleridir, takvim gü
 - **Çıktı:** Lighthouse raporu + optimizasyonlar
 
 ## Gün 18 — Çarşamba 16 Eylül: Erişilebilirlik + SEO/OG + yazım
-- [ ] Kontrast ≥ 4.5:1 denetimi; Tab ile tüm linkler gezilebilir, odak halkası görünür
-- [ ] SEO/OG: her sayfada benzersiz title/description + OG etiketleri (`og:locale=tr_TR`, 1200×630 OG görseli) — Layout.astro'ya eklenecek
-- [ ] Türkçe yazım redaksiyonu — son geçiş (tüm veri dosyaları + sayfalar)
+- [x] Kontrast denetimi Lighthouse'ta 3 sayfada 100; odak halkası `:focus-visible`'da doğrulandı (2px yeşil + 2px boşluk); tabindex hilesi yok, Tab sırası DOM sırası
+- [x] SEO/OG: Layout.astro'ya canonical + OG + twitter kartı eklendi (`og:locale=tr_TR`, `public/og-gorsel.jpg` 1200×630 — paylaşım uyumluluğu için bilinçli JPG); mutlak adresler piramittek.com üzerinden
+- [x] Türkçe yazım son geçişi: otomatik hata taraması + tüm görünür metinlerin okuması — düzeltme çıkmadı
 - **Çıktı:** kalite çıtası maddeleri kapanmış
 
 ## Gün 19 — Perşembe 17 Eylül: README + prova
