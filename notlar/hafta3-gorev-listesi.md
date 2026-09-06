@@ -29,7 +29,7 @@ Not: plan ~4 gün önde işliyor; buradaki gün numaraları plan günleridir, ta
 ## Gün 14 — Perşembe 10 Eylül: Hakkında / İletişim sayfası
 - [x] `hakkinda.astro`: sayfa başı (v2 dili) + kontur görseli + 3 paragraf tanıtım metni (`src/data/hakkinda.js`)
 - [x] İletişim bölümü: e-posta + adres (placeholder, `hakkinda.js`'te tek yerde); footer + hero + kapanış CTA linkleri `#iletisim` çapasına bağlandı
-- [ ] Zaman kalırsa: SSS (3–5 soru) + yol haritası bölümü — **tarih vaadi yok**, "yakında / planlanıyor" dili
+- [x] SSS (5 soru, `<details>` ile JS'siz) + yol haritası (4 madde, "Yakında/Planlanıyor" çipleri, tarih yok) — cevaplar onaylı özellik metinlerinden türetildi
 - [ ] Öğleden sonra tampon: eksik görseller, küçük rötuşlar; commit + push
 - **Çıktı:** tüm sayfalar içerikli
 

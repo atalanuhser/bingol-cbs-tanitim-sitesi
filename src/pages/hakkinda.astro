@@ -3,7 +3,7 @@
 // Kontur görseli dekoratiftir (alt=""); sayfanın en üst görseli olduğu için
 // lazy yüklenmez (kural 7'nin hero istisnası).
 import Layout from "../layouts/Layout.astro";
-import { sayfaBasi, tanitim, iletisim } from "../data/hakkinda.js";
+import { sayfaBasi, tanitim, sss, yolHaritasi, iletisim } from "../data/hakkinda.js";
 import konturGorsel from "../assets/img/hakkinda-kontur.webp";
 ---
 
@@ -29,6 +29,62 @@ import konturGorsel from "../assets/img/hakkinda-kontur.webp";
 
     <section class="tanitim" aria-label="Piramittek CBS tanıtımı">
       {tanitim.map((paragraf) => <p>{paragraf}</p>)}
+    </section>
+
+    <section class="sss" aria-labelledby="sss-baslik">
+      <header class="bolum-basi">
+        <span class="ustbaslik">{sss.eyebrow}</span>
+        <h2 id="sss-baslik">{sss.baslikDuz} <em>{sss.baslikVurgu}</em></h2>
+      </header>
+
+      <div class="sorular">
+        {
+          sss.sorular.map((madde) => (
+            <details class="soru">
+              <summary>
+                <h3>{madde.soru}</h3>
+                <svg
+                  class="ok"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </summary>
+              <p>{madde.cevap}</p>
+            </details>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="yol-haritasi" aria-labelledby="yol-baslik">
+      <header class="bolum-basi">
+        <span class="ustbaslik">{yolHaritasi.eyebrow}</span>
+        <h2 id="yol-baslik">{yolHaritasi.baslikDuz} <em>{yolHaritasi.baslikVurgu}</em></h2>
+        <p>{yolHaritasi.aciklama}</p>
+      </header>
+
+      <ul class="maddeler">
+        {
+          yolHaritasi.maddeler.map((madde) => (
+            <li>
+              <div>
+                <h3>{madde.baslik}</h3>
+                <p>{madde.aciklama}</p>
+              </div>
+              <span class="durum">{madde.durum}</span>
+            </li>
+          ))
+        }
+      </ul>
     </section>
 
     <section class="iletisim" id="iletisim" aria-labelledby="iletisim-baslik">
@@ -146,6 +202,136 @@ import konturGorsel from "../assets/img/hakkinda-kontur.webp";
     max-width: 65ch;
     color: var(--renk-metin-soluk);
     text-wrap: pretty;
+  }
+
+  /* Ara bölüm başlıkları (SSS, yol haritası) — sayfa başıyla aynı editoryal dil */
+  .bolum-basi {
+    max-width: 720px;
+    margin-bottom: var(--bosluk-5);
+  }
+  .bolum-basi h2 {
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+  .bolum-basi p {
+    margin-top: var(--bosluk-3);
+    color: var(--renk-metin-soluk);
+    max-width: 56ch;
+    text-wrap: pretty;
+  }
+
+  /* SSS — JS'siz yerel <details> açılır kutuları */
+  .sss {
+    padding-block: var(--bosluk-2) var(--bosluk-7);
+  }
+
+  .sorular {
+    display: grid;
+    gap: var(--bosluk-3);
+    max-width: 780px;
+  }
+
+  .soru {
+    background: var(--renk-yuzey);
+    border: 1px solid var(--renk-cizgi);
+    border-radius: var(--kose-orta);
+    box-shadow: var(--golge-ince);
+  }
+  .soru[open] {
+    border-color: var(--renk-vurgu-cizgi);
+  }
+
+  .soru summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--bosluk-4);
+    padding: var(--bosluk-4) var(--bosluk-5);
+    cursor: pointer;
+    list-style: none; /* varsayılan üçgen işaret gizlenir, ok ikonu kullanılır */
+  }
+  .soru summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .soru h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .soru .ok {
+    flex-shrink: 0;
+    color: var(--renk-vurgu);
+    transition: transform 200ms ease;
+  }
+  .soru[open] .ok {
+    transform: rotate(180deg);
+  }
+
+  .soru > p {
+    padding: 0 var(--bosluk-5) var(--bosluk-5);
+    color: var(--renk-metin-soluk);
+    max-width: 62ch;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .soru .ok {
+      transition: none;
+    }
+  }
+
+  /* Yol haritası — durum çipli kartlar ("Yakında / Planlanıyor", tarih yok) */
+  .yol-haritasi {
+    padding-block: var(--bosluk-2) var(--bosluk-7);
+  }
+
+  .maddeler {
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--bosluk-4);
+  }
+
+  .maddeler li {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--bosluk-4);
+    background: var(--renk-yuzey);
+    border: 1px solid var(--renk-cizgi);
+    border-radius: var(--kose-orta);
+    box-shadow: var(--golge-ince);
+    padding: var(--bosluk-5);
+  }
+
+  .maddeler h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .maddeler li p {
+    margin-top: var(--bosluk-2);
+    color: var(--renk-metin-soluk);
+    font-size: var(--boyut-kucuk);
+  }
+
+  .durum {
+    flex-shrink: 0;
+    padding: var(--bosluk-1) var(--bosluk-3);
+    border-radius: var(--kose-cip);
+    background: var(--renk-vurgu-acik);
+    color: var(--renk-vurgu);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 640px) {
+    .maddeler {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   /* İletişim — yüzey zeminli, 1px çerçeveli kart; footer linki buraya çapayla gelir */
