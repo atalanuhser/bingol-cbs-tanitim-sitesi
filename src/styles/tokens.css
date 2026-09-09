@@ -26,8 +26,9 @@
   --renk-cta-koyu:     #d99427;
 
   /* Hero görselinin (hero-sehir.webp) kendi zemin rengi — kartta kenar
-     boşlukları görselle kaynaşsın diye birebir aynı değer kullanılır. */
-  --renk-hero-gorsel-zemin: #f7f7f7;
+     boşlukları görselle kaynaşsın diye birebir aynı değer kullanılır.
+     (9 Eylül: koyu zeminli görsel sürümüyle güncellendi) */
+  --renk-hero-gorsel-zemin: #091717;
 
   /* ---- Renkler: koyu harita alanı (CbsMockup) ---- */
   --renk-harita-zemin: #10201b;  /* mockup koyu tema zemini */
